@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
-import User from './models/userModel';
-import Image from './models/imageModel';
-import Page from './models/pageModel';
-import Menu from './models/menuModel';
-import SubMenu from './models/submenuModel';
-import Question from './models/preguntaModel';
+// import User from './models/UsuarioModel';
+// import Image from './models/imageModel';
+import Page from './models/PaginaModel';
+// import Menu from './models/menuModel';
+// import SubMenu from './models/submenuModel';
+// import Question from './models/preguntaModel';
 
 dotenv.config();
 
@@ -56,18 +56,18 @@ const deleteOne = (Model) => {
 };
 
 // CRUD Usuarios
-export const getUser = getOne(User);
-export const getAllUser = getAll(User);
-export const createUser = createOne(User);
-export const deleteUser = deleteOne(User);
-export const updateUser = updateOne(User);
+// export const getUser = getOne(User);
+// export const getAllUser = getAll(User);
+// export const createUser = createOne(User);
+// export const deleteUser = deleteOne(User);
+// export const updateUser = updateOne(User);
 
 // CRUD Imagenes
-export const getImage = getOne(Image);
-export const getAllImage = getAll(Image);
-export const createImage = createOne(Image);
-export const deleteImage = deleteOne(Image);
-export const updateImage = updateOne(Image);
+// export const getImage = getOne(Image);
+// export const getAllImage = getAll(Image);
+// export const createImage = createOne(Image);
+// export const deleteImage = deleteOne(Image);
+// export const updateImage = updateOne(Image);
 
 // CRUD Paginas / Novedades
 export const getPage = getOne(Page);
@@ -80,22 +80,22 @@ export const getAllPage = async () => {
 };
 
 // CRUD Menus
-export const getMenu = getOne(Menu);
-export const getAllMenu = getAll(Menu);
-export const createMenu = createOne(Menu);
-export const deleteMenu = deleteOne(Menu);
-export const updateMenu = updateOne(Menu);
+// export const getMenu = getOne(Menu);
+// export const getAllMenu = getAll(Menu);
+// export const createMenu = createOne(Menu);
+// export const deleteMenu = deleteOne(Menu);
+// export const updateMenu = updateOne(Menu);
 
 // CRUD Sub-menus
-export const getSubMenu = getOne(SubMenu);
-export const getAllSubMenu = getAll(SubMenu);
-export const createSubMenu = createOne(SubMenu);
-export const deleteSubMenu = deleteOne(SubMenu);
-export const updateSubMenu = updateOne(SubMenu);
+// export const getSubMenu = getOne(SubMenu);
+// export const getAllSubMenu = getAll(SubMenu);
+// export const createSubMenu = createOne(SubMenu);
+// export const deleteSubMenu = deleteOne(SubMenu);
+// export const updateSubMenu = updateOne(SubMenu);
 
 // CRUD Preguntas frecuentes
-export const getQuestion = getOne(Question);
-export const getAllQuestion = getAll(Question);
-export const createQuestion = createOne(Question);
-export const deleteQuestion = deleteOne(Question);
-export const updateQuestion = updateOne(Question);
+// export const getQuestion = getOne(Question);
+// export const getAllQuestion = getAll(Question);
+// export const createQuestion = createOne(Question);
+// export const deleteQuestion = deleteOne(Question);
+// export const updateQuestion = updateOne(Question);

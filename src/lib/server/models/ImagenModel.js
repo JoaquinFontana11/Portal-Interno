@@ -13,6 +13,6 @@ const imageSchema = mongoose.Schema({
 	width: Number
 });
 
-const Image = mongoose.model('imagenes', imageSchema);
+const Photo = mongoose.model('imagenes', imageSchema);
 
-export default Image;
+export default Photo;

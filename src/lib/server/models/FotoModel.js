@@ -10,7 +10,7 @@ const imageSchema = mongoose.Schema({
 		ref: 'imagenes',
 		required: [true, 'Una imagen tiene que tener... una imagen']
 	},
-	coments: [
+	comments: [
 		{
 			type: mongoose.Schema.ObjectId,
 			ref: 'comentarios'

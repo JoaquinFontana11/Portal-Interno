@@ -4,7 +4,8 @@ const config = {
 	plugins: [sveltekit()],
 	test: {
 		globals: true,
-		environment: 'jsdom'
+		environment: 'jsdom',
+		cache: false
 	}
 };
 
