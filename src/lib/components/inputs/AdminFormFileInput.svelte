@@ -1,4 +1,5 @@
 <script>
+	export let files;
 	export let label;
 
 	let dragEnter = false;
@@ -22,6 +23,12 @@
 			});
 		}
 		dragEnter = false;
+	};
+
+	const uploadHandler = (e) => {
+		[...files].forEach((file, i) => {
+			filename = file.name;
+		});
 	};
 </script>
 
@@ -60,6 +67,12 @@
 			<p class="text-xs text-gray-500 dark:text-gray-400">PNG o JPG</p>
 			<p class="text-xs text-gray-500 dark:text-gray-400">{filename}</p>
 		</div>
-		<input id="dropzone-file" type="file" class="hidden" />
+		<input
+			id="dropzone-file"
+			type="file"
+			class="hidden"
+			bind:files
+			on:change|preventDefault={uploadHandler}
+		/>
 	</label>
 </div>

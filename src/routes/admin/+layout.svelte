@@ -1,5 +1,6 @@
 <script>
 	import AdminNavbar from '$lib/components/AdminNavbar.svelte';
+	import AdminDrawer from '$lib/components/AdminDrawer.svelte';
 </script>
 
 <AdminNavbar />
@@ -10,3 +11,4 @@
 		<slot />
 	</div>
 </main>
+<AdminDrawer />

@@ -43,7 +43,7 @@
 				bind:value={component.value}
 			/>
 		{:else if component.type == 'file'}
-			<AdminFormFileInput label={component.label} />
+			<AdminFormFileInput label={component.label} bind:files={component.value} />
 		{:else if component.type == 'editor'}
 			<AdminFormEditor label={component.label} />
 		{/if}
