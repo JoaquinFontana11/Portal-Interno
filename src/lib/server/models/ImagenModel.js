@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const imageSchema = mongoose.Schema({
 	url: {
 		type: String,
-		required: [true, 'Una imagen tiene que tener una url']
+		required: [true, 'Una imagen tiene que tener una url'],
+		unique: true
 	},
 	alt: {
 		type: String,

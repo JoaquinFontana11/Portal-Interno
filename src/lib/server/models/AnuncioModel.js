@@ -16,6 +16,6 @@ const adSchema = mongoose.Schema({
 	userClosed: [{ type: mongoose.Schema.ObjectId, ref: 'usuarios' }]
 });
 
-const User = mongoose.model('users', adSchema);
+const Ad = mongoose.model('anuncios', adSchema);
 
-export default User;
+export default Ad;

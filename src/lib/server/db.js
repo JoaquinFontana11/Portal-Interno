@@ -1,12 +1,18 @@
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
-// import User from './models/UsuarioModel';
-// import Image from './models/imageModel';
 import Page from './models/PaginaModel';
-// import Menu from './models/menuModel';
-// import SubMenu from './models/submenuModel';
-// import Question from './models/preguntaModel';
+import User from './models/UsuarioModel';
+import Image from './models/ImagenModel';
+import ImageGalery from './models/FotoModel';
+import Menu from './models/MenuModel';
+import SubMenu from './models/SubmenuModel';
+import Question from './models/PreguntaFrecuenteModel';
+import Ad from './models/AnuncioModel';
+import Comment from './models/ComentarioModel';
+import Manual from './models/ManualModel';
+import Video from './models/VideoModel';
+import Project from './models/ProyectoModel';
 
 dotenv.config();
 
@@ -20,6 +26,13 @@ const getOne = (Model) => {
 
 		if (!doc) throw new Error('No se encontro el documento');
 
+		return doc;
+	};
+};
+
+const getOneFilter = (Model) => {
+	return async (query) => {
+		const doc = await Model.findOne(query);
 		return doc;
 	};
 };
@@ -39,7 +52,7 @@ const createOne = (Model) => {
 };
 
 const updateOne = (Model) => {
-	return async (data, id) => {
+	return async (id, data) => {
 		const doc = await Model.findByIdAndUpdate(id, data, {
 			new: true,
 			runValidators: true
@@ -56,21 +69,28 @@ const deleteOne = (Model) => {
 };
 
 // CRUD Usuarios
-// export const getUser = getOne(User);
-// export const getAllUser = getAll(User);
-// export const createUser = createOne(User);
-// export const deleteUser = deleteOne(User);
-// export const updateUser = updateOne(User);
+export const getUser = getOneFilter(User);
+export const getAllUser = getAll(User);
+export const createUser = createOne(User);
+export const deleteUser = deleteOne(User);
+export const updateUser = updateOne(User);
 
 // CRUD Imagenes
-// export const getImage = getOne(Image);
-// export const getAllImage = getAll(Image);
-// export const createImage = createOne(Image);
-// export const deleteImage = deleteOne(Image);
-// export const updateImage = updateOne(Image);
+export const getImage = getOneFilter(Image);
+export const getAllImage = getAll(Image);
+export const createImage = createOne(Image);
+export const deleteImage = deleteOne(Image);
+export const updateImage = updateOne(Image);
+
+// CRUD Imagenes galeria
+export const getImageGalery = getOneFilter(ImageGalery);
+export const getAllImageGalery = getAll(ImageGalery);
+export const createImageGalery = createOne(ImageGalery);
+export const deleteImageGalery = deleteOne(ImageGalery);
+export const updateImageGalery = updateOne(ImageGalery);
 
 // CRUD Paginas / Novedades
-export const getPage = getOne(Page);
+export const getPage = getOneFilter(Page);
 export const createPage = createOne(Page);
 export const deletePage = deleteOne(Page);
 export const updatePage = updateOne(Page);
@@ -80,22 +100,83 @@ export const getAllPage = async () => {
 };
 
 // CRUD Menus
-// export const getMenu = getOne(Menu);
-// export const getAllMenu = getAll(Menu);
-// export const createMenu = createOne(Menu);
-// export const deleteMenu = deleteOne(Menu);
-// export const updateMenu = updateOne(Menu);
+export const getMenu = getOneFilter(Menu);
+export const getAllMenu = getAll(Menu);
+export const createMenu = createOne(Menu);
+export const deleteMenu = deleteOne(Menu);
+export const updateMenu = updateOne(Menu);
+export const getAllMenuPopulated = async () => {
+	const menus = await Menu.find();
+	const submenus = await SubMenu.find();
+
+	menus.map((menu) => {
+		const submenusArr = [];
+		submenus.forEach((submenu) => {
+			if (submenu.parent == menu._id) submenusArr.push(submenu);
+		});
+		menu.submenus = submenusArr;
+		return menu;
+	});
+	return menus;
+};
+export const getOneMenuPopulated = async (id) => {
+	const menu = await Menu.findById(id);
+	const submenus = await SubMenu.find();
+
+	const submenusArr = [];
+	submenus.forEach((submenu) => {
+		if (submenu.parent.toString() == menu._id.toString()) submenusArr.push(submenu);
+	});
+	menu.submenus = submenusArr;
+
+	return menu;
+};
 
 // CRUD Sub-menus
-// export const getSubMenu = getOne(SubMenu);
-// export const getAllSubMenu = getAll(SubMenu);
-// export const createSubMenu = createOne(SubMenu);
-// export const deleteSubMenu = deleteOne(SubMenu);
-// export const updateSubMenu = updateOne(SubMenu);
+export const getSubMenu = getOneFilter(SubMenu);
+export const getAllSubMenu = getAll(SubMenu);
+export const createSubMenu = createOne(SubMenu);
+export const deleteSubMenu = deleteOne(SubMenu);
+export const updateSubMenu = updateOne(SubMenu);
 
 // CRUD Preguntas frecuentes
-// export const getQuestion = getOne(Question);
-// export const getAllQuestion = getAll(Question);
-// export const createQuestion = createOne(Question);
-// export const deleteQuestion = deleteOne(Question);
-// export const updateQuestion = updateOne(Question);
+export const getQuestion = getOneFilter(Question);
+export const getAllQuestion = getAll(Question);
+export const createQuestion = createOne(Question);
+export const deleteQuestion = deleteOne(Question);
+export const updateQuestion = updateOne(Question);
+
+// CRUD Anuncios
+export const getAd = getOneFilter(Ad);
+export const getAllAd = getAll(Ad);
+export const createAd = createOne(Ad);
+export const deleteAd = deleteOne(Ad);
+export const updateAd = updateOne(Ad);
+
+// CRUD Comentarios
+export const getComment = getOneFilter(Comment);
+export const getAllComment = getAll(Comment);
+export const createComment = createOne(Comment);
+export const deleteComment = deleteOne(Comment);
+export const updateComment = updateOne(Comment);
+
+// CRUD Manuales
+export const getManual = getOneFilter(Manual);
+export const getAllManual = getAll(Manual);
+export const createManual = createOne(Manual);
+export const deleteManual = deleteOne(Manual);
+export const updateManual = updateOne(Manual);
+
+// CRUD Videos
+export const getVideo = getOneFilter(Video);
+export const getAllVideo = getAll(Video);
+export const createVideo = createOne(Video);
+export const deleteVideo = deleteOne(Video);
+export const updateVideo = updateOne(Video);
+
+// CRUD Proyectos
+export const getProject = getOneFilter(Project);
+export const getAllProject = getAll(Project);
+export const createProject = createOne(Project);
+export const deleteProject = deleteOne(Project);
+export const updateProject = updateOne(Project);
