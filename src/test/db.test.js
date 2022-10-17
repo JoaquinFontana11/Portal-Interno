@@ -49,7 +49,7 @@ import {
 	createProject,
 	updateProject,
 	deleteProject
-} from '$lib/server/db';
+} from '$lib/server/db/db';
 
 describe('Operaciones sobre paginas', async () => {
 	it('Crear una pagina', async () => {

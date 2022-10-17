@@ -5,32 +5,32 @@
 
 	const links = [
 		{
-			href: '#',
+			href: '/admin/pages',
 			nombre: 'paginas',
 			icon: DesktopComputer
 		},
 		{
-			href: '#',
+			href: '/admin/menus',
 			nombre: 'menus',
 			icon: Menu
 		},
 		{
-			href: '#',
+			href: '/admin/images',
 			nombre: 'imagenes',
 			icon: Photograph
 		},
 		{
-			href: '#',
+			href: '/admin/photos',
 			nombre: 'galeria',
 			icon: Globe
 		},
 		{
-			href: '#',
+			href: '/admin/users',
 			nombre: 'usuarios',
 			icon: User
 		},
 		{
-			href: '#',
+			href: '/admin/files',
 			nombre: 'archivos',
 			icon: Folder
 		}
@@ -44,7 +44,10 @@
 				<AdminNavbarLink href={link.href} nombre={link.nombre} icon={link.icon} />
 			{/each}
 			<li class="absolute bottom-1">
-				<a href="#" class="flex justify-start gap-1 items-center mb-2">
+				<a
+					href="/admin/users/me"
+					class="flex justify-start gap-1 items-center mb-2 text-gray-900 rounded-lg dark:text-white "
+				>
 					<img class="w-10 h-10 rounded-full" src="/default-thumbnail.jpg" alt="Jese Leos" />
 					<span class="ml-3">Mi cuenta</span>
 				</a>
