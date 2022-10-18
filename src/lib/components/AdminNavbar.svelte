@@ -48,7 +48,7 @@
 					href="/admin/users/me"
 					class="flex justify-start gap-1 items-center mb-2 text-gray-900 rounded-lg dark:text-white "
 				>
-					<img class="w-10 h-10 rounded-full" src="/default-thumbnail.jpg" alt="Jese Leos" />
+					<img class="w-10 h-10 rounded-full" src="/static/img/test.png" alt="Jese Leos" />
 					<span class="ml-3">Mi cuenta</span>
 				</a>
 			</li>

@@ -7,23 +7,23 @@
 
 	export let data;
 
-	const title = 'Formulario de alta de pagina';
+	const title = 'Formulario de modificacion de pagina';
 	let loading = false;
-	let list = true;
+	const page = JSON.parse(data.page);
 
 	const components = [
 		{
 			type: 'text',
 			label: 'Titulo de la pagina',
 			name: 'title',
-			value: '',
+			value: page.title,
 			required: true
 		},
 		{
 			type: 'select',
 			label: 'Es novedad',
 			name: 'isNovelty',
-			value: false,
+			value: page.isNovelty,
 			options: [
 				{ name: 'Si', value: true },
 				{ name: 'No', value: false }
@@ -33,25 +33,25 @@
 			type: 'editor',
 			label: 'Contenido de la pagina',
 			name: 'body',
-			value: ''
+			value: page.body
 		},
 		{
 			type: 'text',
 			label: 'Imagen de la novedad',
 			name: 'image',
-			value: ''
+			value: page.image
 		},
 		{
 			type: 'text',
 			label: 'Banner de la novedad',
 			name: 'banner',
-			value: ''
+			value: page.banner
 		},
 		{
 			type: 'select',
 			label: 'Preguntas frecuentes activas',
 			name: 'questionsActive',
-			value: false,
+			value: page.questionsActive,
 			options: [
 				{ name: 'Si', value: true },
 				{ name: 'No', value: false }
@@ -75,8 +75,8 @@
 		};
 
 		try {
-			await fetch(`/api/pages`, {
-				method: 'POST',
+			await fetch(`/api/pages/${page._id}`, {
+				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
 					Accept: 'application/json'
@@ -89,53 +89,16 @@
 			loading = false;
 		}
 	};
-
-	const deletePage = async (e) => {
-		try {
-			await fetch(`/api/pages/${e.detail.id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json'
-				}
-			});
-		} catch (err) {
-			console.log(err);
-		} finally {
-			location.href = location.href;
-		}
-	};
-
-	const modifyPage = (e) => {
-		console.log(e.detail);
-		location.href = `/admin/pages/${e.detail.id}`;
-	};
 </script>
 
-<AdminButton
-	icon={list ? Plus : Table}
-	on:click={() => {
-		list = !list;
-	}}
-/>
 <main class="ml-56 dark:bg-gray-900 bg-gray-100 h-screen relative overflow-y-scroll">
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		{#if list}
-			<AdminList
-				headers={['titulo', 'slug', 'Es novedad', 'Preguntas activas']}
-				attributes={['title', 'slug', 'isNovelty', 'questionsActive']}
-				data={JSON.parse(data.pages)}
-				on:modify-doc={modifyPage}
-				on:delete-doc={deletePage}
-			/>
-		{:else}
-			<AdminForm
-				{title}
-				{components}
-				submitMessage="Subir pagina"
-				{loading}
-				on:custom-submit={pageSubmit}
-			/>
-		{/if}
+		<AdminForm
+			{title}
+			{components}
+			submitMessage="Subir pagina"
+			{loading}
+			on:custom-submit={pageSubmit}
+		/>
 	</div>
 </main>

@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { searchForWorkspaceRoot } from 'vite';
 
 const config = {
 	plugins: [sveltekit()],
@@ -6,6 +7,11 @@ const config = {
 		globals: true,
 		environment: 'jsdom',
 		cache: false
+	},
+	server: {
+		fs: {
+			allow: [searchForWorkspaceRoot(process.cwd()), '/static']
+		}
 	}
 };
 

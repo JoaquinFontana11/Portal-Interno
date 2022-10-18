@@ -3,5 +3,5 @@
 	import AdminForm from '$lib/components/AdminForm.svelte';
 </script>
 
-<AdminList />
+<!-- <AdminList /> -->
 <!-- <AdminForm /> -->

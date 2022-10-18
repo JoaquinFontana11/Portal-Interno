@@ -18,19 +18,30 @@
 >
 	{#each attributes as atr}
 		{#if typeof doc[atr] == 'boolean'}
-			<td class="flex items-center h-full w-full justify-center">
-				<div class={`h-2.5 w-2.5 rounded-full ${doc[atr] ? 'bg-green-600' : 'bg-red-600'} mr-2`} />
-				{`${doc[atr] ? 'Activo' : 'Inactivo'}`}
+			<td class="h-1">
+				<div class="flex items-center justify-center">
+					<div
+						class={`h-2.5 w-2.5 rounded-full ${doc[atr] ? 'bg-green-600' : 'bg-red-600'} mr-2`}
+					/>
+					{`${doc[atr] ? 'Activo' : 'Inactivo'}`}
+				</div>
 			</td>
 		{:else}
-			<td class="text-center">{doc[atr]}</td>
+			<td class="text-center h-1"><span>{doc[atr]}</span></td>
 		{/if}
 	{/each}
-	<td>
-		<div class="flex items-center h-full w-full justify-center gap-2">
-			<a href="#" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">Editar</a
+	<td class="h-1">
+		<div class="flex items-center w-full justify-center gap-2">
+			<a
+				href="#"
+				class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline"
+				on:click={modifyEvent}>Editar</a
 			>
-			<a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</a>
+			<a
+				href="#"
+				class="font-medium text-red-600 dark:text-red-500 hover:underline"
+				on:click={deleteEvent}>Eliminar</a
+			>
 		</div>
 	</td>
 </tr>

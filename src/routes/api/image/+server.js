@@ -1,21 +1,20 @@
+import sizeOf from 'image-size';
 import { writeFileSync, unlinkSync } from 'fs';
 import { json } from '@sveltejs/kit';
 import { createImage, deleteImage, getImage } from '$lib/server/db/db';
 
 export async function POST({ request }) {
 	const data = await request.json();
-	console.log(data);
-
 	const file = data.image;
+	const path = `static/img/${data.path}/${new Date().getTime()}.png`;
 
-	const path = `img/${data.path}/${new Date().getTime()}.png`;
+	writeFileSync(path, file, 'base64');
 
-	writeFileSync(`static/${path}`, file, 'base64');
+	data.url = '/' + path;
+	const { width, height } = sizeOf(path);
 
-	data.url = path;
 	try {
-		const newImage = await createImage({ url: data.url, alt: data.alt });
-
+		const newImage = await createImage({ url: data.url, alt: data.alt, width, height });
 		return json({
 			status: '201',
 			newImage
