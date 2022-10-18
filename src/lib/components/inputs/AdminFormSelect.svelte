@@ -15,7 +15,6 @@
 		{required}
 		bind:value
 	>
-		<option selected>Elija una opcion</option>
 		{#each options as option}
 			<option value={option.value}>{option.name}</option>
 		{/each}
