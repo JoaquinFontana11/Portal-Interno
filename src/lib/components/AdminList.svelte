@@ -4,6 +4,7 @@
 	export let data;
 	export let headers;
 	export let attributes;
+	export let actions = ['edit', 'delete'];
 
 	const distpach = createEventDispatcher();
 
@@ -16,7 +17,7 @@
 </script>
 
 <!-- {data} -->
-<table class="text-sm text-left text-gray-500 dark:text-gray-400 fixed w-full h-full shadow-md">
+<table class="text-sm text-left text-gray-500 dark:text-gray-400 shadow-md">
 	<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
 		{#each headers as head}
 			<th class="py-3 px-6 text-center">{head}</th>
@@ -25,7 +26,13 @@
 	</thead>
 	<tbody>
 		{#each data as doc}
-			<AdminListRow {doc} {attributes} on:modify-doc={modifyEvent} on:delete-doc={deleteEvent} />
+			<AdminListRow
+				{doc}
+				{attributes}
+				on:modify-doc={modifyEvent}
+				on:delete-doc={deleteEvent}
+				{actions}
+			/>
 		{/each}
 	</tbody>
 </table>

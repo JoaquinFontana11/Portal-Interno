@@ -90,12 +90,16 @@ export const deleteImageGalery = deleteOne(ImageGalery);
 export const updateImageGalery = updateOne(ImageGalery);
 
 // CRUD Paginas / Novedades
-export const getPage = getOneFilter(Page);
+// export const getPage = getOneFilter(Page);
 export const createPage = createOne(Page);
 export const deletePage = deleteOne(Page);
 export const updatePage = updateOne(Page);
 export const getAllPage = async () => {
 	const docs = await Page.find().populate({ path: 'questions' });
+	return docs;
+};
+export const getPage = async (query) => {
+	const docs = await Page.findOne(query).populate({ path: 'questions' });
 	return docs;
 };
 

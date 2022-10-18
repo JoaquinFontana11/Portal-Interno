@@ -8,8 +8,9 @@
 	export let data;
 
 	const title = 'Formulario de modificacion de pagina';
-	let loading = false;
 	const page = JSON.parse(data.page);
+	let loading = false;
+	let loadingQuestion = false;
 
 	const components = [
 		{
@@ -59,6 +60,27 @@
 		}
 	];
 
+	const componentsQuestions = [
+		{
+			type: 'text',
+			label: 'Pregunta',
+			name: 'question',
+			value: ''
+		},
+		{
+			type: 'text',
+			label: 'Respuesta',
+			name: 'answer',
+			value: ''
+		},
+		{
+			type: 'number',
+			label: 'Orden',
+			name: 'order',
+			value: 0
+		}
+	];
+
 	const pageSubmit = async (e) => {
 		if (loading) return;
 
@@ -87,6 +109,51 @@
 			console.log(err);
 		} finally {
 			loading = false;
+			location.href = '/admin/pages';
+		}
+	};
+
+	const questionSubmit = async (e) => {
+		if (loadingQuestion) return;
+
+		loadingQuestion = true;
+		const { data } = e.detail;
+		const body = {
+			question: data[0].value,
+			answer: data[1].value,
+			order: data[2].value
+		};
+
+		try {
+			await fetch(`/api/pages/${page._id}/questions`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				},
+				body: JSON.stringify(body)
+			});
+		} catch (err) {
+			console.log(err);
+		} finally {
+			loadingQuestion = false;
+			location.reload();
+		}
+	};
+
+	const deleteQuestion = async (e) => {
+		try {
+			await fetch(`/api/pages/${page._id}/questions/${e.detail.id}`, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		} finally {
+			location.reload();
 		}
 	};
 </script>
@@ -96,9 +163,24 @@
 		<AdminForm
 			{title}
 			{components}
-			submitMessage="Subir pagina"
+			submitMessage="Modificar pagina"
 			{loading}
 			on:custom-submit={pageSubmit}
 		/>
+		<AdminForm
+			title="Formulario de preguntas"
+			components={componentsQuestions}
+			submitMessage="Subir pregunta"
+			{loadingQuestion}
+			on:custom-submit={questionSubmit}
+		>
+			<AdminList
+				headers={['Pregunta', 'Respuesta']}
+				attributes={['question', 'answer']}
+				data={page.questions}
+				on:delete-doc={deleteQuestion}
+				actions={['delete']}
+			/>
+		</AdminForm>
 	</div>
 </main>

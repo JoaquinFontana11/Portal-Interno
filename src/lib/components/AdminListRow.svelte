@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	export let doc;
 	export let attributes;
+	export let actions;
 
 	const distpach = createEventDispatcher();
 
@@ -18,7 +19,7 @@
 >
 	{#each attributes as atr}
 		{#if typeof doc[atr] == 'boolean'}
-			<td class="h-1">
+			<td class="h-1 py-3 px-6 text-center">
 				<div class="flex items-center justify-center">
 					<div
 						class={`h-2.5 w-2.5 rounded-full ${doc[atr] ? 'bg-green-600' : 'bg-red-600'} mr-2`}
@@ -27,21 +28,25 @@
 				</div>
 			</td>
 		{:else}
-			<td class="text-center h-1"><span>{doc[atr]}</span></td>
+			<td class="text-center h-1 py-3 px-6 text-center"><span>{doc[atr]}</span></td>
 		{/if}
 	{/each}
-	<td class="h-1">
+	<td class="h-1 py-3 px-6 text-center">
 		<div class="flex items-center w-full justify-center gap-2">
-			<a
-				href="#"
-				class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline"
-				on:click={modifyEvent}>Editar</a
-			>
-			<a
-				href="#"
-				class="font-medium text-red-600 dark:text-red-500 hover:underline"
-				on:click={deleteEvent}>Eliminar</a
-			>
+			{#if actions.includes('edit')}
+				<a
+					href="#"
+					class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline"
+					on:click={modifyEvent}>Editar</a
+				>
+			{/if}
+			{#if actions.includes('delete')}
+				<a
+					href="#"
+					class="font-medium text-red-600 dark:text-red-500 hover:underline"
+					on:click={deleteEvent}>Eliminar</a
+				>
+			{/if}
 		</div>
 	</td>
 </tr>
