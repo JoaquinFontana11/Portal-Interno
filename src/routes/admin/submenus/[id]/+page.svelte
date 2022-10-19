@@ -42,7 +42,7 @@
 			type: 'select',
 			label: 'Menu padre',
 			name: 'parent',
-			// value: JSON.parse(data.menus).find((menu) => menu._id == submenu.parent).name,
+			value: JSON.parse(data.menus).find((menu) => menu._id == submenu.parent)._id,
 			options: JSON.parse(data.menus).map((menu) => {
 				return { value: menu._id, name: menu.name };
 			})

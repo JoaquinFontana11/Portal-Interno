@@ -177,6 +177,7 @@
 				data={page.questions}
 				on:delete-doc={deleteQuestion}
 				actions={['delete']}
+				slot="bottom-slot"
 			/>
 		</AdminForm>
 	</div>

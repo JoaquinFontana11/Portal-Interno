@@ -18,7 +18,6 @@
 			name: 'path',
 			value: '',
 			options: [
-				{ name: 'Foto de usuario', value: 'users' },
 				{ name: 'Imagen de proposito general', value: 'pages' },
 				{ name: 'Foto de galeria', value: 'photos' },
 				{ name: 'Imagen de novedades', value: 'noveltys' }

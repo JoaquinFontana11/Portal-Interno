@@ -21,7 +21,10 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: [true, 'Un usuario debe tener un email']
 	},
-	profilePhoto: { type: mongoose.Schema.ObjectId, ref: 'images' },
+	profilePhoto: {
+		type: String,
+		default: '#'
+	},
 	rol: {
 		type: String,
 		default: 'user',
