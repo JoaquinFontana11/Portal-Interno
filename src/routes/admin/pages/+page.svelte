@@ -107,7 +107,6 @@
 	};
 
 	const modifyPage = (e) => {
-		console.log(e.detail);
 		location.href = `/admin/pages/${e.detail.id}`;
 	};
 </script>

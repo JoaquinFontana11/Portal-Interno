@@ -5,6 +5,7 @@
 	export let headers;
 	export let attributes;
 	export let actions = ['edit', 'delete'];
+	export let caption = '';
 
 	const distpach = createEventDispatcher();
 
@@ -16,8 +17,12 @@
 	};
 </script>
 
-<!-- {data} -->
-<table class="text-sm text-left text-gray-500 dark:text-gray-400 shadow-md">
+<table class="text-sm text-left text-gray-500 dark:text-gray-400 shadow-md ml-auto mr-auto">
+	<caption
+		class="mb-2  text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 "
+	>
+		{caption}
+	</caption>
 	<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
 		{#each headers as head}
 			<th class="py-3 px-6 text-center">{head}</th>

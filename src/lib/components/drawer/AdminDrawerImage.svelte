@@ -1,17 +1,27 @@
 <script>
+	import AdminMessage from '../AdminMessage.svelte';
+
 	export let src;
 	export let alt;
 	export let width;
 	export let height;
+
+	let showMessage = false;
+
+	const handlerClick = (e) => {
+		navigator.clipboard.writeText(src);
+		showMessage = true;
+
+		setTimeout(() => {
+			showMessage = false;
+		}, 2000);
+	};
 </script>
 
-<a
-	href="#"
-	class="mt-1 mb-1 relative"
-	on:click={() => {
-		navigator.clipboard.writeText(src);
-	}}
->
+{#if showMessage}
+	<AdminMessage type="success" message="La imagen se copio con exito!" />
+{/if}
+<a href="#" class="mt-1 mb-1 relative" on:click={handlerClick}>
 	<figure class="relative max-w-sm transition-all cursor-pointer flex justify-center">
 		<a href="#">
 			<img

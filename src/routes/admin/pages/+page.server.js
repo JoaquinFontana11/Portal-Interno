@@ -1,8 +1,7 @@
 import { getAllPage } from '$lib/server/db/db';
 
 /** @type {import('./$types').LayoutServerLoad} */
-export async function load({ params }) {
+export async function load() {
 	const pages = await getAllPage();
-	console.log(params);
 	return { pages: JSON.stringify(pages) };
 }
