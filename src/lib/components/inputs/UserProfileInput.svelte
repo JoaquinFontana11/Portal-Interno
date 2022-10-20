@@ -66,7 +66,7 @@
 
 <div>
 	<img
-		src={src == '#' ? '/static/img/test.png' : src}
+		src={src == '#' ? '/img/test.png' : src}
 		alt="Foto de usuario"
 		class="w-32 h-32 rounded-full absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2"
 	/>

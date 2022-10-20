@@ -1,6 +1,9 @@
 import { json } from '@sveltejs/kit';
 import { jwtSign } from '$lib/server/auth/jwt';
 import { getUser } from '$lib/server/db/db';
+// import samesite from '$lib/server/auth/cookie';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export async function POST({ request }) {
 	const data = await request.json();
@@ -23,6 +26,14 @@ export async function POST({ request }) {
 	let date = new Date();
 	date.setFullYear(2023);
 
+	const samesite = process.env.NODE_ENV == 'production' ? ';SameSite=None' : '';
+	const httponly = process.env.NODE_ENV == 'production' ? '' : ';httponly;;';
+
+	const cookieHeader =
+		process.env.NODE_ENV == 'production'
+			? `expires=${date};httponly;path=/;`
+			: `expires=${date};httponly;path=/;secure;`;
+
 	const res = new Response(
 		JSON.stringify({
 			name: 'loggin exitoso'
@@ -32,7 +43,7 @@ export async function POST({ request }) {
 				'Set-Cookie': `jwt=${await jwtSign({
 					username: user.username,
 					rol: user.rol
-				})};expires=${date};httponly;path=/;secure`
+				})};${cookieHeader}`
 			}
 		}
 	);

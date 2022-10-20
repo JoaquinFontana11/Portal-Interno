@@ -19,7 +19,7 @@
 	<td class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
 		<img
 			class="w-10 h-10 rounded-full"
-			src={doc.profilePhoto == '#' ? '/static/img/test.png' : doc.profilePhoto}
+			src={doc.profilePhoto == '#' ? '/img/test.png' : doc.profilePhoto}
 			alt="foto de perfil"
 		/>
 		<div class="pl-3">

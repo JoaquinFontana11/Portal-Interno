@@ -52,7 +52,7 @@
 				>
 					<img
 						class="w-10 h-10 rounded-full"
-						src={user.profilePhoto == '#' ? '/static/img/test.png' : user.profilePhoto}
+						src={user.profilePhoto == '#' ? '/img/test.png' : user.profilePhoto}
 						alt="Foto de perfil"
 					/>
 					<span class="ml-3">Mi cuenta</span>
