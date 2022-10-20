@@ -126,6 +126,7 @@
 				data={JSON.parse(data.pages)}
 				on:modify-doc={modifyPage}
 				on:delete-doc={deletePage}
+				caption="Paginas"
 			/>
 		{:else}
 			<AdminForm

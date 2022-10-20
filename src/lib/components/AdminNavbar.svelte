@@ -3,6 +3,8 @@
 	import AdminNavbarLink from './AdminNavbarLink.svelte';
 	import SwitchDarkMode from './SwitchDarkMode.svelte';
 
+	export let user;
+
 	const links = [
 		{
 			href: '/admin/pages',
@@ -48,7 +50,11 @@
 					href="/admin/users/me"
 					class="flex justify-start gap-1 items-center mb-2 text-gray-900 rounded-lg dark:text-white "
 				>
-					<img class="w-10 h-10 rounded-full" src="/static/img/test.png" alt="Jese Leos" />
+					<img
+						class="w-10 h-10 rounded-full"
+						src={user.profilePhoto == '#' ? '/static/img/test.png' : user.profilePhoto}
+						alt="Foto de perfil"
+					/>
 					<span class="ml-3">Mi cuenta</span>
 				</a>
 			</li>

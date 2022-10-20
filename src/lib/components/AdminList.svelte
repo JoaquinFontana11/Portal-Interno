@@ -6,6 +6,7 @@
 	export let attributes;
 	export let actions = ['edit', 'delete'];
 	export let caption = '';
+	export let customRow = null; // podemos pasar una fila customizada si la tabla tiene que ser distinta
 
 	const distpach = createEventDispatcher();
 
@@ -31,13 +32,24 @@
 	</thead>
 	<tbody>
 		{#each data as doc}
-			<AdminListRow
-				{doc}
-				{attributes}
-				on:modify-doc={modifyEvent}
-				on:delete-doc={deleteEvent}
-				{actions}
-			/>
+			{#if !customRow}
+				<AdminListRow
+					{doc}
+					{attributes}
+					on:modify-doc={modifyEvent}
+					on:delete-doc={deleteEvent}
+					{actions}
+				/>
+			{:else}
+				<svelte:component
+					this={customRow}
+					{doc}
+					{attributes}
+					on:modify-doc={modifyEvent}
+					on:delete-doc={deleteEvent}
+					{actions}
+				/>
+			{/if}
 		{/each}
 	</tbody>
 </table>

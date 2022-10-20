@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { getAllImage } from '$lib/server/db/db';
+import { getAllImage, getUser } from '$lib/server/db/db';
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ request }) {
@@ -7,5 +7,6 @@ export async function load({ request }) {
 		throw redirect(301, '/login');
 	}
 	const images = await getAllImage();
-	return { images: JSON.stringify(images) };
+	const user = await getUser({ username: JSON.parse(request.user).username });
+	return { images: JSON.stringify(images), user: JSON.stringify(user) };
 }

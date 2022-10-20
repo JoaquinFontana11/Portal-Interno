@@ -50,13 +50,37 @@
 			type: 'text',
 			label: 'Cumpleaños (Hacer Date)',
 			name: 'birthday',
-			value: user.birthday,
-			required: true
+			value: user.birthday
 		}
 	];
 
-	const userSubmit = (e) => {
-		console.log(e.detail);
+	const userSubmit = async (e) => {
+		if (loading) return;
+
+		loading = true;
+		const { data } = e.detail;
+		const body = {
+			name: data[0].value,
+			lastName: data[1].value,
+			username: data[2].value,
+			email: data[3].value,
+			rol: data[4].value
+		};
+
+		try {
+			await fetch(`/api/users/${user._id}`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				},
+				body: JSON.stringify(body)
+			});
+		} catch (err) {
+			console.log(err);
+		} finally {
+			loading = false;
+		}
 	};
 </script>
 
