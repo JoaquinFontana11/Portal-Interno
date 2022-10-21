@@ -8,10 +8,22 @@
 
 	let showMessage = false;
 
-	const handlerClick = (e) => {
-		navigator.clipboard.writeText(src);
-		showMessage = true;
+	const handlerClick = async (e) => {
+		// agregamos esto pq el clipboard solo funciona en paginas HTTPS
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(src);
+		} else {
+			let textArea = document.createElement('textarea');
+			textArea.value = src;
+			textArea.classList.add('fuera');
+			document.body.appendChild(textArea);
+			textArea.focus();
+			textArea.select();
+			document.execCommand('copy');
+			textArea.remove();
+		}
 
+		showMessage = true;
 		setTimeout(() => {
 			showMessage = false;
 		}, 2000);
@@ -37,3 +49,11 @@
 		</figcaption>
 	</figure>
 </a>
+
+<style>
+	.fuera {
+		position: fixed;
+		left: -99999px;
+		top: -99999px;
+	}
+</style>

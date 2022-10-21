@@ -10,7 +10,7 @@ export async function POST({ request }) {
 	const data = await request.json();
 	const file = data.image;
 	const path = `/img/${data.path}/${new Date().getTime()}.png`;
-	const realPath = process.env.NODE_ENV == 'production' ? './static' + path : '/static' + path;
+	const realPath = process.env.NODE_ENV == 'production' ? './static' + path : 'static' + path;
 
 	writeFileSync(realPath, file, 'base64');
 	const { width, height } = sizeOf(realPath);

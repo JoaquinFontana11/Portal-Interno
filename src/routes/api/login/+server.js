@@ -26,9 +26,6 @@ export async function POST({ request }) {
 	let date = new Date();
 	date.setFullYear(2023);
 
-	const samesite = process.env.NODE_ENV == 'production' ? ';SameSite=None' : '';
-	const httponly = process.env.NODE_ENV == 'production' ? '' : ';httponly;;';
-
 	const cookieHeader =
 		process.env.NODE_ENV == 'production'
 			? `expires=${date};httponly;path=/;`

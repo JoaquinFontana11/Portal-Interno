@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import AdminListRow from './AdminListRow.svelte';
+	import AdminListRow from './rows/AdminListRow.svelte';
 	export let data;
 	export let headers;
 	export let attributes;
@@ -20,7 +20,7 @@
 
 <table class="text-sm text-left text-gray-500 dark:text-gray-400 shadow-md ml-auto mr-auto">
 	<caption
-		class="mb-2  text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 "
+		class="mb-2 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 "
 	>
 		{caption}
 	</caption>

@@ -3,7 +3,11 @@ module.exports = {
 	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			height: {
+				112: '32rem'
+			}
+		}
 	},
 	plugins: []
 };

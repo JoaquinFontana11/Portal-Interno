@@ -6,8 +6,7 @@ const imageSchema = mongoose.Schema({
 		required: [true, 'Una imagen de galeria tiene que tener un titulo']
 	},
 	image: {
-		type: mongoose.Schema.ObjectId,
-		ref: 'imagenes',
+		type: String,
 		required: [true, 'Una imagen tiene que tener... una imagen']
 	},
 	comments: [

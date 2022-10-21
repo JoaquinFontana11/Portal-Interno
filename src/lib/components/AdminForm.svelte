@@ -30,7 +30,7 @@
 >
 	<!-- Dejamos un slot para ampliar la funcionalidad del formulario dependiendo la necesidad -->
 	<slot name="top-slot" />
-	<legend>{title}</legend>
+	<legend class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{title}</legend>
 	{#each components as component}
 		{#if component.type == 'text'}
 			<AdminFormInputText

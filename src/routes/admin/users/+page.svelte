@@ -3,7 +3,7 @@
 	import AdminForm from '$lib/components/AdminForm.svelte';
 	import AdminList from '$lib/components/AdminList.svelte';
 	import AdminButton from '$lib/components/AdminButton.svelte';
-	import AdminListRowUsers from '$lib/components/AdminListRowUsers.svelte';
+	import AdminListRowUsers from '$lib/components/rows/AdminListRowUsers.svelte';
 
 	export let data;
 
