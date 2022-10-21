@@ -26,14 +26,14 @@ export async function POST({ request }) {
 	}
 }
 
-export async function DELETE({ request }) {
-	const data = await request.json();
-	const img = await getImage({ _id: data.id });
+// export async function DELETE({ request }) {
+// 	const data = await request.json();
+// 	const img = await getImage({ _id: data.id });
 
-	unlinkSync(`static/${img.url}`);
-	await deleteImage(data.id);
+// 	unlinkSync(`static/${img.url}`);
+// 	await deleteImage(data.id);
 
-	return json({
-		status: '202'
-	});
-}
+// 	return json({
+// 		status: '202'
+// 	});
+// }

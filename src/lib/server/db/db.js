@@ -10,8 +10,8 @@ import SubMenu from './models/SubmenuModel';
 import Question from './models/PreguntaFrecuenteModel';
 import Ad from './models/AnuncioModel';
 import Comment from './models/ComentarioModel';
-import Manual from './models/ManualModel';
-import Video from './models/VideoModel';
+import Archivo from './models/ArchivoModel';
+// import Video from './models/VideoModel';
 import Project from './models/ProyectoModel';
 
 dotenv.config();
@@ -164,19 +164,19 @@ export const createComment = createOne(Comment);
 export const deleteComment = deleteOne(Comment);
 export const updateComment = updateOne(Comment);
 
-// CRUD Manuales
-export const getManual = getOneFilter(Manual);
-export const getAllManual = getAll(Manual);
-export const createManual = createOne(Manual);
-export const deleteManual = deleteOne(Manual);
-export const updateManual = updateOne(Manual);
+// CRUD Archivos
+export const getArchivo = getOneFilter(Archivo);
+export const getAllArchivo = getAll(Archivo);
+export const createArchivo = createOne(Archivo);
+export const deleteArchivo = deleteOne(Archivo);
+export const updateArchivo = updateOne(Archivo);
 
 // CRUD Videos
-export const getVideo = getOneFilter(Video);
-export const getAllVideo = getAll(Video);
-export const createVideo = createOne(Video);
-export const deleteVideo = deleteOne(Video);
-export const updateVideo = updateOne(Video);
+// export const getVideo = getOneFilter(Video);
+// export const getAllVideo = getAll(Video);
+// export const createVideo = createOne(Video);
+// export const deleteVideo = deleteOne(Video);
+// export const updateVideo = updateOne(Video);
 
 // CRUD Proyectos
 export const getProject = getOneFilter(Project);
