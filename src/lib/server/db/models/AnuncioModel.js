@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const adSchema = mongoose.Schema({
+	title: {
+		type: String,
+		required: [true, 'Un anuncio tiene que tener un titulo']
+	},
 	content: {
 		type: String,
 		required: [true, 'Un anuncio tiene que tener un contenido']

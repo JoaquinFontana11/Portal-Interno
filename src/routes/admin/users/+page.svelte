@@ -87,7 +87,7 @@
 			username: data[2].value,
 			email: data[3].value,
 			rol: data[4].value,
-			birthday: new Date(data[5].value)
+			birthday: new Date(data[5].value).setDate(new Date(data[5].value).getDate() + 1)
 		};
 
 		try {
