@@ -11,16 +11,18 @@ export async function POST({ request }) {
 	const type = data.type;
 	const extension = data.name.split('.').at(-1);
 
-	const path = `/${type}/${new Date().getTime()}.${extension}`;
-	const realPath = process.env.NODE_ENV == 'production' ? './static' + path : 'static' + path;
+	console.log(data);
 
-	writeFileSync(realPath, file, 'base64');
+	const path = `/${type}/${new Date().getTime()}.${extension}`;
+	// const realPath = process.env.NODE_ENV == 'production' ? './client' + path : 'static' + path;
+
+	writeFileSync(`static${path}`, file, 'base64');
 
 	try {
 		const newFile = await createArchivo({ name: data.name, type, url: path });
 		return json({
-			status: '201',
-			newFile
+			status: '201'
+			// newFile
 		});
 	} catch (err) {
 		throw err;

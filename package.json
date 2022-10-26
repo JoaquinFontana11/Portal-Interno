@@ -39,7 +39,9 @@
 		"axios": "^1.1.2",
 		"cl-editor": "^2.3.0",
 		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
 		"mongoose": "^6.6.5",
+		"path": "^0.12.7",
 		"svelte-spinner": "^2.0.2"
 	}
 }

@@ -1,5 +1,13 @@
 <script>
-	import { DesktopComputer, Menu, Photograph, User, Folder, Globe } from 'svelte-hero-icons';
+	import {
+		DesktopComputer,
+		Menu,
+		Photograph,
+		User,
+		Folder,
+		Globe,
+		Calendar
+	} from 'svelte-hero-icons';
 	import AdminNavbarLink from './AdminNavbarLink.svelte';
 	import SwitchDarkMode from './SwitchDarkMode.svelte';
 
@@ -35,6 +43,11 @@
 			href: '/admin/files',
 			nombre: 'archivos',
 			icon: Folder
+		},
+		{
+			href: '/admin/adds',
+			nombre: 'anuncios',
+			icon: Calendar
 		}
 	];
 </script>

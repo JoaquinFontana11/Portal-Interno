@@ -51,8 +51,8 @@
 			]
 		},
 		{
-			type: 'text',
-			label: 'Cumpleaños (Hacer Date)',
+			type: 'date',
+			label: 'Cumpleaños',
 			name: 'birthday',
 			value: ''
 		}
@@ -86,7 +86,8 @@
 			lastName: data[1].value,
 			username: data[2].value,
 			email: data[3].value,
-			rol: data[4].value
+			rol: data[4].value,
+			birthday: new Date(data[5].value)
 		};
 
 		try {

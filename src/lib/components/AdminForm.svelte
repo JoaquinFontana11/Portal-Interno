@@ -5,6 +5,7 @@
 	import AdminFormInputText from './inputs/AdminFormInputText.svelte';
 	import AdminFormInputNumber from './inputs/AdminFormInputNumber.svelte';
 	import AdminFormInputPassword from './inputs/AdminFormInputPassword.svelte';
+	import AdminFormInputDate from './inputs/AdminFormInputDate.svelte';
 	import AdminFormSelect from './inputs/AdminFormSelect.svelte';
 	import AdminFormFileInput from './inputs/AdminFormFileInput.svelte';
 	import AdminFormEditor from './inputs/AdminFormEditor.svelte';
@@ -39,14 +40,29 @@
 				required={component.required}
 			/>
 		{:else if component.type == 'number'}
-			<AdminFormInputNumber label={component.label} bind:value={component.value} />
+			<AdminFormInputNumber
+				label={component.label}
+				bind:value={component.value}
+				required={component.required}
+			/>
+		{:else if component.type == 'date'}
+			<AdminFormInputDate
+				label={component.label}
+				bind:value={component.value}
+				required={component.required}
+			/>
 		{:else if component.type == 'password'}
-			<AdminFormInputPassword label={component.label} bind:value={component.value} />
+			<AdminFormInputPassword
+				label={component.label}
+				bind:value={component.value}
+				required={component.required}
+			/>
 		{:else if component.type == 'select'}
 			<AdminFormSelect
 				label={component.label}
 				options={component.options}
 				bind:value={component.value}
+				required={component.required}
 			/>
 		{:else if component.type == 'file'}
 			<AdminFormFileInput label={component.label} bind:files={component.value} />
