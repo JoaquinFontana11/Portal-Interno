@@ -13,6 +13,10 @@ const subMenuSchema = mongoose.Schema({
 		type: String,
 		default: '#'
 	},
+	description: {
+		type: String,
+		default: ''
+	},
 	active: {
 		type: Boolean,
 		default: true

@@ -15,11 +15,17 @@
 			required: true
 		},
 		{
+			type: 'text',
+			label: 'Descripcion del submenu',
+			name: 'description',
+			value: submenu.description,
+			required: true
+		},
+		{
 			type: 'select',
 			label: 'Slug del menu',
 			name: 'slug',
 			value: submenu.slug,
-			required: true,
 			options: JSON.parse(data.slugPages)
 		},
 		{
@@ -56,10 +62,11 @@
 		const { data } = e.detail;
 		const body = {
 			name: data[0].value,
-			slug: data[1].value,
-			order: data[2].value,
-			active: data[3].value,
-			parent: data[4].value
+			description: data[1].value,
+			slug: data[2].value,
+			order: data[3].value,
+			active: data[4].value,
+			parent: data[5].value
 		};
 
 		try {

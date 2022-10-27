@@ -24,7 +24,6 @@
 			label: 'Slug del menu',
 			name: 'slug',
 			value: '',
-			required: true,
 			options: JSON.parse(data.slugPages)
 		},
 		{
@@ -53,11 +52,17 @@
 			required: true
 		},
 		{
+			type: 'text',
+			label: 'Descripcion del submenu',
+			name: 'description',
+			value: '',
+			required: true
+		},
+		{
 			type: 'select',
 			label: 'Slug del submenu',
 			name: 'slug',
 			value: '',
-			required: true,
 			options: JSON.parse(data.slugPages)
 		},
 		{
@@ -122,10 +127,11 @@
 		const { data } = e.detail;
 		const body = {
 			name: data[0].value,
-			slug: data[1].value,
-			order: data[2].value,
-			active: data[3].value,
-			parent: data[4].value
+			description: data[1].value,
+			slug: data[2].value,
+			order: data[3].value,
+			active: data[4].value,
+			parent: data[5].value
 		};
 
 		try {
@@ -156,7 +162,7 @@
 		} catch (err) {
 			console.log(err);
 		} finally {
-			location.href = location.href;
+			location.reload();
 		}
 	};
 
@@ -176,7 +182,7 @@
 		} catch (err) {
 			console.log(err);
 		} finally {
-			location.href = location.href;
+			location.reload();
 		}
 	};
 
@@ -204,8 +210,8 @@
 			/>
 			<br />
 			<AdminList
-				headers={['nombre', 'slug', 'orden', 'activo', 'padre']}
-				attributes={['name', 'slug', 'order', 'active', 'parent']}
+				headers={['nombre', 'descripcion', 'slug', 'orden', 'activo', 'padre']}
+				attributes={['name', 'description', 'slug', 'order', 'active', 'parent']}
 				data={JSON.parse(data.submenus).map((submenu) => {
 					submenu.parent = JSON.parse(data.menus).find((menu) => menu._id == submenu.parent).name;
 					return submenu;

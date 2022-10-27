@@ -19,7 +19,6 @@
 			label: 'Slug del menu',
 			name: 'slug',
 			value: menu.slug,
-			required: true,
 			options: JSON.parse(data.slugPages)
 		},
 		{

@@ -110,18 +110,18 @@ export const createMenu = createOne(Menu);
 export const deleteMenu = deleteOne(Menu);
 export const updateMenu = updateOne(Menu);
 export const getAllMenuPopulated = async () => {
-	const menus = await Menu.find();
+	let menus = await Menu.find();
 	const submenus = await SubMenu.find();
 
-	menus.map((menu) => {
+	return menus.map((menu) => {
+		const newMenu = { menu };
 		const submenusArr = [];
 		submenus.forEach((submenu) => {
-			if (submenu.parent == menu._id) submenusArr.push(submenu);
+			if (submenu.parent.toString() == menu._id.toString()) submenusArr.push(submenu);
 		});
-		menu.submenus = submenusArr;
-		return menu;
+		newMenu.submenus = submenusArr;
+		return newMenu;
 	});
-	return menus;
 };
 export const getOneMenuPopulated = async (id) => {
 	const menu = await Menu.findById(id);
