@@ -11,8 +11,6 @@ export async function POST({ request }) {
 	const type = data.type;
 	const extension = data.name.split('.').at(-1);
 
-	console.log(data);
-
 	const path = `/${type}/${new Date().getTime()}.${extension}`;
 	// const realPath = process.env.NODE_ENV == 'production' ? './client' + path : 'static' + path;
 

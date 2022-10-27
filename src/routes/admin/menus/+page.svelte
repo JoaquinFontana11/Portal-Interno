@@ -93,7 +93,6 @@
 	];
 
 	const menuSubmit = async (e) => {
-		console.log(e.detail);
 		if (loadingMenu) return;
 
 		loadingMenu = true;

@@ -64,7 +64,6 @@
 	};
 
 	const deleteFile = async (e) => {
-		console.log(e.detail);
 		try {
 			await fetch(`/api/files/${e.detail.id}`, {
 				method: 'DELETE',

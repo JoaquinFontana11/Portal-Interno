@@ -12,7 +12,6 @@
 				// If dropped items aren't files, reject them
 				if (item.kind === 'file') {
 					const file = item.getAsFile();
-					console.log(file);
 					filename = file.name;
 				}
 			});

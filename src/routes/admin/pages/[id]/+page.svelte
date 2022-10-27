@@ -85,7 +85,14 @@
 		const { data } = e.detail;
 		const body = {
 			title: data[0].value,
-			slug: data[0].value.toLowerCase().replace(/ /g, '-'),
+			slug:
+				'/portal/pages/' +
+				data[0].value
+					.toLowerCase()
+					.replace(/[^a-zA-Z]/g, ' ')
+					.replace(/ /g, '-')
+					.replace(/^(-)/g, '')
+					.replace(/(-)$/g, ''),
 			isNovelty: data[1].value,
 			body: data[2].value,
 			image: data[3].value,
@@ -106,7 +113,7 @@
 			console.log(err);
 		} finally {
 			loading = false;
-			location.href = '/admin/pages';
+			// location.href = '/admin/pages';
 		}
 	};
 

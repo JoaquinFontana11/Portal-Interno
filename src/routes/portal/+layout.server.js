@@ -7,10 +7,8 @@ export async function load({ request }) {
 		throw redirect(301, '/login');
 	}
 	let menus = await getAllMenuPopulated();
-	console.log(menus);
 
 	menus = menus.map((menu) => {
-		console.log(menu);
 		const menuFormated = {
 			name: menu.menu.name,
 			slug: menu.menu.slug,
@@ -18,7 +16,9 @@ export async function load({ request }) {
 			order: menu.menu.order
 		};
 
-		if (menu.submenus.length > 0) menuFormated.submenus = menu.submenus;
+		if (menu.submenus.length > 0) {
+			menuFormated.submenus = menu.submenus;
+		}
 		return menuFormated;
 	});
 	const user = await getUser({ username: JSON.parse(request.user).username });

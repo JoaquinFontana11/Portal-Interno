@@ -36,7 +36,6 @@
 
 		const { data } = e.detail;
 		const files = data[0].value;
-		console.log(data);
 
 		if (!files[0].type.includes('image'))
 			throw new Error('No podes subir algo que no sea una imagen');

@@ -5,7 +5,6 @@
 
 	const submenu = JSON.parse(data.submenu);
 	let loading = false;
-	console.log(JSON.parse(data.menus).find((menu) => menu._id == submenu.parent).name);
 	const components = [
 		{
 			type: 'text',

@@ -9,11 +9,9 @@
 				<img src="/img/PBA.png" class="mr-3 h-20" alt="FlowBite Logo" />
 			</a>
 		</div>
-		<div
-			class={`grid grid-cols-1 text-center gap-8 sm:text-left sm:gap-6 sm:grid-cols-${links.length}`}
-		>
+		<div class={`grid grid-cols-1 text-center gap-8 sm:text-left sm:gap-6 sm:grid-cols-3`}>
 			{#each links as linkList}
-				<div>
+				<div class="">
 					<h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
 						{linkList.title}
 					</h2>

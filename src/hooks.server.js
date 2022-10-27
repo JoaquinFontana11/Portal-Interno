@@ -12,8 +12,6 @@ export async function handle({ event, resolve }) {
 	const decoded = token ? jwtDecode(token) : null;
 	decoded ? (event.request.user = decoded.data) : '';
 
-	console.log(decoded);
-
 	const response = await resolve(event);
 	return response;
 }
