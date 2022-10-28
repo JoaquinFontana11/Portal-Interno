@@ -1,10 +1,29 @@
 <script>
-	import AdminDrawer from '$lib/components/drawer/AdminDrawer.svelte';
-	import AdminDrawerImageList from '$lib/components/drawer/AdminDrawerImageList.svelte';
+	import AdminModal from '$lib/components/modals/AdminModal.svelte';
+	import AdminModalImages from '$lib/components/modals/AdminModalImages.svelte';
+	import AdminModalButton from '$lib/components/modals/AdminModalButton.svelte';
+	import AdminSearchInput from '$lib/components/AdminSearchInput.svelte';
 	export let data;
+
+	let modal = true;
+	let filter = '';
 </script>
 
 <slot />
-<AdminDrawer>
-	<AdminDrawerImageList images={data.images} />
-</AdminDrawer>
+
+<AdminModalButton
+	on:click={() => {
+		modal = true;
+	}}
+/>
+{#if modal}
+	<AdminModal
+		title="Imagenes"
+		on:close-modal={() => {
+			modal = false;
+		}}
+	>
+		<AdminSearchInput slot="header" placeholder="Ingrese texto alternativo.." bind:value={filter} />
+		<AdminModalImages images={data.images} {filter} />
+	</AdminModal>
+{/if}

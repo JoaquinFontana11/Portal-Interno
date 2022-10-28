@@ -34,7 +34,7 @@
 					password: data[1].value
 				})
 			});
-			location.href = '/admin';
+			location.href = '/portal/home';
 		} catch (err) {
 			console.log(err);
 		} finally {
