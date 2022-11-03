@@ -11,7 +11,7 @@
 	id="defaultModal"
 	tabindex="-1"
 	aria-hidden="true"
-	class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0  w-full md:inset-0 h-modal md:h-full bg-indigo-100 "
+	class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0  w-full md:inset-0 h-modal md:h-full bg-indigo-100 dark:bg-gray-600"
 	transition:fade
 >
 	<div

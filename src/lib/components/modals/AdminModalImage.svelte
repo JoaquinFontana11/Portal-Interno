@@ -1,5 +1,4 @@
 <script>
-	import { Login } from 'svelte-hero-icons';
 	import AdminMessage from '../AdminMessage.svelte';
 
 	export let src;
