@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import User from './models/UserModel.js';
+import User from '../models/UserModel.js';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
