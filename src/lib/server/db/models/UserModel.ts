@@ -1,9 +1,6 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelizeConnection from '../connection';
 import Image from './ImageModel';
-
-const sequelizeConnection = new Sequelize(
-	'postgres://postgres:postgres@localhost:5432/portal_interno_db'
-);
 
 // todos los posibles atributos de nuestro modelo
 interface userAttributes {
@@ -51,6 +48,7 @@ User.init(
 		},
 		username: {
 			type: DataTypes.STRING,
+			unique: true,
 			allowNull: false
 		},
 		email: {
@@ -75,8 +73,6 @@ User.init(
 Image.hasOne(User, {
 	foreignKey: 'photo_id'
 });
-User.belongsTo(Image, {
-	foreignKey: 'photo_id'
-});
+User.belongsTo(Image);
 
 export default User;

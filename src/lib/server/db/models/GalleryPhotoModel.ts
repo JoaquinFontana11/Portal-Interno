@@ -1,9 +1,6 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelizeConnection from '../connection';
 import Image from './ImageModel';
-
-const sequelizeConnection = new Sequelize(
-	'postgres://postgres:postgres@localhost:5432/portal_interno_db'
-);
 
 // todos los posibles atributos de nuestro modelo
 interface galleryPhotoAttributes {

@@ -1,5 +1,6 @@
 import { Sequelize, Model, Optional } from 'sequelize';
-// import * as dotenv from 'dotenv';
+
+import connection from './connection';
 
 import User from './models/UserModel';
 import Image from './models/ImageModel';
@@ -12,15 +13,10 @@ import Comment from './models/CommentModel';
 import Announcement from './models/AnnouncementModel';
 import UserCloseAnnouncement from './models/UserCloseAnnouncementModel';
 
-// dotenv.config();
-// console.log(process.env.DB);
-
-const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/portal_interno_db');
-
 const dbInit = async () => {
 	try {
 		// chequeamos la conexion con la base
-		await sequelize.authenticate();
+		await connection.authenticate();
 		// la pripiedad alter crea la tabla si esta no existe en la base, o la actualiza con las clumnas que faltan
 		User.sync({ alter: true });
 		Image.sync({ alter: true });
@@ -39,32 +35,70 @@ const dbInit = async () => {
 	}
 };
 
-const createOne = (Model: any) => async (data: any) => {
-	const newDoc = await Model.create(data);
-	return newDoc;
+const pupulateAssociations = (doc, associations) => {
+	doc = doc.dataValues;
+	associations.forEach((entity) => {
+		doc[entity] = doc[entity]?.dataValues || null;
+	});
+	return doc;
 };
 
-const findAll =
-	(Model: any, includes: any = {}) =>
-	async () => {
-		const allDocs = await Model.findAll(includes);
-		return allDocs;
+const createOne = (Model: any) => async (data: any) => {
+	const newDoc = await Model.create(data);
+	return newDoc.dataValues;
+};
+
+const deleteMany =
+	(Model: any) =>
+	async (where: any = null) => {
+		const docsDeleted = await Model.destroy({
+			where: where ? where : null,
+			truncate: where ? false : true
+		});
+		return docsDeleted;
 	};
 
-export const createUser = createOne(User);
-export const allUsers = findAll(User, { include: Image });
+const updateMany =
+	(Model: any) =>
+	async (data: any = {}, where: any = {}) => {
+		let docsUpdated = await Model.update(data, { where: where });
+		return docsUpdated[0];
+	};
 
-// (async () => {
-// 	await sequelize.sync({ force: true });
+// RelationModel: objeto o arreglo con objetos con los modelos para mapear en las FK
+const getAll =
+	(Model: any, RelationModel: any = null, associations: string[] = []) =>
+	async (where: any = {}) => {
+		const allDocs = await Model.findAll({ where: where, include: RelationModel });
+		return allDocs.map((doc) => {
+			return pupulateAssociations(doc, associations);
+		});
+	};
+const getOne =
+	(Model: any, RelationModel: any = null, associations: string[] = []) =>
+	async (where: any = {}) => {
+		const doc = await Model.findOne({ where: where, include: RelationModel });
 
-// 	const newUser = await User.create({
-// 		name: 'test',
-// 		lastname: 'test',
-// 		username: 'test',
-// 		email: 'test@test.com',
-// 		role: 'test-role'
-// 	});
-// 	console.log(newUser);
-// })();
+		if (!doc) return {};
+
+		return pupulateAssociations(doc, associations);
+	};
 
 export default dbInit;
+
+export const dbOperations = {
+	users: {
+		create: createOne(User),
+		delete: deleteMany(User),
+		update: updateMany(User),
+		getAll: getAll(User, Image, ['Image']),
+		getOne: getOne(User, Image, ['Image'])
+	},
+	images: {
+		create: createOne(Image),
+		delete: deleteMany(Image),
+		update: updateMany(Image),
+		getAll: getAll(Image),
+		getOne: getOne(Image)
+	}
+};
