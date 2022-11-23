@@ -6,6 +6,6 @@ node_modules
 .env
 .env.*
 !.env.example
-/static/img
-/static/files
-/static/videos
+static/img
+static/files
+static/videos

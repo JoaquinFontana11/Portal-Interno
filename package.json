@@ -41,8 +41,10 @@
 		"cl-editor": "^2.3.0",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
-		"mongoose": "^6.6.5",
 		"path": "^0.12.7",
+		"pg": "^8.8.0",
+		"pg-hstore": "^2.3.4",
+		"sequelize": "^6.25.8",
 		"svelte-spinner": "^2.0.2"
 	}
 }
