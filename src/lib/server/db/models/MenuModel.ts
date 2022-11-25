@@ -67,8 +67,7 @@ Page.hasOne(Menu, {
 });
 Menu.belongsTo(Page, {
 	foreignKey: {
-		name: 'page_id',
-		allowNull: true
+		name: 'page_id'
 	}
 });
 

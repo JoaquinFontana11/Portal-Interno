@@ -51,14 +51,14 @@ UserCloseAnnouncement.init(
 	}
 );
 
-User.hasOne(UserCloseAnnouncement, {
+User.hasMany(UserCloseAnnouncement, {
 	foreignKey: 'user_id'
 });
 UserCloseAnnouncement.belongsTo(User, {
 	foreignKey: 'user_id'
 });
 
-Announcement.hasOne(UserCloseAnnouncement, {
+Announcement.hasMany(UserCloseAnnouncement, {
 	foreignKey: 'announcement_id'
 });
 UserCloseAnnouncement.belongsTo(Announcement, {

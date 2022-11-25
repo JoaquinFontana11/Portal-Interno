@@ -1,5 +1,3 @@
-import { Sequelize, Model, Optional } from 'sequelize';
-
 import connection from './connection';
 
 import User from './models/UserModel';
@@ -12,28 +10,28 @@ import GalleryPhoto from './models/GalleryPhotoModel';
 import Comment from './models/CommentModel';
 import Announcement from './models/AnnouncementModel';
 import UserCloseAnnouncement from './models/UserCloseAnnouncementModel';
+import File from './models/FileModel';
 
-const dbInit = async () => {
-	try {
-		// chequeamos la conexion con la base
-		await connection.authenticate();
-		// la pripiedad alter crea la tabla si esta no existe en la base, o la actualiza con las clumnas que faltan
-		User.sync({ alter: true });
-		Image.sync({ alter: true });
-		Page.sync({ alter: true });
-		Menu.sync({ alter: true });
-		Submenu.sync({ alter: true });
-		Novelty.sync({ alter: true });
-		GalleryPhoto.sync({ alter: true });
-		Comment.sync({ alter: true });
-		Announcement.sync({ alter: true });
-		UserCloseAnnouncement.sync({ alter: true });
+try {
+	// chequeamos la conexion con la base
+	await connection.authenticate();
+	// la pripiedad alter crea la tabla si esta no existe en la base, o la actualiza con las clumnas que faltan
+	User.sync({ alter: true });
+	Image.sync({ alter: true });
+	Page.sync({ alter: true });
+	Menu.sync({ alter: true });
+	Submenu.sync({ alter: true });
+	Novelty.sync({ alter: true });
+	GalleryPhoto.sync({ alter: true });
+	Comment.sync({ alter: true });
+	Announcement.sync({ alter: true });
+	File.sync({ alter: true });
+	UserCloseAnnouncement.sync({ alter: true });
 
-		console.log('La conexion con la base fue un exito');
-	} catch (err) {
-		console.error('Hubo un error conectandose con la base: ', err);
-	}
-};
+	console.log('La conexion con la base fue un exito');
+} catch (err) {
+	console.error('Hubo un error conectandose con la base: ', err);
+}
 
 const pupulateAssociations = (doc, associations) => {
 	doc = doc.dataValues;
@@ -85,8 +83,6 @@ const getOne =
 
 		return pupulateAssociations(doc, associations);
 	};
-
-export default dbInit;
 
 export const dbOperations = {
 	users: {

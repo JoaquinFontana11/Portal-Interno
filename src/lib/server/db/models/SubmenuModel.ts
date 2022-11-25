@@ -69,13 +69,12 @@ Submenu.init(
 Page.hasOne(Submenu, {
 	foreignKey: {
 		name: 'page_id',
-		allowNull: false
+		allowNull: true
 	}
 });
 Submenu.belongsTo(Page, {
 	foreignKey: {
-		name: 'page_id',
-		allowNull: false
+		name: 'page_id'
 	}
 });
 
@@ -87,8 +86,7 @@ Menu.hasMany(Submenu, {
 });
 Submenu.belongsTo(Menu, {
 	foreignKey: {
-		name: 'parent_id',
-		allowNull: true
+		name: 'parent_id'
 	}
 });
 
