@@ -5,7 +5,7 @@
 	// import AdminList from '$lib/components/AdminList.svelte';
 	import AdminButton from '$lib/components/admin/AdminButton.svelte';
 	// import AdminListRowPhoto from '$lib/components/rows/AdminListRowPhoto.svelte';
-	import { validateInputText, validateInputFileImage } from '$lib/components/inputs/validators';
+	import { validateInputText, validateEmptyInput } from '$lib/components/inputs/validators';
 	import AdminModalConfirm from '$lib/components/modals/AdminModalConfirm.svelte';
 
 	export let data: any;
@@ -16,34 +16,43 @@
 
 	const components: IComponent[] = [
 		{
-			type: 'image',
-			label: 'Imagen a agregar',
-			name: 'image',
-			value: '',
-			files: []
+			type: 'text',
+			label: 'Titulo',
+			name: 'title',
+			value: ''
 		},
 		{
-			type: 'text',
-			label: 'Texto alternativo',
-			name: 'alt',
+			type: 'editor',
+			label: 'Cuerpo de la Pagina',
+			name: 'body',
 			value: ''
+		},
+		{
+			type: 'select',
+			label: 'Proyecto',
+			name: 'project',
+			value: '',
+			required: true,
+			options: [
+				{ value: true, name: 'Si' },
+				{ value: false, name: 'No' }
+			]
 		}
 	];
 
 	const validateInputs = (data: any) => {
-		if (validateInputFileImage(data[1].value).status && validateInputText(data[1].value).status) {
+		if (validateInputText(data[0].value).status && validateEmptyInput(data[2].value).status) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
 		}
 	};
 
-	const imageSubmit = async (e: CustomEvent) => {
+	const pageSubmit = async (e: CustomEvent) => {
 		console.log(e.detail);
 		if (loading) return;
 
 		const { data } = e.detail;
-		const files = data[0].value;
 
 		// if (!files[0].type.includes('image'))
 		// 	throw new Error('No podes subir algo que no sea una imagen');
@@ -55,38 +64,38 @@
 			loading = false;
 			return (modalConfirm = true);
 		}
-
-		const reader = new FileReader();
-		reader.readAsDataURL(files[0]);
-		reader.onload = async (e) => {
-			const target = e.target as FileReader;
-			const fileReaderResult = target.result as string;
-			const imgData = fileReaderResult.split(',');
-			const body = {
-				url: imgData[1],
-				alt: data[1].value,
-				name: files[0].name
-			};
-			modalConfirm = true;
-			loading = false;
-			console.log(body);
-			// try {
-			// 	await fetch(`/api/image`, {
-			// 		method: 'POST',
-			// 		headers: {
-			// 			'Content-Type': 'application/json',
-			// 			Accept: 'application/json'
-			// 		},
-			// 		body: JSON.stringify(body)
-			// 	});
-			// 	modalConfirm = true;
-			// 	// location.reload();
-			// } catch (err) {
-			// 	console.log('asdasd', err);
-			// } finally {
-			// 	loading = false;
-			// }
+		const body = {
+			title: data[0].value,
+			body: data[1].value,
+			slug:
+				'/pages/' +
+				data[0].value
+					.toLowerCase()
+					.replace(/[^a-zA-Z]/g, ' ')
+					.replace(/ /g, '-')
+					.replace(/^(-)/g, '')
+					.replace(/(-)$/g, ''),
+			project: data[2].value
 		};
+		modalConfirm = true;
+		loading = false;
+		console.log(body);
+		// try {
+		// 	await fetch(`/api/image`, {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			Accept: 'application/json'
+		// 		},
+		// 		body: JSON.stringify(body)
+		// 	});
+		// 	modalConfirm = true;
+		// 	// location.reload();
+		// } catch (err) {
+		// 	console.log('asdasd', err);
+		// } finally {
+		// 	loading = false;
+		// }
 	};
 
 	const deleteImage = async (e: CustomEvent) => {
@@ -112,27 +121,16 @@
 		list = !list;
 	}}
 />
+
 <main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		<!-- {#if list}
-			<AdminList
-				headers={['Imagen', 'Texto alternativo']}
-				attributes={['url', 'alt']}
-				data={JSON.parse(data.images)}
-				on:delete-doc={deleteImage}
-				caption="Imagenes"
-				actions={['delete']}
-				customRow={AdminListRowPhoto}
-			/>
-		{:else} -->
 		<AdminForm
-			title="Formulario de alta de imagenes"
+			title="Formulario de Paginas"
 			{components}
-			submitMessage="Subir imagen"
+			submitMessage="Subir Pagina"
 			{loading}
-			on:custom-submit={imageSubmit}
+			on:custom-submit={pageSubmit}
 		/>
-		<!-- {/if} -->
 	</div>
 	<div>
 		{#if modalConfirm}

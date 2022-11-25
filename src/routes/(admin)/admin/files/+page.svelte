@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { Plus, Table } from 'svelte-hero-icons';
+	import type { PageData } from './$types';
 	import type { IComponent } from '$lib/types/Components';
+	import { Plus, Table } from 'svelte-hero-icons';
 	import AdminForm from '$lib/components/admin/AdminForm.svelte';
 	// import AdminList from '$lib/components/AdminList.svelte';
 	import AdminButton from '$lib/components/admin/AdminButton.svelte';
-	// import AdminListRowPhoto from '$lib/components/rows/AdminListRowPhoto.svelte';
-	import { validateInputText, validateInputFileImage } from '$lib/components/inputs/validators';
+	import { validateInputFile, validateEmptyInput } from '$lib/components/inputs/validators';
 	import AdminModalConfirm from '$lib/components/modals/AdminModalConfirm.svelte';
 
-	export let data: any;
+	export let data: PageData;
 	let list = true;
 	let loading = false;
 	let modalConfirm = false;
@@ -16,37 +16,33 @@
 
 	const components: IComponent[] = [
 		{
-			type: 'image',
-			label: 'Imagen a agregar',
-			name: 'image',
+			type: 'file',
+			label: 'Input de archivos',
+			name: 'manual',
 			value: '',
 			files: []
 		},
 		{
 			type: 'text',
-			label: 'Texto alternativo',
-			name: 'alt',
-			value: ''
+			label: 'Descripcion del archivo',
+			name: 'description',
+			value: '',
+			required: true
 		}
 	];
 
 	const validateInputs = (data: any) => {
-		if (validateInputFileImage(data[1].value).status && validateInputText(data[1].value).status) {
+		if (validateInputFile(data[0].value).status && validateEmptyInput(data[1].value).status) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
 		}
 	};
 
-	const imageSubmit = async (e: CustomEvent) => {
-		console.log(e.detail);
+	const fileSubmit = async (e: CustomEvent) => {
 		if (loading) return;
-
 		const { data } = e.detail;
 		const files = data[0].value;
-
-		// if (!files[0].type.includes('image'))
-		// 	throw new Error('No podes subir algo que no sea una imagen');
 
 		loading = true;
 
@@ -59,19 +55,20 @@
 		const reader = new FileReader();
 		reader.readAsDataURL(files[0]);
 		reader.onload = async (e) => {
+			// uploadImage(e.target.result);
 			const target = e.target as FileReader;
 			const fileReaderResult = target.result as string;
-			const imgData = fileReaderResult.split(',');
+			const file = fileReaderResult.split(',');
 			const body = {
-				url: imgData[1],
-				alt: data[1].value,
-				name: files[0].name
+				url: file[1],
+				name: files[0].name,
+				description: data[1].value
 			};
 			modalConfirm = true;
 			loading = false;
 			console.log(body);
 			// try {
-			// 	await fetch(`/api/image`, {
+			// 	await fetch(`/api/files`, {
 			// 		method: 'POST',
 			// 		headers: {
 			// 			'Content-Type': 'application/json',
@@ -80,18 +77,17 @@
 			// 		body: JSON.stringify(body)
 			// 	});
 			// 	modalConfirm = true;
-			// 	// location.reload();
 			// } catch (err) {
-			// 	console.log('asdasd', err);
+			// 	console.log(err);
 			// } finally {
 			// 	loading = false;
 			// }
 		};
 	};
 
-	const deleteImage = async (e: CustomEvent) => {
+	const deleteFile = async (e: CustomEvent) => {
 		try {
-			await fetch(`/api/image/${e.detail.id}`, {
+			await fetch(`/api/files/${e.detail.id}`, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
@@ -116,21 +112,28 @@
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
 		<!-- {#if list}
 			<AdminList
-				headers={['Imagen', 'Texto alternativo']}
-				attributes={['url', 'alt']}
-				data={JSON.parse(data.images)}
-				on:delete-doc={deleteImage}
-				caption="Imagenes"
+				headers={['Nombre', 'Descripcion', 'Extension', 'Orden']}
+				attributes={['name', 'description', 'extension', 'order']}
+				data={JSON.parse(data.files).map((file) => {
+					return {
+						_id: file._id,
+						name: file.name.split('.').at(0),
+						extension: file.name.split('.').at(-1),
+						order: file.order,
+						description: file.description
+					};
+				})}
+				on:delete-doc={deleteFile}
+				caption="Archivos"
 				actions={['delete']}
-				customRow={AdminListRowPhoto}
 			/>
 		{:else} -->
 		<AdminForm
-			title="Formulario de alta de imagenes"
+			title="Formulario de archivos"
 			{components}
-			submitMessage="Subir imagen"
+			submitMessage="Subir archivo"
 			{loading}
-			on:custom-submit={imageSubmit}
+			on:custom-submit={fileSubmit}
 		/>
 		<!-- {/if} -->
 	</div>
@@ -142,6 +145,11 @@
 				on:close={() => {
 					modalConfirm = false;
 					messageSubmit.status ? location.reload() : (list = false);
+					// if (messageSubmit.status) {
+					// 	location.reload();
+					// } else {
+					// 	list = false;
+					// }
 				}}
 			/>
 		{/if}
