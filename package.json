@@ -1,8 +1,9 @@
 {
-	"name": "portal-interoperabilidad",
+	"name": "portal-interno",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"test": "vite test",
 		"dev": "vite dev",
 		"dev-force": "vite dev --force",
 		"host": "vite dev --host",

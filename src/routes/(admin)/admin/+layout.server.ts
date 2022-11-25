@@ -8,7 +8,6 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 	const privateKey = JWT_PRIVATE_KEY as string;
 	try {
 		const decoded = jwt.verify(token, privateKey);
-		console.log(decoded);
 	} catch (err) {
 		throw redirect(302, '/login');
 	}

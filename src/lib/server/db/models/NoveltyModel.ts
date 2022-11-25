@@ -54,7 +54,7 @@ Novelty.init(
 	}
 );
 
-Image.hasOne(Novelty, {
+Image.hasMany(Novelty, {
 	foreignKey: 'image_id'
 });
 Novelty.belongsTo(Image, {

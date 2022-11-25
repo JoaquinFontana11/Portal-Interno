@@ -55,7 +55,7 @@ Submenu.init(
 		},
 		page_id: {
 			type: DataTypes.INTEGER.UNSIGNED,
-			allowNull: false
+			allowNull: true
 		}
 	},
 	{

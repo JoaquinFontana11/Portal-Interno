@@ -7,6 +7,7 @@ interface announcementAttributes {
 	content: string;
 	init_date: Date;
 	end_date: Date;
+	title: string;
 }
 
 // Define el tipo del objeto  pasado al Model.create de sequlize
@@ -24,6 +25,7 @@ class Announcement
 	public content!: string;
 	public init_date!: Date;
 	public end_date!: Date;
+	public title: string;
 }
 
 // Creamos la tabla del modelo
@@ -35,6 +37,10 @@ Announcement.init(
 			primaryKey: true
 		},
 		content: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		title: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
