@@ -1,6 +1,6 @@
 import { assert, beforeEach, describe, expect, it, afterAll, beforeAll } from 'vitest';
 import initDB from '$lib/server/db/db';
-import { dbOperations } from '$lib/server/db/db';
+import dbOperations from '$lib/server/db/db';
 
 describe('Operaciones sobre usuarios', async () => {
 	await initDB();

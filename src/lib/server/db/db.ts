@@ -69,7 +69,6 @@ const getAll =
 	(Model: any, AssociatedModel: any = null, associations: string[] = []) =>
 	async (where: any = {}) => {
 		const allDocs = await Model.findAll({ where: where, include: AssociatedModel });
-		console.log(allDocs);
 		return allDocs.map((doc) => {
 			return pupulateAssociations(doc, associations);
 		});
@@ -84,7 +83,7 @@ const getOne =
 		return pupulateAssociations(doc, associations);
 	};
 
-export const dbOperations = {
+const dbOperations = {
 	users: {
 		create: createOne(User),
 		delete: deleteMany(User),
@@ -163,3 +162,5 @@ export const dbOperations = {
 		getOne: getOne(UserCloseAnnouncement, [User, Announcement], ['User', 'Announcement'])
 	}
 };
+
+export default dbOperations;
