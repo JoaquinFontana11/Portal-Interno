@@ -1,22 +1,19 @@
-import { assert, beforeEach, describe, expect, it, afterAll, beforeAll } from 'vitest';
-import initDB from '$lib/server/db/db';
+import { assert, describe, it, afterAll, beforeAll } from 'vitest';
 import dbOperations from '$lib/server/db/db';
 
 describe('Operaciones sobre usuarios', async () => {
-	await initDB();
-
 	it('Creacion de un usuario sin foto', async () => {
 		const newUser = await dbOperations.users.create({
-			name: 'test',
-			lastname: 'test',
-			username: 'test',
-			email: 'test@test.com',
-			role: 'test-role'
+			name: 'vitest',
+			lastname: 'vitest',
+			username: 'vitest',
+			email: 'vitest@vitest.com',
+			role: 'vitest-role'
 		});
-		assert.equal(newUser.name, 'test');
+		assert.equal(newUser.name, 'vitest');
 	});
 	it('Modificacion de un usuario', async () => {
-		const oldUser = await dbOperations.users.getOne({ username: 'test' });
+		const oldUser = await dbOperations.users.getOne({ username: 'vitest' });
 		const cantUpdates = await dbOperations.users.update(
 			{ username: 'new-test' },
 			{ username: oldUser.username }
@@ -97,15 +94,15 @@ describe('Operaciones sobre paginas, menus y novedades', async () => {
 	it('Creacion de un menu y asociacion de una pagina a un menu', async () => {
 		const page = await dbOperations.pages.getOne({ title: 'page-test' });
 		const newMenu = await dbOperations.menus.create({
-			name: 'menu-test',
+			name: 'menu-vitest',
 			order: 1,
 			page_id: page.id,
 			active: true
 		});
 
-		assert.equal(newMenu.name, 'menu-test');
+		assert.equal(newMenu.name, 'menu-vitest');
 
-		const menu = await dbOperations.menus.getOne({ name: 'menu-test' });
+		const menu = await dbOperations.menus.getOne({ name: 'menu-vitest' });
 		assert.equal(menu.Page.title, page.title);
 	});
 	it('Asociacion de una pagina a una novedad', async () => {
@@ -122,7 +119,7 @@ describe('Operaciones sobre paginas, menus y novedades', async () => {
 	});
 	it('Creacion de un submenu y asociacion de un padre', async () => {
 		const page = await dbOperations.pages.getOne({ title: 'page-test' });
-		const menuParent = await dbOperations.menus.getOne({ name: 'menu-test' });
+		const menuParent = await dbOperations.menus.getOne({ name: 'menu-vitest' });
 		const newSubMenu = await dbOperations.submenus.create({
 			name: 'submenu-test',
 			order: 1,
@@ -138,7 +135,7 @@ describe('Operaciones sobre paginas, menus y novedades', async () => {
 
 	it('Eliminacion de un Menu que es padre', async () => {
 		const page = await dbOperations.pages.getOne({ title: 'page-test' });
-		const menu = await dbOperations.menus.getOne({ name: 'menu-test' });
+		const menu = await dbOperations.menus.getOne({ name: 'menu-vitest' });
 
 		await dbOperations.submenus.create({
 			name: 'submenu-test-2',

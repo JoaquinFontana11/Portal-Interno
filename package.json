@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"test": "vite test",
+		"test": "vitest",
 		"dev": "vite dev",
 		"dev-force": "vite dev --force",
 		"host": "vite dev --host",
@@ -23,6 +23,7 @@
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"jsdom": "^20.0.3",
 		"postcss": "^8.4.18",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
@@ -47,6 +48,7 @@
 		"pg": "^8.8.0",
 		"pg-hstore": "^2.3.4",
 		"sequelize": "^6.25.8",
-		"svelte-spinner": "^2.0.2"
+		"svelte-spinner": "^2.0.2",
+		"vitest": "^0.25.3"
 	}
 }
