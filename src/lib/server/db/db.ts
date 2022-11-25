@@ -45,6 +45,7 @@ const pupulateAssociations = (doc, associations) => {
 
 const createOne = (Model: any) => async (data: any) => {
 	const newDoc = await Model.create(data);
+
 	return newDoc.dataValues;
 };
 
@@ -65,19 +66,20 @@ const updateMany =
 		return docsUpdated[0];
 	};
 
-// RelationModel: objeto o arreglo con objetos con los modelos para mapear en las FK
+// AssociatedModel: objeto o arreglo con objetos con los modelos para mapear en las FK
 const getAll =
-	(Model: any, RelationModel: any = null, associations: string[] = []) =>
+	(Model: any, AssociatedModel: any = null, associations: string[] = []) =>
 	async (where: any = {}) => {
-		const allDocs = await Model.findAll({ where: where, include: RelationModel });
+		const allDocs = await Model.findAll({ where: where, include: AssociatedModel });
+		console.log(allDocs);
 		return allDocs.map((doc) => {
 			return pupulateAssociations(doc, associations);
 		});
 	};
 const getOne =
-	(Model: any, RelationModel: any = null, associations: string[] = []) =>
+	(Model: any, AssociatedModel: any = null, associations: string[] = []) =>
 	async (where: any = {}) => {
-		const doc = await Model.findOne({ where: where, include: RelationModel });
+		const doc = await Model.findOne({ where: where, include: AssociatedModel });
 
 		if (!doc) return {};
 
@@ -100,5 +102,68 @@ export const dbOperations = {
 		update: updateMany(Image),
 		getAll: getAll(Image),
 		getOne: getOne(Image)
+	},
+	pages: {
+		create: createOne(Page),
+		delete: deleteMany(Page),
+		update: updateMany(Page),
+		getAll: getAll(Page),
+		getOne: getOne(Page)
+	},
+	files: {
+		create: createOne(File),
+		delete: deleteMany(File),
+		update: updateMany(File),
+		getAll: getAll(File),
+		getOne: getOne(File)
+	},
+	menus: {
+		create: createOne(Menu),
+		delete: deleteMany(Menu),
+		update: updateMany(Menu),
+		getAll: getAll(Menu, Page, ['Page']),
+		getOne: getOne(Menu, Page, ['Page'])
+	},
+	submenus: {
+		create: createOne(Submenu),
+		delete: deleteMany(Submenu),
+		update: updateMany(Submenu),
+		getAll: getAll(Submenu, [Page, Menu], ['Page', 'Menu']),
+		getOne: getOne(Submenu, [Page, Menu], ['Page', 'Menu'])
+	},
+	noveltys: {
+		create: createOne(Novelty),
+		delete: deleteMany(Novelty),
+		update: updateMany(Novelty),
+		getAll: getAll(Novelty, [Page, Image], ['Page', 'Image']),
+		getOne: getOne(Novelty, [Page, Image], ['Page', 'Image'])
+	},
+	announcements: {
+		create: createOne(Announcement),
+		delete: deleteMany(Announcement),
+		update: updateMany(Announcement),
+		getAll: getAll(Announcement),
+		getOne: getOne(Announcement)
+	},
+	galleryPhotos: {
+		create: createOne(GalleryPhoto),
+		delete: deleteMany(GalleryPhoto),
+		update: updateMany(GalleryPhoto),
+		getAll: getAll(GalleryPhoto, Image, ['Image']),
+		getOne: getOne(GalleryPhoto, Image, ['Image'])
+	},
+	comments: {
+		create: createOne(Comment),
+		delete: deleteMany(Comment),
+		update: updateMany(Comment),
+		getAll: getAll(Comment, [User, GalleryPhoto], ['User', 'GalleryPhoto']),
+		getOne: getOne(Comment, [User, GalleryPhoto], ['User', 'GalleryPhoto'])
+	},
+	announcementClosed: {
+		create: createOne(UserCloseAnnouncement),
+		delete: deleteMany(UserCloseAnnouncement),
+		update: updateMany(UserCloseAnnouncement),
+		getAll: getAll(UserCloseAnnouncement, [User, Announcement], ['User', 'Announcement']),
+		getOne: getOne(UserCloseAnnouncement, [User, Announcement], ['User', 'Announcement'])
 	}
 };

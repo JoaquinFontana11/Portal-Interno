@@ -61,7 +61,7 @@ Comment.belongsTo(User, {
 	foreignKey: 'user_id'
 });
 
-GalleryPhoto.hasOne(Comment, {
+GalleryPhoto.hasMany(Comment, {
 	foreignKey: 'photo_id'
 });
 Comment.belongsTo(GalleryPhoto, {

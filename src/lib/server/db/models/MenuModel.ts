@@ -60,10 +60,16 @@ Menu.init(
 
 // Creamos las relacion entre un menu y una pagina
 Page.hasOne(Menu, {
-	foreignKey: 'page_id'
+	foreignKey: {
+		name: 'page_id',
+		allowNull: true
+	}
 });
 Menu.belongsTo(Page, {
-	foreignKey: 'page_id'
+	foreignKey: {
+		name: 'page_id',
+		allowNull: true
+	}
 });
 
 export default Menu;

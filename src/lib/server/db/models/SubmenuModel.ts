@@ -10,7 +10,7 @@ interface submenuAttributes {
 	order: number;
 	active: boolean;
 	page_id: number;
-	parent_id: number;
+	parent_id: number | null;
 }
 
 // Define el tipo del objeto  pasado al Model.create de sequlize
@@ -26,7 +26,7 @@ class Submenu extends Model<submenuAttributes, submenuInput> implements submenuA
 	public order!: number;
 	public active!: boolean;
 	public page_id!: number;
-	public parent_id!: number;
+	public parent_id!: number | null;
 }
 
 // Creamos la tabla del modelo
@@ -51,7 +51,7 @@ Submenu.init(
 		},
 		parent_id: {
 			type: DataTypes.INTEGER.UNSIGNED,
-			allowNull: false
+			allowNull: true
 		},
 		page_id: {
 			type: DataTypes.INTEGER.UNSIGNED,
@@ -67,17 +67,29 @@ Submenu.init(
 
 // Creamos las relacion entre un menu y una pagina
 Page.hasOne(Submenu, {
-	foreignKey: 'page_id'
+	foreignKey: {
+		name: 'page_id',
+		allowNull: false
+	}
 });
 Submenu.belongsTo(Page, {
-	foreignKey: 'page_id'
+	foreignKey: {
+		name: 'page_id',
+		allowNull: false
+	}
 });
 
-Menu.hasOne(Submenu, {
-	foreignKey: 'parent_id'
+Menu.hasMany(Submenu, {
+	foreignKey: {
+		name: 'parent_id',
+		allowNull: true
+	}
 });
 Submenu.belongsTo(Menu, {
-	foreignKey: 'parent_id'
+	foreignKey: {
+		name: 'parent_id',
+		allowNull: true
+	}
 });
 
 export default Submenu;

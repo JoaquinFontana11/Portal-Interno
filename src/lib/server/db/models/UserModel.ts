@@ -73,6 +73,6 @@ User.init(
 Image.hasOne(User, {
 	foreignKey: 'photo_id'
 });
-User.belongsTo(Image);
+User.belongsTo(Image, { foreignKey: 'photo_id' });
 
 export default User;
