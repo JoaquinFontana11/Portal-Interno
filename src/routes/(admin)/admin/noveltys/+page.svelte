@@ -14,6 +14,9 @@
 	let loading = false;
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
+	console.log('-----------------------------------');
+	console.log(JSON.parse(data.images));
+	console.log('-----------------------------------');
 
 	const components: IComponent[] = [
 		{
@@ -28,15 +31,10 @@
 			]
 		},
 		{
-			type: 'select',
-			label: 'Esto deberia ser un custom select Imagenes',
+			type: 'select-image',
+			label: 'Imagen',
 			name: 'image',
-			value: '',
-			required: true,
-			options: [
-				{ value: '0', name: 'Imagen 1' },
-				{ value: '1', name: 'Imagen 2' }
-			]
+			value: JSON.parse(data.images)
 		},
 		{
 			type: 'date',

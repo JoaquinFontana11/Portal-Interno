@@ -84,7 +84,7 @@ const getOne =
 		return pupulateAssociations(doc, associations);
 	};
 
-export const dbOperations = {
+const dbOperations = {
 	users: {
 		create: createOne(User),
 		delete: deleteMany(User),
@@ -163,3 +163,5 @@ export const dbOperations = {
 		getOne: getOne(UserCloseAnnouncement, [User, Announcement], ['User', 'Announcement'])
 	}
 };
+
+export default dbOperations;
