@@ -19,13 +19,12 @@
 		{
 			type: 'select',
 			label: 'Esto deberia ser un custom select Paginas',
-			name: 'page',
+			name: 'page_id',
 			value: '',
 			required: true,
-			options: [
-				{ value: '0', name: 'Pagina 1' },
-				{ value: '1', name: 'Pagina 2' }
-			]
+			options: JSON.parse(data.pages).map((page) => {
+				return { name: page.title, value: page.id };
+			})
 		},
 		{
 			type: 'select',
@@ -33,10 +32,9 @@
 			name: 'image',
 			value: '',
 			required: true,
-			options: [
-				{ value: '0', name: 'Imagen 1' },
-				{ value: '1', name: 'Imagen 2' }
-			]
+			options: JSON.parse(data.images).map((image) => {
+				return { name: image.name, value: image.id };
+			})
 		},
 		{
 			type: 'date',
@@ -47,81 +45,16 @@
 		}
 	];
 
-	const validateInputs = (data: any) => {
+	const validators = (data: any) => {
 		if (
-			validateEmptyInput(data[0].value).status &&
-			validateEmptyInput(data[1].value).status &&
-			validateEmptyInput(data[2].value).status
+			validateEmptyInput(data[0][1]).status &&
+			validateEmptyInput(data[1][1]).status &&
+			validateEmptyInput(data[2][1]).status
 		) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
 		}
-	};
-
-	// const noveltySubmit = async (e: CustomEvent) => {
-	// 	if (loading) return;
-
-	// 	loading = true;
-
-	// 	const { data } = e.detail;
-	// 	console.log(data);
-	// 	messageSubmit = validateInputs(data);
-	// 	if (!messageSubmit.status) {
-	// 		loading = false;
-	// 		return (modalConfirm = true);
-	// 	}
-	// 	const body = {
-	// 		page_id: data[0].value,
-	// 		image_id: data[1].value,
-	// 		// slug:
-	// 		// 	'/pages/catalogo/novedades/' +
-	// 		// 	data[0].value
-	// 		// 		.toLowerCase()
-	// 		// 		.replace(/[^a-zA-Z]/g, ' ')
-	// 		// 		.replace(/ /g, '-')
-	// 		// 		.replace(/^(-)/g, '')
-	// 		// 		.replace(/(-)$/g, ''),
-	// 		date: new Date(data[2].value).setDate(new Date(data[2].value).getDate() + 1)
-	// 	};
-	// 	console.log(body);
-	// 	modalConfirm = true;
-	// 	loading = false;
-	// 	// try {
-	// 	// 	await fetch(`/api/noveltys`, {
-	// 	// 		method: 'POST',
-	// 	// 		headers: {
-	// 	// 			'Content-Type': 'application/json',
-	// 	// 			Accept: 'application/json'
-	// 	// 		},
-	// 	// 		body: JSON.stringify(body)
-	// 	// 	});
-	// 	// 	modalConfirm = true;
-	// 	// } catch (err) {
-	// 	// 	console.log(err);
-	// 	// } finally {
-	// 	// 	loading = false;
-	// 	// }
-	// };
-
-	const deleteNovelty = async (e: CustomEvent) => {
-		try {
-			await fetch(`/api/noveltys/${e.detail.id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json'
-				}
-			});
-		} catch (err) {
-			console.log(err);
-		} finally {
-			location.href = location.href;
-		}
-	};
-
-	const modifyNovelty = (e: CustomEvent) => {
-		location.href = `/admin/noveltys/${e.detail.id}`;
 	};
 </script>
 
@@ -147,6 +80,12 @@
 				{components}
 				submitMessage="Subir novedad"
 				{loading}
+				action="create"
+				{validators}
+				on:validation-end={(e) => {
+					messageSubmit = e.detail;
+					modalConfirm = true;
+				}}
 			/>
 		{/if}
 	</div>

@@ -17,14 +17,31 @@
 	export let title: string;
 	export let submitMessage: string;
 	export let loading: boolean;
+	export let action: string = 'create';
+
+	// si es necesario agregar una logica EXTRA al proceso de submit agregamos esta funcion
+	export let addExtraData: Function = () => [];
+
+	// agregamos validadores custom
+	export let validators: Function = () => {
+		return { status: true };
+	};
 
 	const handlerSubmit = async (e: Event) => {
-		dispatch('custom-submit', {
-			data: components.map((component) => {
-				return { input: component.name, value: component.value };
-			})
+		const formData = new FormData();
+		components.forEach((component) => formData.append(component.name, component.value));
+		addExtraData(components).forEach((component) =>
+			formData.append(component.name, component.value)
+		);
+		// informamos si las valiaciones fueron correctas o no
+		dispatch('validation-end', validators([...formData]));
+
+		if (!validators([...formData]).status) return;
+
+		await fetch(`?/${action}`, {
+			method: 'POST',
+			body: formData
 		});
-		console.log('Ey tamo Devuelta');
 	};
 </script>
 
