@@ -14,27 +14,26 @@
 	let loading = false;
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
-	console.log('-----------------------------------');
-	console.log(JSON.parse(data.images));
-	console.log('-----------------------------------');
+
+	const optionsPage = JSON.parse(data.pages).map((page) => {
+		return { value: page.id, name: page.title };
+	});
 
 	const components: IComponent[] = [
 		{
 			type: 'select',
-			label: 'Esto deberia ser un custom select Paginas',
+			label: 'Paginas',
 			name: 'page',
 			value: '',
 			required: true,
-			options: [
-				{ value: '0', name: 'Pagina 1' },
-				{ value: '1', name: 'Pagina 2' }
-			]
+			options: optionsPage
 		},
 		{
 			type: 'select-image',
 			label: 'Imagen',
 			name: 'image',
-			value: JSON.parse(data.images)
+			value: '',
+			images: JSON.parse(data.images)
 		},
 		{
 			type: 'date',

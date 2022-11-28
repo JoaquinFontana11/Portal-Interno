@@ -1,29 +1,16 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	export let src: string;
 	export let alt: string;
+	export let id: number;
 
 	let showMessage = false;
 	let loadImage = false;
 
-	const handlerClick = async (e: Event) => {
-		// agregamos esto pq el clipboard solo funciona en paginas HTTPS
-		if (navigator.clipboard) {
-			navigator.clipboard.writeText(src);
-		} else {
-			let textArea = document.createElement('textarea');
-			textArea.value = src;
-			textArea.classList.add('fuera');
-			document.body.appendChild(textArea);
-			textArea.focus();
-			textArea.select();
-			document.execCommand('copy');
-			textArea.remove();
-		}
+	const dispatch = createEventDispatcher();
 
-		showMessage = true;
-		setTimeout(() => {
-			showMessage = false;
-		}, 2000);
+	const handlerClick = async (e: Event) => {
+		dispatch('loadImage', { src_image: src, alt_image: alt, id_image: id });
 	};
 </script>
 

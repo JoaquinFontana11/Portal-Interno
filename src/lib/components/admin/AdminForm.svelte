@@ -25,7 +25,6 @@
 				return { input: component.name, value: component.value };
 			})
 		});
-		console.log('Ey tamo Devuelta');
 	};
 </script>
 
@@ -69,7 +68,11 @@
 		{:else if component.type == 'editor'}
 			<FormEditor label={component.label} bind:value={component.value} />
 		{:else if component.type == 'select-image'}
-			<FormInputSelectImage label={component.label} bind:value={component.value} />
+			<FormInputSelectImage
+				label={component.label}
+				bind:value={component.value}
+				images={component.images}
+			/>
 		{/if}
 	{/each}
 	<!-- Dejamos un slot para ampliar la funcionalidad del formulario dependiendo la necesidad -->

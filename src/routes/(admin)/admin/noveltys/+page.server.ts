@@ -3,7 +3,6 @@ import dbOperations from '$lib/server/db/db';
 
 export const load: PageServerLoad = async () => {
 	const images = await dbOperations.images.getAll();
-	console.log('BDD0');
-	console.log(images);
-	return { images: JSON.stringify(images) };
+	const pages = await dbOperations.pages.getAll();
+	return { images: JSON.stringify(images), pages: JSON.stringify(pages) };
 };
