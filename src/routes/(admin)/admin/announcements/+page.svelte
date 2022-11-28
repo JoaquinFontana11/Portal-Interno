@@ -7,8 +7,10 @@
 	// import AdminListRowPhoto from '$lib/components/rows/AdminListRowPhoto.svelte';
 	import { validateInputText, validateEmptyInput } from '$lib/components/inputs/validators';
 	import AdminModalConfirm from '$lib/components/modals/AdminModalConfirm.svelte';
+	import type { PageData } from './$types';
+	import AdminList from '$lib/components/admin/list/AdminList.svelte';
 
-	export let data: any;
+	export let data: PageData;
 	let list = true;
 	let loading = false;
 	let modalConfirm = false;
@@ -98,6 +100,9 @@
 		// 	loading = false;
 		// }
 	};
+	const deleteAnnouncement = (e: CustomEvent) => {
+		console.log(e.detail);
+	};
 </script>
 
 <AdminButton
@@ -108,17 +113,16 @@
 />
 <main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		<!-- {#if list}
-			<AdminList
-				headers={['Imagen', 'Texto alternativo']}
-				attributes={['url', 'alt']}
-				data={JSON.parse(data.images)}
-				on:delete-doc={deleteImage}
-				caption="Imagenes"
-				actions={['delete']}
-				customRow={AdminListRowPhoto}
-			/>
-		{:else} -->
+		{#if list}
+		<AdminList
+			headers={['Titulo', 'Fecha de inicio', 'Fecha de fin']}
+			attributes={['title', 'init_date', 'end_date']}
+			data={JSON.parse(data.announcements)}
+			on:delete-doc={deleteAnnouncement}
+			caption="Anuncios"
+			actions={['delete']}
+		/>
+		{:else}
 		<AdminForm
 			title="Formulario Noticias"
 			{components}
@@ -126,7 +130,7 @@
 			{loading}
 			on:custom-submit={announcementSubmit}
 		/>
-		<!-- {/if} -->
+		{/if}
 	</div>
 	<div>
 		{#if modalConfirm}
@@ -139,28 +143,5 @@
 				}}
 			/>
 		{/if}
-	</div>
-</main>
-<script lang="ts">
-	import type { PageData } from './$types';
-	import AdminList from '$lib/components/admin/list/AdminList.svelte';
-
-	export let data: PageData;
-
-	const deleteAnnouncement = (e: CustomEvent) => {
-		console.log(e.detail);
-	};
-</script>
-
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
-	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		<AdminList
-			headers={['Titulo', 'Fecha de inicio', 'Fecha de fin']}
-			attributes={['title', 'init_date', 'end_date']}
-			data={JSON.parse(data.announcements)}
-			on:delete-doc={deleteAnnouncement}
-			caption="Anuncios"
-			actions={['delete']}
-		/>
 	</div>
 </main>
