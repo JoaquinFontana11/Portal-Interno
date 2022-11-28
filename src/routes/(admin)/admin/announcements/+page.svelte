@@ -18,7 +18,7 @@
 		{
 			type: 'text',
 			label: 'Titulo',
-			name: 'name',
+			name: 'title',
 			value: ''
 		},
 		{

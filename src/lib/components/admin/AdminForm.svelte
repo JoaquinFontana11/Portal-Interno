@@ -3,6 +3,7 @@
 	import { IComponent } from '$lib/types/Components';
 
 	import FormInputText from '$lib/components/inputs/FormInputText.svelte';
+	import FormInputEmail from '$lib/components/inputs/FormInputEmail.svelte';
 	import FormInputNumber from '$lib/components/inputs/FormInputNumber.svelte';
 	import FormInputDate from '$lib/components/inputs/FormInputDate.svelte';
 	import FormSelect from '$lib/components/inputs/FormSelect.svelte';
@@ -30,10 +31,17 @@
 
 	const handlerSubmit = async (e: Event) => {
 		const formData = new FormData();
-		components.forEach((component) => formData.append(component.name, component.value));
-		addExtraData(components).forEach((component) =>
-			formData.append(component.name, component.value)
-		);
+
+		components.forEach((component) => {
+			if (typeof component.value == 'object') formData.append(component.name, component.value[0]);
+			else formData.append(component.name, component.value);
+		});
+
+		// agregamos o no data extra
+		addExtraData(components).forEach((component) => {
+			formData.append(component.name, component.value);
+		});
+
 		// informamos si las valiaciones fueron correctas o no
 		dispatch('validation-end', validators([...formData]));
 
@@ -56,6 +64,12 @@
 	{#each components as component}
 		{#if component.type == 'text'}
 			<FormInputText
+				label={component.label}
+				bind:value={component.value}
+				required={component.required}
+			/>
+		{:else if component.type == 'email'}
+			<FormInputEmail
 				label={component.label}
 				bind:value={component.value}
 				required={component.required}

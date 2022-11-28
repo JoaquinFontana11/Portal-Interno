@@ -18,7 +18,7 @@
 		{
 			type: 'file',
 			label: 'Input de archivos',
-			name: 'manual',
+			name: 'file',
 			value: '',
 			files: []
 		},
@@ -31,75 +31,59 @@
 		}
 	];
 
-	const validateInputs = (data: any) => {
-		if (validateInputFile(data[0].value).status && validateEmptyInput(data[1].value).status) {
+	const validators = (data: any) => {
+		if (validateInputFile(data[0][1]).status && validateEmptyInput(data[1][1]).status) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
 		}
 	};
 
-	const fileSubmit = async (e: CustomEvent) => {
-		if (loading) return;
-		const { data } = e.detail;
-		const files = data[0].value;
+	// const fileSubmit = async (e: CustomEvent) => {
+	// 	if (loading) return;
+	// 	const { data } = e.detail;
+	// 	const files = data[0].value;
 
-		loading = true;
+	// 	loading = true;
 
-		messageSubmit = validateInputs(data);
-		if (!messageSubmit.status) {
-			loading = false;
-			return (modalConfirm = true);
-		}
+	// 	messageSubmit = validateInputs(data);
+	// 	if (!messageSubmit.status) {
+	// 		loading = false;
+	// 		return (modalConfirm = true);
+	// 	}
 
-		const reader = new FileReader();
-		reader.readAsDataURL(files[0]);
-		reader.onload = async (e) => {
-			// uploadImage(e.target.result);
-			const target = e.target as FileReader;
-			const fileReaderResult = target.result as string;
-			const file = fileReaderResult.split(',');
-			const body = {
-				url: file[1],
-				name: files[0].name,
-				description: data[1].value
-			};
-			modalConfirm = true;
-			loading = false;
-			console.log(body);
-			// try {
-			// 	await fetch(`/api/files`, {
-			// 		method: 'POST',
-			// 		headers: {
-			// 			'Content-Type': 'application/json',
-			// 			Accept: 'application/json'
-			// 		},
-			// 		body: JSON.stringify(body)
-			// 	});
-			// 	modalConfirm = true;
-			// } catch (err) {
-			// 	console.log(err);
-			// } finally {
-			// 	loading = false;
-			// }
-		};
-	};
-
-	const deleteFile = async (e: CustomEvent) => {
-		try {
-			await fetch(`/api/files/${e.detail.id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json'
-				}
-			});
-		} catch (err) {
-			console.log(err);
-		} finally {
-			location.href = location.href;
-		}
-	};
+	// 	const reader = new FileReader();
+	// 	reader.readAsDataURL(files[0]);
+	// 	reader.onload = async (e) => {
+	// 		// uploadImage(e.target.result);
+	// 		const target = e.target as FileReader;
+	// 		const fileReaderResult = target.result as string;
+	// 		const file = fileReaderResult.split(',');
+	// 		const body = {
+	// 			url: file[1],
+	// 			name: files[0].name,
+	// 			description: data[1].value
+	// 		};
+	// 		modalConfirm = true;
+	// 		loading = false;
+	// 		console.log(body);
+	// 		// try {
+	// 		// 	await fetch(`/api/files`, {
+	// 		// 		method: 'POST',
+	// 		// 		headers: {
+	// 		// 			'Content-Type': 'application/json',
+	// 		// 			Accept: 'application/json'
+	// 		// 		},
+	// 		// 		body: JSON.stringify(body)
+	// 		// 	});
+	// 		// 	modalConfirm = true;
+	// 		// } catch (err) {
+	// 		// 	console.log(err);
+	// 		// } finally {
+	// 		// 	loading = false;
+	// 		// }
+	// 	};
+	// };
 </script>
 
 <AdminButton
@@ -131,7 +115,12 @@
 				{components}
 				submitMessage="Subir archivo"
 				{loading}
-				on:custom-submit={fileSubmit}
+				action="create"
+				{validators}
+				on:validation-end={(e) => {
+					messageSubmit = e.detail;
+					modalConfirm = true;
+				}}
 			/>
 		{/if}
 	</div>
