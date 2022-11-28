@@ -126,7 +126,7 @@
 			/>
 		{:else} -->
 		<AdminForm
-			title="Formulario de alta de imagenes"
+			title="Formulario imagenes"
 			{components}
 			submitMessage="Subir imagen"
 			{loading}
