@@ -23,6 +23,8 @@ const factoryValidators = (type: string | null = null) => {
 		if (value === '') message = 'Debe completar este campo';
 		if (type == 'text' && /[|°¬!#$%&@()=?'¡¿´¨+*~}{[^}_-]/.test(value))
 			message = 'No se admiten caracteres especiales';
+		if (type == 'email' && /[|°¬!#$%&()=?'¡¿´¨+*~}{[^}_]/.test(value))
+			message = 'No se admiten caracteres especiales';
 		if (type == 'file' && validateFilesAndImages(value, extensionErrorTypes))
 			message = 'No se admiten archivos con esa extension';
 		if (type == 'image' && !validateFilesAndImages(value, extensionsImages))
@@ -45,15 +47,20 @@ const factoryValidators = (type: string | null = null) => {
 	};
 };
 
-const validateFilesAndImages = (files: FileList, extensions: Array<string>): Boolean => {
-	return [...files].some((file, i) => {
-		return extensions.some((str) => file.name.toLowerCase().endsWith(str));
-	});
+const validateFilesAndImages = (file: File, extensions: Array<string>): Boolean => {
+	return extensions.some((str) => file.name.toLowerCase().endsWith(str));
 };
 
 const validateEmptyInput = factoryValidators();
 const validateInputText = factoryValidators('text');
+const validateInputEmail = factoryValidators('email');
 const validateInputFile = factoryValidators('file');
 const validateInputFileImage = factoryValidators('image');
 
-export { validateEmptyInput, validateInputText, validateInputFile, validateInputFileImage };
+export {
+	validateEmptyInput,
+	validateInputText,
+	validateInputFile,
+	validateInputFileImage,
+	validateInputEmail
+};

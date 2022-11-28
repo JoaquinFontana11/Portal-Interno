@@ -9,6 +9,5 @@ export const load: PageServerLoad = async () => {
 
 export const actions: Actions = {
 	create: dbActions.announcements.create,
-	delete: dbActions.announcements.delete,
-	update: dbActions.announcements.create
+	delete: dbActions.announcements.delete
 };

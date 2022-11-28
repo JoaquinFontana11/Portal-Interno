@@ -3,6 +3,7 @@
 	import { IComponent } from '$lib/types/Components';
 
 	import FormInputText from '$lib/components/inputs/FormInputText.svelte';
+	import FormInputEmail from '$lib/components/inputs/FormInputEmail.svelte';
 	import FormInputNumber from '$lib/components/inputs/FormInputNumber.svelte';
 	import FormInputDate from '$lib/components/inputs/FormInputDate.svelte';
 	import FormSelect from '$lib/components/inputs/FormSelect.svelte';
@@ -18,12 +19,37 @@
 	export let title: string;
 	export let submitMessage: string;
 	export let loading: boolean;
+	export let action: string = 'create';
+
+	// si es necesario agregar una logica EXTRA al proceso de submit agregamos esta funcion
+	export let addExtraData: Function = () => [];
+
+	// agregamos validadores custom
+	export let validators: Function = () => {
+		return { status: true };
+	};
 
 	const handlerSubmit = async (e: Event) => {
-		dispatch('custom-submit', {
-			data: components.map((component) => {
-				return { input: component.name, value: component.value };
-			})
+		const formData = new FormData();
+
+		components.forEach((component) => {
+			if (typeof component.value == 'object') formData.append(component.name, component.value[0]);
+			else formData.append(component.name, component.value);
+		});
+
+		// agregamos o no data extra
+		addExtraData(components).forEach((component) => {
+			formData.append(component.name, component.value);
+		});
+
+		// informamos si las valiaciones fueron correctas o no
+		dispatch('validation-end', validators([...formData]));
+
+		if (!validators([...formData]).status) return;
+
+		await fetch(`?/${action}`, {
+			method: 'POST',
+			body: formData
 		});
 	};
 </script>
@@ -38,6 +64,12 @@
 	{#each components as component}
 		{#if component.type == 'text'}
 			<FormInputText
+				label={component.label}
+				bind:value={component.value}
+				required={component.required}
+			/>
+		{:else if component.type == 'email'}
+			<FormInputEmail
 				label={component.label}
 				bind:value={component.value}
 				required={component.required}

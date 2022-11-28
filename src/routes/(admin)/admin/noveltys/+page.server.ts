@@ -1,9 +1,20 @@
-import type { PageServerLoad } from './$types';
-import dbOperations from '$lib/server/db/db';
+import type { PageServerLoad, Actions } from './$types';
+import dbOpeartions from '$lib/server/db/db';
+import dbActions from '$lib/server/actions/actions';
 
 export const load: PageServerLoad = async () => {
-	const images = await dbOperations.images.getAll();
-	const pages = await dbOperations.pages.getAll();
-	const noveltys = await dbOperations.noveltys.getAll();
-	return { images: JSON.stringify(images), pages: JSON.stringify(pages),noveltys: JSON.stringify(noveltys) };
+	const noveltys = await dbOpeartions.noveltys.getAll();
+	const pages = await dbOpeartions.pages.getAll();
+	const images = await dbOpeartions.images.getAll();
+	return {
+		noveltys: JSON.stringify(noveltys),
+		pages: JSON.stringify(pages),
+		images: JSON.stringify(images)
+	};
+};
+
+export const actions: Actions = {
+	create: dbActions.noveltys.create,
+	delete: dbActions.noveltys.delete,
+	update: dbActions.noveltys.create
 };

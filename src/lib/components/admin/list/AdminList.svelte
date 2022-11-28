@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import { type ComponentType } from 'svelte';
 	import AdminListRow from './rows/AdminListRow.svelte';
 	export let data: any;
@@ -10,8 +9,6 @@
 	export let customRow: ComponentType | null = null; // podemos pasar una fila customizada si la tabla tiene que ser distinta
 	export let deleteAction: string;
 
-	const dispatch = createEventDispatcher();
-
 	const deleteEvent = async (e: CustomEvent) => {
 		const body = new FormData();
 		body.append('id', e.detail.id);
@@ -19,10 +16,12 @@
 			method: 'POST',
 			body
 		});
+
+		location.reload();
 	};
 
 	const modifyEvent = (e: CustomEvent) => {
-		dispatch('modify-doc', { id: e.detail.id, doc: e.detail.doc });
+		location.href = `${location.href}/${e.detail.id}`;
 	};
 </script>
 
