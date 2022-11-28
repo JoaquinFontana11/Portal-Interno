@@ -15,28 +15,25 @@
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
 
+	const optionsPage = JSON.parse(data.pages).map((page) => {
+		return { value: page.id, name: page.title };
+	});
+
 	const components: IComponent[] = [
 		{
 			type: 'select',
-			label: 'Esto deberia ser un custom select Paginas',
+			label: 'Paginas',
 			name: 'page',
 			value: '',
 			required: true,
-			options: [
-				{ value: '0', name: 'Pagina 1' },
-				{ value: '1', name: 'Pagina 2' }
-			]
+			options: optionsPage
 		},
 		{
-			type: 'select',
-			label: 'Esto deberia ser un custom select Imagenes',
+			type: 'select-image',
+			label: 'Imagen',
 			name: 'image',
 			value: '',
-			required: true,
-			options: [
-				{ value: '0', name: 'Imagen 1' },
-				{ value: '1', name: 'Imagen 2' }
-			]
+			images: JSON.parse(data.images)
 		},
 		{
 			type: 'date',

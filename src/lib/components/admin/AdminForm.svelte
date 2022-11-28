@@ -8,6 +8,7 @@
 	import FormSelect from '$lib/components/inputs/FormSelect.svelte';
 	import FormInputFile from '$lib/components/inputs/FormInputFile.svelte';
 	import FormInputFileImage from '$lib/components/inputs/FormInputFileImage.svelte';
+	import FormInputSelectImage from '../inputs/FormInputSelectImage.svelte';
 	import FormEditor from '$lib/components/inputs/FormInputEditor.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 
@@ -24,7 +25,6 @@
 				return { input: component.name, value: component.value };
 			})
 		});
-		console.log('Ey tamo Devuelta');
 	};
 </script>
 
@@ -67,6 +67,12 @@
 			<FormInputFileImage label={component.label} bind:files={component.value} />
 		{:else if component.type == 'editor'}
 			<FormEditor label={component.label} bind:value={component.value} />
+		{:else if component.type == 'select-image'}
+			<FormInputSelectImage
+				label={component.label}
+				bind:value={component.value}
+				images={component.images}
+			/>
 		{/if}
 	{/each}
 	<!-- Dejamos un slot para ampliar la funcionalidad del formulario dependiendo la necesidad -->

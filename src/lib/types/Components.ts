@@ -10,4 +10,5 @@ export interface IComponent {
 	required?: boolean;
 	files?: FileList | Array<File>;
 	options?: IOption[];
+	images?: Array<Object>;
 }
