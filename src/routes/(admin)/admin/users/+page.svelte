@@ -20,7 +20,7 @@
 			data={JSON.parse(data.users)}
 			on:delete-doc={deleteUser}
 			on:modify-doc={modifyUser}
-			caption="Archivos"
+			caption="Usuarios"
 			actions={['delete', 'edit']}
 			customRow={AdminListRowUser}
 		/>

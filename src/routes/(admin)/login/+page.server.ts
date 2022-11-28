@@ -1,7 +1,10 @@
 import { invalid, redirect } from '@sveltejs/kit';
 import type { Actions, Action } from './$types';
 import jwt from 'jsonwebtoken';
-import { USER_APP, PASSWORD, NODE_ENV, JWT_PRIVATE_KEY } from '$env/static/private';
+import { USER_APP, PASSWORD, JWT_PRIVATE_KEY, NODE_ENV } from '$env/static/private';
+
+console.log(USER_APP, PASSWORD, JWT_PRIVATE_KEY, NODE_ENV);
+console.log(process.env);
 
 const login: Action = async ({ cookies, request }) => {
 	const data = await request.formData();
