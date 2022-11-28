@@ -27,8 +27,8 @@
 			})
 		},
 		{
-			type: 'select',
-			label: 'Esto deberia ser un custom select Imagenes',
+			type: 'select-image',
+			label: 'Imagen',
 			name: 'image',
 			value: '',
 			required: true,
