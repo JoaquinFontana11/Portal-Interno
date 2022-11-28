@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher, type ComponentType } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+	import { type ComponentType } from 'svelte';
 	import AdminListRow from './rows/AdminListRow.svelte';
 	export let data: any;
 	export let headers: string[];
@@ -7,14 +8,21 @@
 	export let actions: string[] = ['edit', 'delete'];
 	export let caption: string = '';
 	export let customRow: ComponentType | null = null; // podemos pasar una fila customizada si la tabla tiene que ser distinta
+	export let deleteAction: string;
 
-	const distpach = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
-	const deleteEvent = (e: CustomEvent) => {
-		distpach('delete-doc', { id: e.detail.id, doc: e.detail.doc });
+	const deleteEvent = async (e: CustomEvent) => {
+		const body = new FormData();
+		body.append('id', e.detail.id);
+		await fetch(`?/delete`, {
+			method: 'POST',
+			body
+		});
 	};
+
 	const modifyEvent = (e: CustomEvent) => {
-		distpach('modify-doc', { id: e.detail.id, doc: e.detail.doc });
+		dispatch('modify-doc', { id: e.detail.id, doc: e.detail.doc });
 	};
 </script>
 

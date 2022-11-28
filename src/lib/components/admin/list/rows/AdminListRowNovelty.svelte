@@ -7,10 +7,10 @@
 	const distpach = createEventDispatcher();
 
 	const deleteEvent = () => {
-		distpach('delete-doc', { id: doc._id });
+		distpach('delete-doc', { id: doc.id });
 	};
 	const modifyEvent = () => {
-		distpach('modify-doc', { id: doc._id, doc: doc });
+		distpach('modify-doc', { id: doc.id, doc: doc });
 	};
 
 	console.log(doc);

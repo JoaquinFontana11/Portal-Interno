@@ -20,4 +20,12 @@
 			actions={['delete']}
 		/>
 	</div>
+
+	<form method="POST" action="?/create">
+		<input type="text" name="content" />
+		<input type="text" name="title" />
+		<input type="date" name="init_date" />
+		<input type="date" name="end_date" />
+		<input type="submit" value="submit" />
+	</form>
 </main>
