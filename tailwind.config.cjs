@@ -10,6 +10,10 @@ module.exports = {
 			},
 			spacing: {
 				128: '32rem'
+			},
+			backgroundImage: {
+				section:
+					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/background.svg')"
 			}
 		}
 	},

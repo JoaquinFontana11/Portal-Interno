@@ -57,7 +57,7 @@
 </script>
 
 <Navbar {menus} user={JSON.parse(data.user)} />
-<main class="min-h-screen min-w-screen z-10">
+<main class="min-h-screen min-w-screen z-10 bg-section">
 	<slot />
 </main>
 <Footer links={linksFooter} />

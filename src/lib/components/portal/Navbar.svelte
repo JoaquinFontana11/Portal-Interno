@@ -92,7 +92,7 @@
 								{#if menu.drop}
 									<div
 										id="mega-menu-full-dropdown"
-										class="mt-1  bg-white border-gray-200 shadow-xl border dark:bg-gray-800 dark:border-gray-600 absolute top-12 left-1/2 transform -translate-x-1/2"
+										class="mt-1 rounded-lg bg-white border-gray-200 shadow-lg border dark:bg-gray-800 dark:border-gray-600 absolute top-12 left-1/2 transform -translate-x-1/2"
 										style="z-index: 9999;"
 										transition:fly={{
 											duration: 300,
@@ -190,7 +190,7 @@
 			</button>
 			{#if dropUserMenu}
 				<div
-					class="z-50 absolute my-4 right-1/3 text-base shadow-xl list-none bg-white divide-y divide-gray-100 rounded  dark:bg-gray-700 dark:divide-gray-600"
+					class="z-50 absolute my-4 right-1/3 text-base shadow-lg rounded-lg list-none bg-white divide-y divide-gray-100 dark:bg-gray-700 dark:divide-gray-600"
 					id="user-dropdown"
 					transition:fly={{
 						duration: 300,

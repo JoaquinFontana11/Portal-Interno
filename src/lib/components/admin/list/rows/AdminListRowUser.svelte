@@ -18,7 +18,7 @@
 	class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 >
 	<td class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-		<img class="w-10 h-10 rounded-full" src={doc.Photo?.url || '/img/test.png'} alt={``} />
+		<img class="w-10 h-10 rounded-full" src={doc.Image?.url || '/img/test.png'} alt={``} />
 		<div class="pl-3">
 			<div class="text-base font-semibold">{`${doc.name} ${doc.lastname}`}</div>
 			<div class="font-normal text-gray-500">{doc.email}</div>

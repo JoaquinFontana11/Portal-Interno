@@ -1,6 +1,6 @@
 import type { Action } from './$types';
 import { writeFileSync, statSync, unlinkSync } from 'fs';
-import dbOpeartions from '$lib/server/db/db';
+import dbOperations from '$lib/server/db/db';
 
 const factoryCreateAction =
 	(model: string): Action =>
@@ -14,7 +14,7 @@ const factoryCreateAction =
 		console.log(data);
 		console.log('--------- DOCDATA ---------');
 		console.log(docData);
-		await dbOpeartions[model].create(docData);
+		await dbOperations[model].create(docData);
 	};
 
 const factoryUpdateAction =
@@ -27,14 +27,14 @@ const factoryUpdateAction =
 			if (e[0] == 'id') return (id = e[1]);
 			docData[e[0]] = e[1];
 		});
-		await dbOpeartions[model].update(docData, { id: id });
+		await dbOperations[model].update(docData, { id: id });
 	};
 
 const factoryDeleteAction =
 	(model: string): Action =>
 	async ({ request }) => {
 		const data = [...(await request.formData())].flat();
-		await dbOpeartions[model].delete({ id: data[1] });
+		await dbOperations[model].delete({ id: data[1] });
 	};
 
 const uploadFileAction: Action = async ({ request }) => {
@@ -44,7 +44,7 @@ const uploadFileAction: Action = async ({ request }) => {
 	const path = `/files/${new Date().getTime()}.${extension}`;
 	writeFileSync(`static${path}`, data[1][1], 'base64');
 
-	await dbOpeartions.files.create({
+	await dbOperations.files.create({
 		name: data[2][1],
 		description: data[0][1],
 		url: path
@@ -53,21 +53,19 @@ const uploadFileAction: Action = async ({ request }) => {
 
 const deleteFileAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
-	const file = await dbOpeartions.files.getOne({ id: data[0][1] });
+	const file = await dbOperations.files.getOne({ id: data[0][1] });
 	unlinkSync(`static/${file.url}`);
 
-	await dbOpeartions.files.delete({ id: file.id });
+	await dbOperations.files.delete({ id: file.id });
 };
 
 const uploadImageAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
 
-	console.log(data);
-
 	const path = `/img/${new Date().getTime()}.png`;
 	writeFileSync(`static${path}`, data[1][1], 'base64');
 
-	await dbOpeartions.images.create({
+	await dbOperations.images.create({
 		name: data[2][1],
 		alt: data[0][1],
 		url: path
@@ -76,10 +74,37 @@ const uploadImageAction: Action = async ({ request }) => {
 
 const deleteImageAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
-	const image = await dbOpeartions.images.getOne({ id: data[0][1] });
-	unlinkSync(`static/${image.url}`);
+	const image = await dbOperations.images.getOne({ id: data[0][1] });
+	unlinkSync(`static${image.url}`);
 
-	await dbOpeartions.images.delete({ id: image.id });
+	await dbOperations.images.delete({ id: image.id });
+};
+
+const uploadUserPhotoAction: Action = async ({ request }) => {
+	const data = [...(await request.formData())];
+
+	const user = await dbOperations.users.getOne({ id: data[3][1] });
+	// Borramos la foto anterior del usuario (si tiene)
+	if (user.Image) {
+		try {
+			unlinkSync(`static${user.Image.url}`);
+		} catch (err) {
+			console.log('La foto del usuario se elimino manualmente');
+		}
+		await dbOperations.images.delete({ id: user.Image.id });
+	}
+	// Creamos la nueva foto
+	const path = `/img/${user.id}-${new Date().getTime()}.png`;
+	writeFileSync(`static${path}`, data[1][1], 'base64');
+
+	const newImage = await dbOperations.images.create({
+		name: data[2][1],
+		alt: data[0][1],
+		url: path
+	});
+
+	// Asignamos la foto al usuario
+	await dbOperations.users.update({ photo_id: newImage.id }, { id: user.id });
 };
 
 const dbActions = {
@@ -91,7 +116,8 @@ const dbActions = {
 	users: {
 		create: factoryCreateAction('users'),
 		delete: factoryDeleteAction('users'),
-		update: factoryUpdateAction('users')
+		update: factoryUpdateAction('users'),
+		uploadPhoto: uploadUserPhotoAction
 	},
 	images: {
 		create: uploadImageAction,
