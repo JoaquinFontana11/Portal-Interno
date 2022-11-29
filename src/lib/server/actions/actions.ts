@@ -35,21 +35,16 @@ const factoryDeleteAction =
 
 const uploadFileAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
-	console.log(data);
-	const extension = data[1][1].name.split('.').at(-1);
+	const extension = data[2][1].split('.').at(-1);
 
-	// Subimos el archivo al servidor
-	const reader = new FileReader(); // FILEREADER ES DEL CLIENT; NO DE NODE
-	reader.readAsDataURL(data[1][1]);
-	reader.onload = async (e) => {
-		const target = e.target as FileReader;
-		const fileReaderResult = target.result as string;
-		const fileBase64 = fileReaderResult.split(',');
+	const path = `/files/${new Date().getTime()}.${extension}`;
+	writeFileSync(`static${path}`, data[1][1], 'base64');
 
-		const path = `/files/${new Date().getTime()}.${extension}`;
-
-		writeFileSync(`static${path}`, fileBase64[1], 'base64');
-	};
+	await dbOpeartions.files.create({
+		name: data[2][1],
+		description: data[0][1],
+		url: path
+	});
 };
 
 const dbActions = {
