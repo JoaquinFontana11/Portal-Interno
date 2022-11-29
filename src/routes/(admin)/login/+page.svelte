@@ -5,7 +5,7 @@
 	<form
 		method="POST"
 		action="?/login"
-		class="absolute top-1/2 left-1/2 h-74 bg-white shadow-lg rounded-lg transform -translate-x-1/2 -translate-y-1/2 p-10"
+		class="absolute top-1/2 left-1/2 h-74  shadow-2xl rounded-lg transform -translate-x-1/2 -translate-y-1/2 p-10 bg-gray-200"
 	>
 		<div class="mb-6">
 			<label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -35,7 +35,7 @@
 
 		<button
 			type="submit"
-			class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+			class="text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
 			>Ingresar</button
 		>
 	</form>

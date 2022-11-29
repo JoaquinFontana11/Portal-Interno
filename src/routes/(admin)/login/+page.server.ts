@@ -1,18 +1,23 @@
 import { invalid, redirect } from '@sveltejs/kit';
 import type { Actions, Action } from './$types';
 import jwt from 'jsonwebtoken';
-import { USER_APP, PASSWORD, JWT_PRIVATE_KEY, NODE_ENV } from '$env/static/private';
+import { JWT_PRIVATE_KEY, NODE_ENV } from '$env/static/private';
+import dbOpeartions from '$lib/server/db/db';
 
 const login: Action = async ({ cookies, request }) => {
 	const data = await request.formData();
 
 	if (!data.get('username') || !data.get('password')) return invalid(400, { missing: true });
 
-	if (data.get('username') != USER_APP || data.get('password') != PASSWORD)
-		return invalid(400, { credentials: true });
+	const user = await dbOpeartions.users.getOne({
+		username: data.get('username'),
+		password: data.get('password')
+	});
+
+	if (!user) return invalid(400, { credentials: true });
 
 	const privateKey = JWT_PRIVATE_KEY as string;
-	const token = jwt.sign({ user: USER_APP }, privateKey, {
+	const token = jwt.sign({ id: user.id }, privateKey, {
 		expiresIn: '1h'
 	});
 

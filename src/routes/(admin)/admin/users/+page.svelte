@@ -54,6 +54,12 @@
 				{ value: 'Visitante', name: 'Visitante' },
 				{ value: 'Admin', name: 'Admin' }
 			]
+		},
+		{
+			type: 'text',
+			label: 'Contraseña',
+			name: 'password',
+			value: ''
 		}
 	];
 

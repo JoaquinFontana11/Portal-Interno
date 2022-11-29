@@ -7,6 +7,7 @@ import Menu from './MenuModel';
 interface submenuAttributes {
 	id: number;
 	name: string;
+	description: string;
 	order: number;
 	active: boolean;
 	page_id: number;
@@ -23,6 +24,7 @@ export interface submenuOuput extends Required<submenuAttributes> {}
 class Submenu extends Model<submenuAttributes, submenuInput> implements submenuAttributes {
 	public id!: number; // el "!" signfica que no hay problema si no es inicializada
 	public name!: string;
+	public description!: string;
 	public order!: number;
 	public active!: boolean;
 	public page_id!: number;
@@ -40,6 +42,10 @@ Submenu.init(
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		description: {
+			type: DataTypes.STRING,
+			allowNull: true
 		},
 		order: {
 			type: DataTypes.INTEGER,
