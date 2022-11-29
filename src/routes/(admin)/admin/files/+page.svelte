@@ -32,58 +32,12 @@
 	];
 
 	const validators = (data: any) => {
-		if (validateInputFile(data[0][1]).status && validateEmptyInput(data[1][1]).status) {
+		if (validateEmptyInput(data[0][1]).status && validateEmptyInput(data[1][1]).status) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
 		}
 	};
-
-	// const fileSubmit = async (e: CustomEvent) => {
-	// 	if (loading) return;
-	// 	const { data } = e.detail;
-	// 	const files = data[0].value;
-
-	// 	loading = true;
-
-	// 	messageSubmit = validateInputs(data);
-	// 	if (!messageSubmit.status) {
-	// 		loading = false;
-	// 		return (modalConfirm = true);
-	// 	}
-
-	// 	const reader = new FileReader();
-	// 	reader.readAsDataURL(files[0]);
-	// 	reader.onload = async (e) => {
-	// 		// uploadImage(e.target.result);
-	// 		const target = e.target as FileReader;
-	// 		const fileReaderResult = target.result as string;
-	// 		const file = fileReaderResult.split(',');
-	// 		const body = {
-	// 			url: file[1],
-	// 			name: files[0].name,
-	// 			description: data[1].value
-	// 		};
-	// 		modalConfirm = true;
-	// 		loading = false;
-	// 		console.log(body);
-	// 		// try {
-	// 		// 	await fetch(`/api/files`, {
-	// 		// 		method: 'POST',
-	// 		// 		headers: {
-	// 		// 			'Content-Type': 'application/json',
-	// 		// 			Accept: 'application/json'
-	// 		// 		},
-	// 		// 		body: JSON.stringify(body)
-	// 		// 	});
-	// 		// 	modalConfirm = true;
-	// 		// } catch (err) {
-	// 		// 	console.log(err);
-	// 		// } finally {
-	// 		// 	loading = false;
-	// 		// }
-	// 	};
-	// };
 </script>
 
 <AdminButton
@@ -100,7 +54,7 @@
 				attributes={['name', 'description', 'extension']}
 				data={JSON.parse(data.files).map((file) => {
 					return {
-						_id: file._id,
+						id: file.id,
 						name: file.name.split('.').at(0),
 						extension: file.name.split('.').at(-1),
 						description: file.description
@@ -132,11 +86,6 @@
 				on:close={() => {
 					modalConfirm = false;
 					messageSubmit.status ? location.reload() : (list = false);
-					// if (messageSubmit.status) {
-					// 	location.reload();
-					// } else {
-					// 	list = false;
-					// }
 				}}
 			/>
 		{/if}

@@ -29,21 +29,40 @@
 		return { status: true };
 	};
 
+	// transforma una fila en base64
+	const fileToBase64 = async (file) => {
+		let base64: string = await new Promise((resolve) => {
+			let fileReader = new FileReader();
+			fileReader.onload = (e) => resolve(fileReader.result as string);
+			fileReader.readAsDataURL(file);
+		});
+		return base64.split(',')[1];
+	};
+
 	const handlerSubmit = async (e: Event) => {
 		const formData = new FormData();
 
-		components.forEach((component) => {
-			if (typeof component.value == 'object') formData.append(component.name, component.value[0]);
-			else formData.append(component.name, component.value);
-		});
-
+		// pasamos todos los valores del formualrio a FormData
+		await Promise.all(
+			components.map(async (component) => {
+				// si es de tipo objetc es porque es un File por eso lo pasamos a base 64
+				if (typeof component.value == 'object') {
+					formData.append(component.name, await fileToBase64(component.value[0]));
+					formData.append('name', component.value[0].name);
+				} else formData.append(component.name, component.value);
+			})
+		);
 		// agregamos o no data extra
 		addExtraData(components).forEach((component) => {
 			formData.append(component.name, component.value);
 		});
 
+		console.log([...formData]);
+
 		// informamos si las valiaciones fueron correctas o no
 		dispatch('validation-end', validators([...formData]));
+
+		console.log([...formData]);
 
 		if (!validators([...formData]).status) return;
 		await fetch(`?/${action}`, {

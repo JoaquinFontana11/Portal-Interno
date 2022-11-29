@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher();
 
 	const handlerClick = async (e: Event) => {
-		dispatch('loadImage', { src_image: src, alt_image: alt, id_image: id });
+		dispatch('loadImage', { url: src, alt: alt, id: id });
 	};
 </script>
 
