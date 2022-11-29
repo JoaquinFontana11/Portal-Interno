@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 	import Navbar from '$lib/components/portal/Navbar.svelte';
+	import Footer from '$lib/components/portal/Footer.svelte';
 
 	export let data: LayoutData;
 
@@ -12,9 +13,51 @@
 			return menu;
 		});
 
-	console.log(menus);
+	const linksFooter = [
+		{
+			title: 'titulo 1',
+			links: [
+				{
+					name: 'link 1',
+					href: '#'
+				},
+				{
+					name: 'link 2',
+					href: '#'
+				}
+			]
+		},
+		{
+			title: 'titulo 2',
+			links: [
+				{
+					name: 'link 1',
+					href: '#'
+				},
+				{
+					name: 'link 2',
+					href: '#'
+				}
+			]
+		},
+		{
+			title: 'titulo 3',
+			links: [
+				{
+					name: 'link 1',
+					href: '#'
+				},
+				{
+					name: 'link 2',
+					href: '#'
+				}
+			]
+		}
+	];
 </script>
 
-<!-- {menus} -->
-<Navbar {menus} />
-<slot />
+<Navbar {menus} user={JSON.parse(data.user)} />
+<main class="min-h-screen min-w-screen z-10">
+	<slot />
+</main>
+<Footer links={linksFooter} />

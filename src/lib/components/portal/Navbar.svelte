@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { User } from 'svelte-hero-icons';
 
 	export let menus: any;
+	export let user: any;
 	let responsiveNavDrop = true;
 	let dropUserMenu = false;
 
@@ -18,7 +20,7 @@
 
 <svelte:window on:click={closeSubmenus} />
 <nav
-	class={`bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 shadow-xl z-50 hover:shadow-3x relative w-screen`}
+	class={`bg-white border-gray-200  sm:px-4 py-2.5 dark:bg-gray-900 shadow-xl z-50 hover:shadow-3x relative max-w-screen`}
 	style="z-index: 9999"
 >
 	<div class="container flex flex-wrap justify-between items-center min-w-full">
@@ -50,7 +52,7 @@
 		</button>
 		{#if responsiveNavDrop != null && responsiveNavDrop}
 			<div
-				class=" w-full md:block md:w-auto"
+				class="w-full md:block md:w-auto grow justify-self-end pr-20"
 				id="navbar-default"
 				transition:fly={{
 					duration: 300,
@@ -61,7 +63,7 @@
 				}}
 			>
 				<ul
-					class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+					class="flex flex-col justify-end gap-10 p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
 				>
 					{#each menus as menu}
 						{#if menu.submenus}
@@ -109,7 +111,7 @@
 														<li>
 															<a
 																href={submenu.Page.slug}
-																class="block p-3 rounded-lg hover:bg-gray-200 text-gray-700  hover:text-sky-500 dark:hover:bg-gray-700"
+																class="block p-3 rounded-lg hover:bg-gray-200 text-gray-700   dark:hover:bg-gray-700"
 															>
 																<p class="font-semibold text-sm ">{submenu.name}</p>
 																<span class="text-sm font-light text-gray-500 dark:text-gray-400"
@@ -184,14 +186,11 @@
 					dropUserMenu = !dropUserMenu;
 				}}
 			>
-				<img
-					class="w-8 h-8 rounded-full"
-					src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-				/>
+				<img class="w-8 h-8 rounded-full" src={user.Image?.url} />
 			</button>
 			{#if dropUserMenu}
 				<div
-					class="z-50 absolute my-4 right-1/3 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+					class="z-50 absolute my-4 right-1/3 text-base shadow-xl list-none bg-white divide-y divide-gray-100 rounded  dark:bg-gray-700 dark:divide-gray-600"
 					id="user-dropdown"
 					transition:fly={{
 						duration: 300,
@@ -202,38 +201,35 @@
 					}}
 				>
 					<div class="px-4 py-3">
-						<span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+						<span class="block text-sm text-gray-900 dark:text-white"
+							>{user.name} {user.lastname}</span
+						>
 						<span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"
-							>name@flowbite.com</span
+							>{user.email}</span
 						>
 					</div>
 					<ul class="py-1" aria-labelledby="user-menu-button">
 						<li>
 							<a
-								href="#"
+								href="/me"
 								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>Dashboard</a
+								>Configuracion</a
 							>
 						</li>
+						{#if user.role == 'Admin'}
+							<li>
+								<a
+									href="/admin"
+									class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+									>Panel de administracion</a
+								>
+							</li>
+						{/if}
 						<li>
 							<a
 								href="#"
 								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>Settings</a
-							>
-						</li>
-						<li>
-							<a
-								href="#"
-								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>Earnings</a
-							>
-						</li>
-						<li>
-							<a
-								href="#"
-								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>Sign out</a
+								>Salir</a
 							>
 						</li>
 					</ul>

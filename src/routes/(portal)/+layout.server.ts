@@ -14,7 +14,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
 		const decoded = jwt.verify(token, privateKey);
 		user = await dbOpeartions.users.getOne({ id: decoded.id });
 	} catch (err) {
-		console.log('err', err);
 		throw redirect(302, '/login');
 	}
 
