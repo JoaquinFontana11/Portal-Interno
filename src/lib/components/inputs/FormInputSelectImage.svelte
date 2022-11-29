@@ -6,13 +6,18 @@
 	import AdminModalImages from '../modals/AdminModalImages.svelte';
 
 	export let images: LayoutData;
-	export let value: number;
+	export let value: number = 0;
 	export let label: string;
 	export let required = false;
 	let selectImage = false;
 	let filterImages = '';
 	let loadImage = false;
 	let imageSelected = {};
+
+	if (value) {
+		loadImage = true;
+		imageSelected = images.find((image) => image.id == value);
+	}
 
 	const succes = {
 		input:
@@ -69,9 +74,9 @@
 			></button
 		>
 		{#if loadImage}
-			<div class="flex flex-row gap-4">
-				<span class="flex italic text-sm text-gray-500 pt-1">{imageSelected.alt_image}</span>
-				<img src={imageSelected.src_image} alt={imageSelected.alt_image} class="h-auto w-auto" />
+			<div class="flex flex-row gap-4 justify-end">
+				<span class="flex">{imageSelected.alt}</span>
+				<img src={imageSelected.url} alt={imageSelected.alt} class="h-auto w-auto" />
 			</div>
 		{/if}
 	</div>
@@ -93,10 +98,11 @@
 			{images}
 			filter={filterImages}
 			on:loadImage={({ detail }) => {
+				console.log(detail);
 				imageSelected = detail;
 				selectImage = false;
 				loadImage = true;
-				value = imageSelected.id_image;
+				value = imageSelected.id;
 			}}
 		/>
 	</AdminModal>

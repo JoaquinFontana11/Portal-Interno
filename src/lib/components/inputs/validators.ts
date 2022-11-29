@@ -48,6 +48,7 @@ const factoryValidators = (type: string | null = null) => {
 };
 
 const validateFilesAndImages = (file: File, extensions: Array<string>): Boolean => {
+	console.log(file);
 	return extensions.some((str) => file.name.toLowerCase().endsWith(str));
 };
 

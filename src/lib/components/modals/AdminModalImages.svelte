@@ -10,7 +10,7 @@
 </script>
 
 <div class="grid grid-cols-4 gap-1 ">
-	{#each images.filter((image) => image.alt.includes(filter)) as image (image._id)}
+	{#each images.filter((image) => image.alt.includes(filter)) as image (image.id)}
 		<div in:fade={{ duration: 300 }} animate:flip={{ duration: 300 }}>
 			<AdminModalImage
 				src={image.url}

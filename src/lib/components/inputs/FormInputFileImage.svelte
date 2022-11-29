@@ -49,7 +49,7 @@
 			message: errorMsg,
 			inputStyle: styleInput,
 			messageStyle: styleMessage
-		} = validateInputFileImage(files, error, succes));
+		} = validateInputFileImage(files[0], error, succes));
 	};
 
 	const uploadHandler = (e: Event) => {

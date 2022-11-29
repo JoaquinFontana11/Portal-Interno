@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { Plus, Table } from 'svelte-hero-icons';
-	import type { IComponent } from '$lib/types/Components';
 	import type { PageData } from './$types';
+	import type { IComponent } from '$lib/types/Components';
 	import AdminForm from '$lib/components/admin/AdminForm.svelte';
-	import AdminButton from '$lib/components/admin/AdminButton.svelte';
 	import { validateInputText, validateEmptyInput } from '$lib/components/inputs/validators';
 	import AdminModalConfirm from '$lib/components/modals/AdminModalConfirm.svelte';
-	import AdminList from '$lib/components/admin/list/AdminList.svelte';
-	import AdminListRowImage from '$lib/components/admin/list/rows/AdminListRowImage.svelte';
 
 	export let data: PageData;
 	let list = true;
@@ -15,61 +11,68 @@
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
 
+	const novelty = JSON.parse(data.novelty);
+	console.log(novelty.date);
+
 	const components: IComponent[] = [
 		{
-			type: 'image',
-			label: 'Imagen a agregar',
-			name: 'image',
-			value: '',
-			files: []
+			type: 'select',
+			label: 'Paginas',
+			name: 'page_id',
+			value: novelty.Page.id,
+			required: true,
+			options: JSON.parse(data.pages).map((page) => {
+				return { name: page.title, value: page.id };
+			})
 		},
 		{
-			type: 'text',
-			label: 'Texto alternativo',
-			name: 'alt',
-			value: ''
+			type: 'select-image',
+			label: 'Imagen',
+			name: 'image_id',
+			value: novelty.Image.id,
+			images: JSON.parse(data.images)
+		},
+		{
+			type: 'date',
+			label: 'Fecha de la novedad',
+			name: 'date',
+			value: new Date(novelty.date),
+			required: true
 		}
 	];
 
 	const validators = (data: any) => {
-		if (validateEmptyInput(data[0][1]).status && validateInputText(data[0][1]).status) {
+		if (
+			validateEmptyInput(data[0][1]).status &&
+			validateEmptyInput(data[1][1]).status &&
+			validateEmptyInput(data[2][1]).status
+		) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
 		}
 	};
+
+	const addExtraData = (components) => {
+		return [{ name: 'id', value: novelty.id }];
+	};
 </script>
 
-<AdminButton
-	icon={list ? Plus : Table}
-	on:click={() => {
-		list = !list;
-	}}
-/>
 <main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		{#if list}
-			<AdminList
-				headers={['Imagen', 'Nombre', 'Texto alternativo']}
-				data={JSON.parse(data.images)}
-				caption="Imagenes"
-				actions={['delete']}
-				customRow={AdminListRowImage}
-			/>
-		{:else}
-			<AdminForm
-				title="Formulario imagenes"
-				{components}
-				submitMessage="Subir imagen"
-				{loading}
-				action="create"
-				{validators}
-				on:validation-end={(e) => {
-					messageSubmit = e.detail;
-					modalConfirm = true;
-				}}
-			/>
-		{/if}
+		<AdminForm
+			title="Formulario de novedades"
+			{components}
+			submitMessage="Modificar novedad"
+			{loading}
+			action="update"
+			{addExtraData}
+			{validators}
+			on:validation-end={(e) => {
+				messageSubmit = e.detail;
+				modalConfirm = true;
+			}}
+		/>
 	</div>
 	<div>
 		{#if modalConfirm}
