@@ -30,13 +30,13 @@
 	};
 
 	// transforma una fila en base64
-	const fileToBase64 = async (file): Promise<string> => {
+	const fileToBase64 = async (file) => {
 		let base64: string = await new Promise((resolve) => {
 			let fileReader = new FileReader();
-			fileReader.onload = (e) => resolve(fileReader.result);
+			fileReader.onload = (e) => resolve(fileReader.result as string);
 			fileReader.readAsDataURL(file);
 		});
-		return base64.split(',')[1] as string;
+		return base64.split(',')[1];
 	};
 
 	const handlerSubmit = async (e: Event) => {

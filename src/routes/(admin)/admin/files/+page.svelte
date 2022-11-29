@@ -54,7 +54,7 @@
 				attributes={['name', 'description', 'extension']}
 				data={JSON.parse(data.files).map((file) => {
 					return {
-						_id: file._id,
+						id: file.id,
 						name: file.name.split('.').at(0),
 						extension: file.name.split('.').at(-1),
 						description: file.description
@@ -86,11 +86,6 @@
 				on:close={() => {
 					modalConfirm = false;
 					messageSubmit.status ? location.reload() : (list = false);
-					// if (messageSubmit.status) {
-					// 	location.reload();
-					// } else {
-					// 	list = false;
-					// }
 				}}
 			/>
 		{/if}

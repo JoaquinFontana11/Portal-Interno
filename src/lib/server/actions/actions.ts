@@ -1,5 +1,5 @@
 import type { Action } from './$types';
-import { writeFileSync, statSync } from 'fs';
+import { writeFileSync, statSync, unlinkSync } from 'fs';
 import dbOpeartions from '$lib/server/db/db';
 
 const factoryCreateAction =
@@ -47,6 +47,37 @@ const uploadFileAction: Action = async ({ request }) => {
 	});
 };
 
+const deleteFileAction: Action = async ({ request }) => {
+	const data = [...(await request.formData())];
+	const file = await dbOpeartions.files.getOne({ id: data[0][1] });
+	unlinkSync(`static/${file.url}`);
+
+	await dbOpeartions.files.delete({ id: file.id });
+};
+
+const uploadImageAction: Action = async ({ request }) => {
+	const data = [...(await request.formData())];
+
+	console.log(data);
+
+	const path = `/img/${new Date().getTime()}.png`;
+	writeFileSync(`static${path}`, data[1][1], 'base64');
+
+	await dbOpeartions.images.create({
+		name: data[2][1],
+		alt: data[0][1],
+		url: path
+	});
+};
+
+const deleteImageAction: Action = async ({ request }) => {
+	const data = [...(await request.formData())];
+	const image = await dbOpeartions.images.getOne({ id: data[0][1] });
+	unlinkSync(`static/${image.url}`);
+
+	await dbOpeartions.images.delete({ id: image.id });
+};
+
 const dbActions = {
 	announcements: {
 		create: factoryCreateAction('announcements'),
@@ -59,8 +90,8 @@ const dbActions = {
 		update: factoryUpdateAction('users')
 	},
 	images: {
-		create: factoryCreateAction('images'), // TODO: agregar la logica de guardado del archivo
-		delete: factoryDeleteAction('images')
+		create: uploadImageAction,
+		delete: deleteImageAction
 	},
 	pages: {
 		create: factoryCreateAction('pages'),
@@ -69,7 +100,7 @@ const dbActions = {
 	},
 	files: {
 		create: uploadFileAction,
-		delete: factoryDeleteAction('files')
+		delete: deleteFileAction
 	},
 	menus: {
 		create: factoryCreateAction('menus'),

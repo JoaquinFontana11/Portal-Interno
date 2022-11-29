@@ -4,8 +4,7 @@
 	import type { PageData } from './$types';
 	import AdminForm from '$lib/components/admin/AdminForm.svelte';
 	import AdminButton from '$lib/components/admin/AdminButton.svelte';
-
-	import { validateInputText, validateInputFileImage } from '$lib/components/inputs/validators';
+	import { validateInputText, validateEmptyInput } from '$lib/components/inputs/validators';
 	import AdminModalConfirm from '$lib/components/modals/AdminModalConfirm.svelte';
 	import AdminList from '$lib/components/admin/list/AdminList.svelte';
 	import AdminListRowImage from '$lib/components/admin/list/rows/AdminListRowImage.svelte';
@@ -32,78 +31,11 @@
 		}
 	];
 
-	const validateInputs = (data: any) => {
-		if (validateInputFileImage(data[1].value).status && validateInputText(data[1].value).status) {
+	const validators = (data: any) => {
+		if (validateEmptyInput(data[0][1]).status && validateInputText(data[0][1]).status) {
 			return { status: true, message: 'Se subio correctamente' };
 		} else {
 			return { status: false, message: 'Alguno de los datos ingresados es incorrecto' };
-		}
-	};
-
-	// const imageSubmit = async (e: CustomEvent) => {
-	// 	console.log(e.detail);
-	// 	if (loading) return;
-
-	// 	const { data } = e.detail;
-	// 	const files = data[0].value;
-
-	// 	// if (!files[0].type.includes('image'))
-	// 	// 	throw new Error('No podes subir algo que no sea una imagen');
-
-	// 	loading = true;
-
-	// 	messageSubmit = validateInputs(data);
-	// 	if (!messageSubmit.status) {
-	// 		loading = false;
-	// 		return (modalConfirm = true);
-	// 	}
-
-	// 	const reader = new FileReader();
-	// 	reader.readAsDataURL(files[0]);
-	// 	reader.onload = async (e) => {
-	// 		const target = e.target as FileReader;
-	// 		const fileReaderResult = target.result as string;
-	// 		const imgData = fileReaderResult.split(',');
-	// 		const body = {
-	// 			url: imgData[1],
-	// 			alt: data[1].value,
-	// 			name: files[0].name
-	// 		};
-	// 		modalConfirm = true;
-	// 		loading = false;
-	// 		console.log(body);
-	// 		// try {
-	// 		// 	await fetch(`/api/image`, {
-	// 		// 		method: 'POST',
-	// 		// 		headers: {
-	// 		// 			'Content-Type': 'application/json',
-	// 		// 			Accept: 'application/json'
-	// 		// 		},
-	// 		// 		body: JSON.stringify(body)
-	// 		// 	});
-	// 		// 	modalConfirm = true;
-	// 		// 	// location.reload();
-	// 		// } catch (err) {
-	// 		// 	console.log('asdasd', err);
-	// 		// } finally {
-	// 		// 	loading = false;
-	// 		// }
-	// 	};
-	// };
-
-	const deleteImage = async (e: CustomEvent) => {
-		try {
-			await fetch(`/api/image/${e.detail.id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json'
-				}
-			});
-		} catch (err) {
-			console.log(err);
-		} finally {
-			location.href = location.href;
 		}
 	};
 </script>
@@ -130,7 +62,12 @@
 				{components}
 				submitMessage="Subir imagen"
 				{loading}
-				on:custom-submit={imageSubmit}
+				action="create"
+				{validators}
+				on:validation-end={(e) => {
+					messageSubmit = e.detail;
+					modalConfirm = true;
+				}}
 			/>
 		{/if}
 	</div>
