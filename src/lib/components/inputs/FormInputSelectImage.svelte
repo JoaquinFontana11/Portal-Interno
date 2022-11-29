@@ -70,7 +70,7 @@
 		>
 		{#if loadImage}
 			<div class="flex flex-row gap-4">
-				<span class="flex">{imageSelected.alt_image}</span>
+				<span class="flex italic text-sm text-gray-500 pt-1">{imageSelected.alt_image}</span>
 				<img src={imageSelected.src_image} alt={imageSelected.alt_image} class="h-auto w-auto" />
 			</div>
 		{/if}

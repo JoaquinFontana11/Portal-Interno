@@ -46,7 +46,6 @@
 		dispatch('validation-end', validators([...formData]));
 
 		if (!validators([...formData]).status) return;
-
 		await fetch(`?/${action}`, {
 			method: 'POST',
 			body: formData

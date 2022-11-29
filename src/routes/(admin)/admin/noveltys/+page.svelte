@@ -15,10 +15,6 @@
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
 
-	const optionsPage = JSON.parse(data.pages).map((page) => {
-		return { value: page.id, name: page.title };
-	});
-
 	const components: IComponent[] = [
 		{
 			type: 'select',
@@ -33,7 +29,7 @@
 		{
 			type: 'select-image',
 			label: 'Imagen',
-			name: 'image',
+			name: 'image_id',
 			value: '',
 			images: JSON.parse(data.images)
 		},

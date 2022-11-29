@@ -118,21 +118,21 @@
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
 		{#if list}
 			<AdminList
-			headers={['Imagen', 'Nombre', 'Texto alternativo']}
-			data={JSON.parse(data.images)}
-			caption="Imagenes"
-			actions={['delete']}
-			customRow={AdminListRowImage}
-		/>
+				headers={['Imagen', 'Nombre', 'Texto alternativo']}
+				data={JSON.parse(data.images)}
+				caption="Imagenes"
+				actions={['delete']}
+				customRow={AdminListRowImage}
+			/>
 		{:else}
-		<AdminForm
-			title="Formulario imagenes"
-			{components}
-			submitMessage="Subir imagen"
-			{loading}
-			on:custom-submit={imageSubmit}
-		/>
-		<!-- {/if} -->
+			<AdminForm
+				title="Formulario imagenes"
+				{components}
+				submitMessage="Subir imagen"
+				{loading}
+				on:custom-submit={imageSubmit}
+			/>
+		{/if}
 	</div>
 	<div>
 		{#if modalConfirm}
