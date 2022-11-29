@@ -1,7 +1,5 @@
 <script lang="ts">
 	import {
-		Server,
-		ChartPie,
 		Document,
 		Newspaper,
 		Photograph,
@@ -58,7 +56,7 @@
 	];
 </script>
 
-<aside class="h-screen w-56 fixed bg-gray-50 dark:bg-gray-800 shadow-md z-10" aria-label="Sidebar">
+<aside class="h-screen w-56 fixed bg-gray-50 dark:bg-gray-800 z-50 shadow-lg shadow-[#999]">
 	<div class=" overflow-y-auto py-4 px-3 h-full">
 		<ul class="space-y-2 h-full">
 			{#each links as link}

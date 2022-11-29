@@ -8,7 +8,7 @@
 	const menus = JSON.parse(data.menus)
 		.filter((menu) => menu.active)
 		.map((menu) => {
-			menu.submenus = menu.submenus.filter((submenu) => submenu.active);
+			menu.submenus = menu.submenus?.filter((submenu) => submenu.active);
 			menu.drop = false;
 			return menu;
 		});

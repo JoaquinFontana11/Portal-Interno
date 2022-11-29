@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
 		AllSubmenus.forEach((submenu) => {
 			if (submenu.parent_id == menu.id) submenus.push(submenu);
 		});
-		menu.submenus = submenus;
+		if (submenus.length) menu.submenus = submenus;
 		return menu;
 	});
 	return {
