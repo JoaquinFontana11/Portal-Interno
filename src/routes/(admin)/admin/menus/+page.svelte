@@ -68,7 +68,8 @@
 			type: 'text',
 			label: 'Nombre',
 			name: 'name',
-			value: ''
+			value: '',
+			required: true
 		},
 		{
 			type: 'select',
@@ -106,6 +107,13 @@
 				{ value: true, name: 'SI' },
 				{ value: false, name: 'No' }
 			]
+		},
+		{
+			type: 'text',
+			label: 'Descripcion',
+			name: 'description',
+			value: '',
+			required: false
 		}
 	];
 

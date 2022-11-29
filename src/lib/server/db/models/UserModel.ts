@@ -9,6 +9,7 @@ interface userAttributes {
 	lastname: string;
 	username: string;
 	email: string;
+	password: string;
 	role: string;
 	photo_id?: number;
 }
@@ -25,6 +26,7 @@ class User extends Model<userAttributes, userInput> implements userAttributes {
 	public name!: string;
 	public lastname!: string;
 	public username!: string;
+	public password!: string;
 	public email!: string;
 	public role!: string;
 	public photo_id!: number;
@@ -54,6 +56,11 @@ User.init(
 		email: {
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		password: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			defaultValue: '123'
 		},
 		role: {
 			type: DataTypes.STRING,
