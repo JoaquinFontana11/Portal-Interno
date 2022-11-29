@@ -3,14 +3,8 @@ import type { Actions, Action } from './$types';
 import jwt from 'jsonwebtoken';
 import { USER_APP, PASSWORD, JWT_PRIVATE_KEY, NODE_ENV } from '$env/static/private';
 
-console.log(USER_APP, PASSWORD, JWT_PRIVATE_KEY, NODE_ENV);
-console.log(process.env);
-
 const login: Action = async ({ cookies, request }) => {
 	const data = await request.formData();
-
-	console.log(data.get('username'), data.get('password'));
-	console.log(USER_APP, PASSWORD);
 
 	if (!data.get('username') || !data.get('password')) return invalid(400, { missing: true });
 
