@@ -226,10 +226,13 @@
 							</li>
 						{/if}
 						<li>
-							<a
-								href="#"
+							<button
+								on:click={async () => {
+									await fetch('/login?/logout', { method: 'POST', body: new FormData() });
+									location.reload();
+								}}
 								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>Salir</a
+								>Salir</button
 							>
 						</li>
 					</ul>

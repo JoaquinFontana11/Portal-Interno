@@ -29,9 +29,15 @@ const login: Action = async ({ cookies, request }) => {
 		maxAge: 60 * 60 * 24 * 30
 	});
 
-	throw redirect(302, '/admin');
+	throw redirect(302, '/');
+};
+
+const logout: Action = async ({ cookies }) => {
+	cookies.delete('jwt');
+	throw redirect(302, '/login');
 };
 
 export const actions: Actions = {
-	login
+	login,
+	logout
 };
