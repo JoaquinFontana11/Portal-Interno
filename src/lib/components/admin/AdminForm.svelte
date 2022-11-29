@@ -10,6 +10,7 @@
 	import FormInputFile from '$lib/components/inputs/FormInputFile.svelte';
 	import FormInputFileImage from '$lib/components/inputs/FormInputFileImage.svelte';
 	import FormInputSelectImage from '../inputs/FormInputSelectImage.svelte';
+	import FormInputBigSelectImage from '../inputs/FormInputBigSelectImage.svelte';
 	import FormEditor from '$lib/components/inputs/FormInputEditor.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 
@@ -100,6 +101,12 @@
 			<FormEditor label={component.label} bind:value={component.value} />
 		{:else if component.type == 'select-image'}
 			<FormInputSelectImage
+				label={component.label}
+				bind:value={component.value}
+				images={component.images}
+			/>
+		{:else if component.type == 'big-select-image'}
+			<FormInputBigSelectImage
 				label={component.label}
 				bind:value={component.value}
 				images={component.images}
