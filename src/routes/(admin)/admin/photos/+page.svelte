@@ -14,6 +14,7 @@
 	let loading = false;
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
+	console.log(data.galleryPhotos);
 
 	const components: IComponent[] = [
 		{
@@ -25,7 +26,7 @@
 		{
 			type: 'big-select-image',
 			label: 'Seleccionar Imagen',
-			name: 'body',
+			name: 'image_id',
 			value: '',
 			images: JSON.parse(data.images)
 		}

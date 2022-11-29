@@ -10,6 +10,10 @@ const factoryCreateAction =
 		data.forEach((e: { name: string; value: any }) => {
 			docData[e[0]] = e[1];
 		});
+		console.log('--------- DATA ---------');
+		console.log(data);
+		console.log('--------- DOCDATA ---------');
+		console.log(docData);
 		await dbOpeartions[model].create(docData);
 	};
 
@@ -117,10 +121,9 @@ const dbActions = {
 		delete: factoryDeleteAction('noveltys'),
 		update: factoryUpdateAction('noveltys')
 	},
-	galleryPhotos: {
-		create: factoryCreateAction('galleryPhotos'),
-		delete: factoryDeleteAction('galleryPhotos'),
-		update: factoryUpdateAction('galleryPhotos')
+	photos: {
+		create: factoryCreateAction('photos'),
+		delete: factoryDeleteAction('photos')
 	},
 	comments: {
 		create: factoryCreateAction('comments'),

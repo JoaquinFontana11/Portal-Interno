@@ -63,6 +63,7 @@
 		// informamos si las valiaciones fueron correctas o no
 		dispatch('validation-end', validators([...formData]));
 
+		console.log('------- FORMDATA -------');
 		console.log([...formData]);
 
 		if (!validators([...formData]).status) return;

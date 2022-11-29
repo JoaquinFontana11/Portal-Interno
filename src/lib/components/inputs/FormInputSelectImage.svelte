@@ -19,29 +19,8 @@
 		imageSelected = images.find((image) => image.id == value);
 	}
 
-	const succes = {
-		input:
-			'bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500',
-		message: 'block text-green-600 dark:text-green-500 mb-2 text-sm font-medium'
-	};
-
-	const error = {
-		input:
-			'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500',
-		message: 'block text-red-600 dark:text-red-500 mb-2 text-sm font-medium'
-	};
-
-	let styleInput =
-		' m-0 focus:outline-none text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-900 flex justify-center inline';
 	let styleMessage = 'hidden';
 	let errorMsg = '';
-	const validateInput = (e: Event) => {
-		({
-			message: errorMsg,
-			inputStyle: styleInput,
-			messageStyle: styleMessage
-		} = validateEmptyInput(value, error, succes));
-	};
 </script>
 
 <div>

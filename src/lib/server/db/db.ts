@@ -140,7 +140,7 @@ const dbOperations = {
 		getAll: getAll(Announcement),
 		getOne: getOne(Announcement)
 	},
-	galleryPhotos: {
+	photos: {
 		create: createOne(GalleryPhoto),
 		delete: deleteMany(GalleryPhoto),
 		update: updateMany(GalleryPhoto),
