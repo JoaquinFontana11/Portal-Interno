@@ -12,6 +12,8 @@ module.exports = {
 				128: '32rem'
 			},
 			backgroundImage: {
+				proyectCard:
+					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/background-proyects-card.svg')",
 				section:
 					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/background.svg')"
 			}

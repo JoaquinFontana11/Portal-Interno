@@ -49,12 +49,14 @@
 	};
 
 	const extraDataSlug = (components) => {
-		const slug = components[0].value
-			.toLowerCase()
-			.replace(/[^a-zA-Z]/g, ' ')
-			.replace(/ /g, '-')
-			.replace(/^(-)/g, '')
-			.replace(/(-)$/g, '');
+		const slug =
+			'/pages/' +
+			components[0].value
+				.toLowerCase()
+				.replace(/[^a-zA-Z]/g, ' ')
+				.replace(/ /g, '-')
+				.replace(/^(-)/g, '')
+				.replace(/(-)$/g, '');
 		return [{ name: 'slug', value: slug }];
 	};
 </script>
