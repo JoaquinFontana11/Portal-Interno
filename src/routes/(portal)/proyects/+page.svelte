@@ -16,7 +16,7 @@
 	<div class="grid grid-cols-4 gap-10 auto-rows-[26rem]">
 		{#each JSON.parse(data.pages) as page}
 			<div
-				class="border shadow-md w-auto flex flex-wrap justify-center relative h-full bg-proyectCard"
+				class="border shadow-md  flex flex-wrap justify-center relative h-full bg-proyectCard max-w-[340px]"
 			>
 				<h1 class="text-center font-semibold text-2xl h-min mt-6">{page.title}</h1>
 				<div class="flex justify-center px-5 max-h-60 w-72">

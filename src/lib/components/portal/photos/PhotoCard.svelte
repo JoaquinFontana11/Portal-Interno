@@ -5,7 +5,7 @@
 	export let big: boolean = false;
 </script>
 
-<div class="flex flex-col p-10 rounded-lg shadow-lg gap-1 h-full max-h-full">
+<div class="flex flex-col p-10 rounded-lg shadow-lg gap-1 h-full max-h-full bg-white">
 	<div class="flex items-center gap-2 mb-5">
 		<img src="/img/test.png" class="w-12 h-12 rounded-full" />
 		<div class="flex flex-col justify-center gap-1">
