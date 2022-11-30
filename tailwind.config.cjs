@@ -13,7 +13,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				proyectCard:
-					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/background-proyects-card.svg')",
+					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/background-proyect-card.svg')",
 				section:
 					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/background.svg')"
 			}

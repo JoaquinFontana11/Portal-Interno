@@ -10,7 +10,7 @@
 	overview="Nuestros Proyectos"
 	config={{
 		titleColor: 'text-gray-900',
-		backgroundColor: 'bg-slate-50'
+		backgroundColor: 'bg-transparent'
 	}}
 >
 	<div class="grid grid-cols-4 gap-10 auto-rows-[26rem]">
@@ -26,7 +26,7 @@
 				<!-- bg-[url('/img/footer.png')] -->
 				<a
 					href={page.slug}
-					class=" z-10 inline-flex items-center justify-end font-medium text-sky-600 dark:text-blue-500 hover:underline relative w-full mt-10 hover:gap-2 duration-75 pr-4"
+					class=" z-10 inline-flex items-center justify-end font-medium text-sky-400 dark:text-blue-500 hover:underline relative w-full mt-10 hover:gap-2 duration-75 pr-4"
 				>
 					Ver todo el proyecto
 					<svg
