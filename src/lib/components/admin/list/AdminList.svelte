@@ -5,13 +5,14 @@
 	export let headers: string[];
 	export let attributes: string[];
 	export let actions: string[] = ['edit', 'delete'];
+	export let deleteAction: string = 'delete';
 	export let caption: string = '';
 	export let customRow: ComponentType | null = null; // podemos pasar una fila customizada si la tabla tiene que ser distinta
 
 	const deleteEvent = async (e: CustomEvent) => {
 		const body = new FormData();
 		body.append('id', e.detail.id);
-		await fetch(`?/delete`, {
+		await fetch(`?/${deleteAction}`, {
 			method: 'POST',
 			body
 		});

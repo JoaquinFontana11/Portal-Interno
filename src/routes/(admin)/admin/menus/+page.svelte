@@ -167,6 +167,7 @@
 				})}
 				caption="Menus"
 				actions={['delete', 'edit']}
+				deleteAction="deleteMenu"
 			/>
 			<br />
 			<AdminList
@@ -179,6 +180,7 @@
 				})}
 				caption="Submenus"
 				actions={['delete', 'edit']}
+				deleteAction="deleteSubmenu"
 			/>
 		{:else}
 			<FormSelect
