@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, Optional, TextDataType } from 'sequelize';
 import sequelizeConnection from '../connection';
 
 // todos los posibles atributos de nuestro modelo
@@ -38,7 +38,7 @@ Page.init(
 			allowNull: false
 		},
 		body: {
-			type: DataTypes.STRING,
+			type: DataTypes.TEXT,
 			allowNull: false
 		},
 		slug: {
