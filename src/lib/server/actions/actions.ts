@@ -39,14 +39,16 @@ const factoryDeleteAction =
 
 const uploadFileAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
-	const extension = data[2][1].split('.').at(-1);
+	const extension = data[3][1].split('.').at(-1);
 
 	const path = `/files/${new Date().getTime()}.${extension}`;
-	writeFileSync(`static${path}`, data[1][1], 'base64');
+	writeFileSync(`static${path}`, data[2][1], 'base64');
+	console.log(data);
 
 	await dbOperations.files.create({
-		name: data[2][1],
+		name: data[3][1],
 		description: data[0][1],
+		group: data[1][1],
 		url: path
 	});
 };

@@ -7,6 +7,7 @@ interface fileAttributes {
 	name: string;
 	url: string;
 	description: string;
+	group: string;
 }
 
 // Define el tipo del objeto  pasado al Model.create de sequlize
@@ -21,6 +22,7 @@ class File extends Model<fileAttributes, fileInput> implements fileAttributes {
 	public name!: string;
 	public url!: string;
 	public description!: string;
+	public group!: string;
 }
 
 // Creamos la tabla del modelo
@@ -40,6 +42,10 @@ File.init(
 			allowNull: false
 		},
 		description: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		group: {
 			type: DataTypes.STRING,
 			allowNull: false
 		}
