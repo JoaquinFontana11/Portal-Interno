@@ -6,13 +6,7 @@
 <div
 	class="grid grid-cols-4 auto-rows-fr grid-flow-dense gap-10 w-5/6 ml-auto mr-auto grid-container"
 >
-	{#each [...photos, ...photos, ...photos, ...photos] as photo, i}
-		<!-- <div
-			class=" bg-sky-300 aspect-square photo-grid"
-			style="background-image: url('{photo.Image.url}'); background-size: cover"
-		>
-			{photo.title}
-		</div> -->
+	{#each photos as photo, i}
 		<div class="photo-grid">
 			<PhotoCard {photo} big={(i + '').endsWith('0') || (i + '').endsWith('9')} />
 		</div>
@@ -20,26 +14,6 @@
 </div>
 
 <style>
-	/* con 4 columns */
-	/* .photo-grid:nth-child(10n + 1),
-	.photo-grid:nth-child(10n + 10) {
-		grid-area: span 2 / span 2;
-	}
-	.photo-grid:nth-child(10n + 8) {
-		grid-column: 1;
-	}
-	.photo-grid:nth-child(10n + 9) {
-		grid-column: 2;
-	} */
-
-	/* con 3 columns */
-	/* .photo-grid:nth-child(6n + 1),
-	.photo-grid:nth-child(6n + 6) {
-		grid-area: span 2 / span 2;
-	}
-	.photo-grid:nth-child(6n + 5) {
-		grid-column: 1;
-	} */
 	@media screen and (max-width: 64em) {
 		/* 640- */
 		.grid-container {

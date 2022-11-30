@@ -11,6 +11,7 @@ import Comment from './models/CommentModel';
 import Announcement from './models/AnnouncementModel';
 import UserCloseAnnouncement from './models/UserCloseAnnouncementModel';
 import File from './models/FileModel';
+import Like from './models/LikeModel';
 
 try {
 	// chequeamos la conexion con la base
@@ -27,6 +28,7 @@ try {
 	Announcement.sync({ alter: true });
 	File.sync({ alter: true });
 	UserCloseAnnouncement.sync({ alter: true });
+	Like.sync({ alter: true });
 
 	console.log('La conexion con la base fue un exito');
 } catch (err) {
@@ -160,6 +162,13 @@ const dbOperations = {
 		update: updateMany(UserCloseAnnouncement),
 		getAll: getAll(UserCloseAnnouncement, [User, Announcement], ['User', 'Announcement']),
 		getOne: getOne(UserCloseAnnouncement, [User, Announcement], ['User', 'Announcement'])
+	},
+	likes: {
+		create: createOne(Like),
+		delete: deleteMany(Like),
+		update: updateMany(Like),
+		getAll: getAll(Like, [User, GalleryPhoto], ['User', 'GalleryPhoto']),
+		getOne: getOne(Like, [User, GalleryPhoto], ['User', 'GalleryPhoto'])
 	}
 };
 

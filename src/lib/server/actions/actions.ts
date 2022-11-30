@@ -10,10 +10,6 @@ const factoryCreateAction =
 		data.forEach((e: { name: string; value: any }) => {
 			docData[e[0]] = e[1];
 		});
-		console.log('--------- DATA ---------');
-		console.log(data);
-		console.log('--------- DOCDATA ---------');
-		console.log(docData);
 		await dbOperations[model].create(docData);
 	};
 
@@ -107,6 +103,15 @@ const uploadUserPhotoAction: Action = async ({ request }) => {
 	await dbOperations.users.update({ photo_id: newImage.id }, { id: user.id });
 };
 
+// const createCommentAction: Action = async ({ request }) => {
+// 	const data = [...(await request.formData())];
+// 	console.log(data);
+
+// 	await dbOperations.comments.create({
+// 		content
+// 	})
+// };
+
 const dbActions = {
 	announcements: {
 		create: factoryCreateAction('announcements'),
@@ -153,8 +158,11 @@ const dbActions = {
 	},
 	comments: {
 		create: factoryCreateAction('comments'),
-		delete: factoryDeleteAction('comments'),
-		update: factoryUpdateAction('comments')
+		delete: factoryDeleteAction('comments')
+	},
+	likes: {
+		create: factoryCreateAction('likes'),
+		delete: factoryDeleteAction('likes')
 	},
 	announcementClosed: {
 		create: factoryCreateAction('announcementClosed'),
