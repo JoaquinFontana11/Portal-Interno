@@ -4,18 +4,19 @@
 
 	export let data: PageData;
 	const page = JSON.parse(data.page);
-	console.log(page);
 </script>
 
 <Section
 	title={page.title}
 	overview=""
 	config={{
-		titleColor: 'text-gray-900',
+		titleColor: 'text-sky-400',
 		backgroundColor: 'bg-transparent'
 	}}
 >
-	<div class="text-lg flex flex-col gap-3">
+	<div
+		class="bg-neutral-50  rounded-lg shadow-lg p-10 gap-10 relative z-10 w-11/12 m-auto h-11/12 mt-10 mb-10"
+	>
 		{@html page.body}
 	</div>
 </Section>
