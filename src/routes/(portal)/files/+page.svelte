@@ -6,6 +6,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import AdminSearch from '$lib/components/admin/AdminSearch.svelte';
+	import SelectGroups from '$lib/components/portal/files/SelectGroups.svelte';
 
 	export let data: PageData;
 	const files = JSON.parse(data.files).map((f) => {
@@ -15,6 +16,7 @@
 	console.log(files);
 
 	let filterFiles = '';
+	let filterGroups = '';
 	const iconAndColor: any = {
 		pdf: [Document, 'border-rose-300 hover:border-rose-500'],
 		doc: [Document, 'border-blue-300 hover:border-blue-500'],
@@ -35,13 +37,14 @@
 	}}
 >
 	<div class="bg-neutral-50 rounded-lg shadow-lg p-10 flex flex-col z-10 relative">
-		<div class="w-96 relative self-end">
+		<div class="w-96 relative self-end flex gap-3">
+			<SelectGroups bind:value={filterGroups} />
 			<AdminSearch placeholder="Ingrese nombre de archivo..." bind:value={filterFiles} />
 		</div>
 		<ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
 			{#each files.filter((file) => file.name
-					.toLowerCase()
-					.includes(filterFiles)) as file (file._id)}
+						.toLowerCase()
+						.includes(filterFiles) && (file.group == filterGroups || filterGroups == '')) as file (file.id)}
 				<div in:fade={{ duration: 300 }} animate:flip={{ duration: 300 }}>
 					<li class="pb-3 sm:pb-4 pt-3 hover:transition hover:-translate-y-1 duration-75">
 						<div class="flex items-center space-x-4">
@@ -83,6 +86,7 @@
 									aria-controls="accordion-flush-body-1"
 									on:click={(e) => {
 										file.drop = !file.drop;
+										console.log('AAAAAAAAAAAAAAAAAAAAA');
 									}}
 								>
 									{#if file.drop}
