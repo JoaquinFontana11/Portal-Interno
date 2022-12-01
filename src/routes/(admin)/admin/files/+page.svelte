@@ -28,6 +28,21 @@
 			name: 'description',
 			value: '',
 			required: true
+		},
+		{
+			type: 'select',
+			label: 'Grupo',
+			name: 'group',
+			value: '',
+			required: true,
+			options: [
+				{ value: 'DPMA', name: 'DPMA' },
+				{ value: 'IOP', name: 'IOP' },
+				{ value: 'PMO', name: 'PMO' },
+				{ value: 'MC', name: 'MC' },
+				{ value: 'SP', name: 'SP' },
+				{ value: 'CYC', name: 'CYC' }
+			]
 		}
 	];
 
@@ -50,8 +65,8 @@
 	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
 		{#if list}
 			<AdminList
-				headers={['Nombre', 'Descripcion', 'Extension']}
-				attributes={['name', 'description', 'extension']}
+				headers={['Nombre', 'Descripcion', 'Extension', 'Grupo']}
+				attributes={['name', 'description', 'extension', 'group']}
 				data={JSON.parse(data.files).map((file) => {
 					return {
 						id: file.id,

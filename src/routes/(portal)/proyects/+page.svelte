@@ -22,8 +22,6 @@
 				<div class="flex justify-center px-5 max-h-60 w-72">
 					<span class="break-words truncate">{@html page.body}</span>
 				</div>
-				<!-- <div class="w-full h-48 absolute top-0 left-0 -z-1 bg-proyectCard" /> -->
-				<!-- bg-[url('/img/footer.png')] -->
 				<a
 					href={page.slug}
 					class=" z-10 inline-flex items-center justify-end font-medium text-sky-400 dark:text-blue-500 hover:underline relative w-full mt-10 hover:gap-2 duration-75 pr-4"

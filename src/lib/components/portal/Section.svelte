@@ -6,6 +6,7 @@
 		titleColor: 'text-gray-900',
 		backgroundColor: 'bg-white'
 	};
+	console.log('SECCION');
 </script>
 
 <section class={`h-auto w-full p-10 ${config.backgroundColor} `}>
