@@ -25,7 +25,7 @@ const login: Action = async ({ cookies, request }) => {
 		path: '/',
 		httpOnly: true,
 		sameSite: 'strict',
-		secure: NODE_ENV === 'production',
+		secure: false, // NODE_ENV === 'production'
 		maxAge: 60 * 60 * 24 * 30
 	});
 
