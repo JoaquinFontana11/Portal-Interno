@@ -20,7 +20,7 @@
 			>En este lugar encotraras informacion y archivos que pueden ser de tu interes</span
 		>
 	</div>
-	<div class=" grid grid-cols-2 grid-rows-2 text-lg px-10">
+	<!-- <div class=" grid grid-cols-2 grid-rows-2 text-lg px-10">
 		<div class="flex justify-center">
 			<img src="/img/teamWork.jpg" alt="team work" class="h-2/3 w-1/2" />
 		</div>
@@ -40,7 +40,7 @@
 		<div class="flex justify-center">
 			<img src="/img/files.jpg" alt="team work" class="h-2/3 w-1/2" />
 		</div>
-	</div>
+	</div> -->
 </Section>
 <Section
 	title="Zonas de interes"
@@ -49,19 +49,9 @@
 		backgroundColor: 'bg-gray-100'
 	}}
 >
-	<div class="grid grid-cols-3 gap-10 auto-rows-[20rem]">
-		<Card href="/proyects" icon={DocumentDuplicate} title="Proyectos" summary="Proyectos Activos" />
-		<Card
-			href="/files"
-			icon={FolderDownload}
-			title="Recursos"
-			summary="Archivos que podrian ser de tu interes"
-		/>
-		<Card
-			href="/"
-			icon={Calendar}
-			title="Calendario"
-			summary="Un calendario con todo lo que se viene"
-		/>
+	<div class="grid grid-cols-3 gap-10 auto-rows-[12rem] justify-items-center">
+		<Card href="/proyects" icon={DocumentDuplicate} title="Proyectos" />
+		<Card href="/files" icon={FolderDownload} title="Recursos" />
+		<Card href="/" icon={Calendar} title="Calendario" />
 	</div>
 </Section>
