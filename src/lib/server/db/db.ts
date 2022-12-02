@@ -146,8 +146,8 @@ const dbOperations = {
 		create: createOne(GalleryPhoto),
 		delete: deleteMany(GalleryPhoto),
 		update: updateMany(GalleryPhoto),
-		getAll: getAll(GalleryPhoto, Image, ['Image']),
-		getOne: getOne(GalleryPhoto, Image, ['Image'])
+		getAll: getAll(GalleryPhoto, [Image, User], ['Image', 'User']),
+		getOne: getOne(GalleryPhoto, [Image, User], ['Image', 'User'])
 	},
 	comments: {
 		create: createOne(Comment),

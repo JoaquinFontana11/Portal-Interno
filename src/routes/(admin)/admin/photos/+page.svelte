@@ -14,7 +14,7 @@
 	let loading = false;
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
-	console.log(data.galleryPhotos);
+	const user = JSON.parse(data.user);
 
 	const components: IComponent[] = [
 		{
@@ -39,8 +39,8 @@
 		}
 	};
 
-	const deletePhoto = (e: CustomEvent) => {
-		console.log(e.detail);
+	const extraDataUser = (components) => {
+		return [{ name: 'user_id', value: user.id }];
 	};
 </script>
 
@@ -57,7 +57,6 @@
 			<AdminList
 				headers={['Titulo', 'Imagen']}
 				data={JSON.parse(data.galleryPhotos)}
-				on:delete-doc={deletePhoto}
 				caption="Fotos de galeria"
 				actions={['delete']}
 				customRow={AdminListRowPhoto}
@@ -70,6 +69,7 @@
 				{loading}
 				action="create"
 				{validators}
+				addExtraData={extraDataUser}
 				on:validation-end={(e) => {
 					messageSubmit = e.detail;
 					modalConfirm = true;

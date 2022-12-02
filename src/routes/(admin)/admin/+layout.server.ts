@@ -22,4 +22,8 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 		throw error(401, {
 			message: 'No tenes los permisos para acceder a esta seccion 😮‍💨'
 		});
+
+	return {
+		user: JSON.stringify(user)
+	};
 };

@@ -16,6 +16,11 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	photo.comments = comments;
 	photo.likes = likes.filter((like) => like.photo_id == params.id);
+
+	// cargamos la imagen del usuario que publico la foto
+	const userImage = await dbOpeartions.images.getOne({ id: photo.User.photo_id });
+	photo.User.Image = userImage;
+
 	return { photo: JSON.stringify(photo) };
 };
 

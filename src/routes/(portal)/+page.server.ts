@@ -2,10 +2,13 @@ import type { PageServerLoad } from './$types';
 import dbOpeartions from '$lib/server/db/db';
 
 export const load: PageServerLoad = async () => {
+	const noveltys = await dbOpeartions.noveltys.getAll();
+
 	const photos = await Promise.all(
 		(
 			await dbOpeartions.photos.getAll()
 		).map(async (photo) => {
+			// cargamos comentarios y likes
 			const comments = await Promise.all(
 				(
 					await dbOpeartions.comments.getAll({ photo_id: photo.id })
@@ -27,5 +30,5 @@ export const load: PageServerLoad = async () => {
 		})
 	);
 
-	return { photos: JSON.stringify(photos) };
+	return { noveltys: JSON.stringify(noveltys), photos: JSON.stringify(photos) };
 };

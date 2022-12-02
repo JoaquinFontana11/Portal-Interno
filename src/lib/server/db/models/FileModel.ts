@@ -47,7 +47,8 @@ File.init(
 		},
 		group: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: false,
+			defaultValue: 'DPMA'
 		}
 	},
 	{

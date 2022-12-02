@@ -5,14 +5,14 @@
 	export let big: boolean = false;
 </script>
 
-<div class="flex flex-col p-10 rounded-lg shadow-lg gap-1 h-full max-h-full bg-white">
+<div class="flex flex-col p-5 rounded-lg shadow-lg gap-1 w-full h-full max-h-full bg-white ">
 	<div class="flex items-center gap-2 mb-5">
-		<img src="/img/test.png" class="w-12 h-12 rounded-full" />
+		<img src={photo.User.Image.url} class="w-12 h-12 rounded-full" />
 		<div class="flex flex-col justify-center gap-1">
 			{#if !big}
 				<span
 					class={`"text-medium font-medium tracking-tight leading-none text-gray-500  dark:text-white"`}
-					>nombre de usuario</span
+					>{photo.User.username}</span
 				>
 				<h1
 					class="text-xl font-extrabold tracking-tight leading-none text-gray-900  dark:text-white"
@@ -21,7 +21,7 @@
 				</h1>
 			{:else}
 				<span class="text-xl font-medium leading-none text-gray-800  dark:text-white"
-					>nombre de usuario</span
+					>{photo.User.username}</span
 				>
 			{/if}
 		</div>
@@ -59,7 +59,7 @@
 			/>
 		</button>
 	</div>
-	{#if big && JSON.stringify(photo.comments).length != 0}
+	{#if big && photo.comments.length != 0}
 		<div class="flex items-center gap-2 bro">
 			<img src={photo.comments[0].User.Image.url} class="w-10 h-10 rounded-full" />
 			<div class="flex flex-col">
@@ -68,5 +68,8 @@
 			</div>
 		</div>
 		<span>. . .</span>
+	{/if}
+	{#if big && photo.comments.length == 0}
+		<span> Se el primer comentario!</span>
 	{/if}
 </div>
