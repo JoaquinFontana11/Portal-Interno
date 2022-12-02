@@ -15,6 +15,8 @@
 			fileReader.onload = (e) => resolve(fileReader.result as string);
 			fileReader.readAsDataURL(file);
 		});
+		console.log('ARchivo Base 64');
+		console.log(base64.split(',')[1]);
 		return base64.split(',')[1];
 	};
 
@@ -25,15 +27,18 @@
 		formData.append('name', files[0].name);
 		formData.append('user', user.id);
 
+		console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAa');
+		formData.forEach((value, key) => console.log(`KEY: ${key} , VALUE: ${value}`));
+
 		await fetch('?/uploadPhoto', {
 			method: 'POST',
 			body: formData
 		});
 
-		location.reload();
+		// location.reload();
 	};
 
-	console.log(user);
+	// console.log(user);
 </script>
 
 <Section

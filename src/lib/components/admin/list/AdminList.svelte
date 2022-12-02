@@ -9,6 +9,9 @@
 	export let caption: string = '';
 	export let customRow: ComponentType | null = null; // podemos pasar una fila customizada si la tabla tiene que ser distinta
 
+	console.log(data);
+	console.log(caption);
+
 	const deleteEvent = async (e: CustomEvent) => {
 		const body = new FormData();
 		body.append('id', e.detail.id);
@@ -40,13 +43,17 @@
 	<tbody>
 		{#each data as doc}
 			{#if !customRow}
-				<AdminListRow
-					{doc}
-					{attributes}
-					on:modify-doc={modifyEvent}
-					on:delete-doc={deleteEvent}
-					{actions}
-				/>
+				{#if caption == 'Paginas' && doc.slug[0] == '/'}
+					<AdminListRow
+						{doc}
+						{attributes}
+						on:modify-doc={modifyEvent}
+						on:delete-doc={deleteEvent}
+						{actions}
+					/>
+				{:else}
+					<AdminListRow {doc} {attributes} on:modify-doc={modifyEvent} actions={['edit']} />
+				{/if}
 			{:else}
 				<svelte:component
 					this={customRow}
