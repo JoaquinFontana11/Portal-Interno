@@ -105,7 +105,12 @@
 							<span class="font-light text-gray-500">{noveltys[i].date.split('T')[0]}</span>
 							<h1 class=" font-semibold text-2xl h-min ">{noveltys[i].Page.title}</h1>
 							<div class="flex  h-full w-72">
-								<span class="break-words truncate">{@html noveltys[i].Page.body}</span>
+								<span class="break-words truncate"
+									>{@html noveltys[i].Page.body.replace(
+										/<img/g,
+										'<img style="display: none;"'
+									)}</span
+								>
 							</div>
 						</div>
 					</a>
