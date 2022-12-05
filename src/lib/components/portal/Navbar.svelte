@@ -130,7 +130,7 @@
 													{#each menu.submenus.filter((submenu, i) => i % 2 == 0) as submenu}
 														<li>
 															<a
-																href={submenu.slug}
+																href={submenu.Page.slug}
 																class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
 															>
 																<p class="font-semibold text-sm text-gray-700">{submenu.name}</p>
@@ -145,7 +145,7 @@
 													{#each menu.submenus.filter((submenu, i) => i % 2 != 0) as submenu}
 														<li>
 															<a
-																href={submenu.href}
+																href={submenu.Page.slug}
 																class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
 															>
 																<p class="font-semibold text-sm text-gray-700">{submenu.name}</p>
