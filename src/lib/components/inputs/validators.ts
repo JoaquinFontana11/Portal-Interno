@@ -21,7 +21,7 @@ const factoryValidators = (type: string | null = null) => {
 	) => {
 		let message = '';
 		if (value === '') message = 'Debe completar este campo';
-		if (type == 'text' && /[|°¬!#$%&@()=?'¡¿´¨+*~}{[^}_-]/.test(value))
+		if (type == 'text' && /[°¬!#$%&@=?'¡¿´¨+*~}{[^}_-]/.test(value))
 			message = 'No se admiten caracteres especiales';
 		if (type == 'email' && /[|°¬!#$%&()=?'¡¿´¨+*~}{[^}_]/.test(value))
 			message = 'No se admiten caracteres especiales';
