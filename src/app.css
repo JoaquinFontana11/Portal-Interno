@@ -32,3 +32,15 @@
 	margin-right: auto;
 	max-width: 50%;
 }
+
+.page-content h1,
+.cl-content h1 {
+	@apply text-sky-500;
+	@apply text-3xl;
+}
+
+.page-content h2,
+.cl-content h2 {
+	@apply text-sky-500;
+	@apply text-2xl;
+}
