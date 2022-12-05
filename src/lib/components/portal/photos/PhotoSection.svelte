@@ -84,7 +84,7 @@
 		</button>
 	</div>
 	{#if makeComment}
-		<div class="flex gap-3">
+		<div class="flex gap-3 mb-5">
 			<input
 				type="text"
 				placeholder="Escribi tu comentario! 🤓"

@@ -8,7 +8,7 @@
 </script>
 
 <a
-	class="border shadow-md flex flex-col gap-5 relative h-full p-5 justify-center bg-white duration-75 hover:-translate-y-1 rounded-md aspect-square"
+	class="border shadow-md flex flex-col gap-5 relative w-50 h-50 p-5 justify-center bg-white duration-75 hover:-translate-y-1 rounded-md aspect-square"
 	{href}
 >
 	<!-- <img src={novelty.Image.url} /> -->
@@ -18,12 +18,12 @@
 		</div>
 
 		<h1 class=" font-semibold text-2xl h-min">{title}</h1>
-		{#if title == 'Calendario'}
+		<!-- {#if title == 'Calendario'}
 			<div class="flex flex-row gap-1 absolute bottom-5">
 				<img src="/img/pala.png" alt="miedo" class="h-6" />
 				<img src="/img/pala.png" alt="miedo" class="h-6" />
 				<img src="/img/pala.png" alt="miedo" class="h-6" />
 			</div>
-		{/if}
+		{/if} -->
 	</div>
 </a>

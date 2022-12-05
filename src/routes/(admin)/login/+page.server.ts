@@ -25,7 +25,7 @@ const login: Action = async ({ cookies, request }) => {
 		path: '/',
 		httpOnly: true,
 		sameSite: 'strict',
-		secure: NODE_ENV === 'production',
+		secure: false, // deberia ser true, pero a veces la vida no es true. Si las personas fueran booleans estaria lleno de false
 		maxAge: 60 * 60 * 24 * 30
 	});
 

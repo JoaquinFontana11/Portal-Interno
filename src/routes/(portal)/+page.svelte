@@ -13,9 +13,7 @@
 
 <header class="h-[600px] max-w-screen bg-home bg-cover flex items-center justify-center">
 	<div class="relative">
-		<h1
-			class="mb-4 text-6xl font-extrabold tracking-tight leading-none text-sky-500 dark:text-white"
-		>
+		<h1 class="mb-4 text-6xl font-extrabold tracking-tight leading-none text-white ">
 			Portal Interno de la DPMA
 		</h1>
 		<span
@@ -25,15 +23,15 @@
 	</div>
 </header>
 <Section
-	title="Introduccion"
+	title="Nuevo portal Interno!"
 	config={{
-		titleColor: 'text-sky-400 ',
-		backgroundColor: 'bg-white'
+		titleColor: 'text-gray-900 ',
+		backgroundColor: 'bg-gradientWhite'
 	}}
 >
-	<h1 class="text-gray-800 text-2xl text-center font-semibold mb-6 col-span-2">
+	<!-- <h1 class="text-gray-800 text-2xl text-center font-semibold mb-6 col-span-2">
 		Nuevo Portal Interno
-	</h1>
+	</h1> -->
 	<div class="mb-10">
 		<span class="text-center block text-gray-700">Bienvenido al nuevo portal Interno!!</span>
 		<span class="text-center block  text-gray-700"
@@ -61,15 +59,15 @@
 			<img src="/img/files.jpg" alt="team work" class="h-2/3 w-1/2" />
 		</div>
 	</div> -->
-</Section>
+	<!-- </Section>
 <Section
 	title="Zonas de interes"
 	config={{
 		titleColor: 'text-gray-900',
 		backgroundColor: 'bg-gray-100'
 	}}
->
-	<div class="grid grid-cols-3 gap-10 auto-rows-[12rem] justify-items-center">
+> -->
+	<div class="flex gap-10 justify-center">
 		<Card href="/proyects" icon={DocumentDuplicate} title="Proyectos" />
 		<Card href="/files" icon={FolderDownload} title="Recursos" />
 		<Card href="/" icon={Calendar} title="Calendario" />
@@ -81,11 +79,11 @@
 	overview="Enterarte de lo ultimo de la DPMA"
 	config={{
 		titleColor: 'text-gray-900',
-		backgroundColor: 'bg-[url("/img/fondo.svg")]'
+		backgroundColor: 'bg-gradientSky'
 	}}
 >
-	<div class="flex justify-center gap-2 w-2/3 ml-auto mr-auto">
-		<div class="flex flex-col gap-2 justify-center items-center h-auto grow-0">
+	<div class="flex justify-center gap-4 w-2/3 ml-auto mr-auto">
+		<div class="flex flex-col gap-4 justify-center items-center h-auto grow-0">
 			{#if photos[0]}
 				<PhotoCard photo={photos[0]} />
 			{/if}
@@ -95,11 +93,11 @@
 			{/if}
 		</div>
 
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col gap-4">
 			{#each [0, 1] as i}
 				{#if noveltys[i]}
 					<a
-						class="flex flex-col p-10 rounded-lg shadow-lg gap-1 h-full max-h-full bg-white max-w-[640px]"
+						class="flex flex-col p-10 rounded-lg shadow-lg gap-1 h-full max-h-full bg-white max-w-[640px] uration-75 hover:-translate-y-1"
 						href={`/noveltys/${noveltys[i].id}`}
 					>
 						<img src={noveltys[i].Image.url} />

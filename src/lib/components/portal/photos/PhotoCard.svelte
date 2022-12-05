@@ -5,7 +5,9 @@
 	export let big: boolean = false;
 </script>
 
-<div class="flex flex-col p-5 rounded-lg shadow-lg gap-1 w-full h-full max-h-full bg-white ">
+<div
+	class="flex flex-col p-5 rounded-lg shadow-lg gap-1 w-full h-full max-h-full bg-white duration-75 hover:-translate-y-1"
+>
 	<div class="flex items-center gap-2 mb-5">
 		<img src={photo.User.Image.url} class="w-12 h-12 rounded-full" />
 		<div class="flex flex-col justify-center gap-1">

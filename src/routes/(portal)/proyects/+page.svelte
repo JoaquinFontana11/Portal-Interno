@@ -13,18 +13,19 @@
 		backgroundColor: 'bg-transparent'
 	}}
 >
-	<div class="grid grid-cols-4 gap-10 auto-rows-[26rem]">
+	<div class="grid grid-cols-4 gap-10 auto-rows-[26rem] ">
 		{#each JSON.parse(data.pages) as page}
-			<div
-				class="border shadow-md  flex flex-wrap justify-center relative h-full bg-proyectCard max-w-[340px]"
+			<a
+				class="border shadow-md  flex flex-col gap-10 justify-around relative h-96 bg-proyectCard max-w-[340px] duration-75 hover:-translate-y-1"
+				href={page.slug}
 			>
-				<h1 class="text-center font-semibold text-2xl h-min mt-6">{page.title}</h1>
-				<div class="flex justify-center px-5 max-h-60 w-72">
-					<span class="break-words truncate">{@html page.body}</span>
-				</div>
-				<a
+				<h1 class="text-center font-semibold text-4xl h-min text-gray-700">{page.title}</h1>
+				<!-- <div class="flex justify-center px-5 max-h-60 w-72">
+					<span class="break-words truncate text-gray-500">{@html page.body}</span>
+				</div> -->
+				<!-- <a
 					href={page.slug}
-					class=" z-10 inline-flex items-center justify-end font-medium text-sky-400 dark:text-blue-500 hover:underline relative w-full mt-10 hover:gap-2 duration-75 pr-4"
+					class=" z-10 inline-flex items-center justify-end font-medium  text-sky-400 dark:text-blue-500 hover:underline relative w-full mt-10 hover:gap-2 pr-4"
 				>
 					Ver todo el proyecto
 					<svg
@@ -38,9 +39,9 @@
 							d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
 							clip-rule="evenodd"
 						/></svg
-					>
-				</a>
-			</div>
+					> 
+				</a> -->
+			</a>
 		{/each}
 	</div>
 </Section>
