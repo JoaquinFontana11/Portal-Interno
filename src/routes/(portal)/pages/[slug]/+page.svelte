@@ -17,6 +17,9 @@
 	<div
 		class="bg-neutral-50  rounded-lg shadow-lg p-10 gap-10 relative z-10 w-11/12 m-auto h-11/12 mt-10 mb-10"
 	>
-		{@html page.body}
+		{@html page.body.replace(
+			/<img/g,
+			'<img style="width: 50%; margin-left: auto; margin-right: auto"'
+		)}
 	</div>
 </Section>
