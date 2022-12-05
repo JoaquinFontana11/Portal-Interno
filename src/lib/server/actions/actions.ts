@@ -1,6 +1,7 @@
 import type { Action } from './$types';
 import { writeFileSync, statSync, unlinkSync } from 'fs';
 import dbOperations from '$lib/server/db/db';
+import { NODE_ENV } from '$env/static/private';
 
 const factoryCreateAction =
 	(model: string): Action =>
@@ -38,7 +39,7 @@ const uploadFileAction: Action = async ({ request }) => {
 	const extension = data[3][1].split('.').at(-1);
 
 	const path = `/files/${new Date().getTime()}.${extension}`;
-	writeFileSync(`static${path}`, data[2][1], 'base64');
+	writeFileSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${path}`, data[2][1], 'base64');
 	console.log(data);
 
 	await dbOperations.files.create({
@@ -52,7 +53,7 @@ const uploadFileAction: Action = async ({ request }) => {
 const deleteFileAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
 	const file = await dbOperations.files.getOne({ id: data[0][1] });
-	unlinkSync(`static/${file.url}`);
+	unlinkSync(`${NODE_ENV == 'production' ? 'client' : 'static'}/${file.url}`);
 
 	await dbOperations.files.delete({ id: file.id });
 };
@@ -61,7 +62,7 @@ const uploadImageAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
 
 	const path = `/img/${new Date().getTime()}.png`;
-	writeFileSync(`static${path}`, data[1][1], 'base64');
+	writeFileSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${path}`, data[1][1], 'base64');
 
 	await dbOperations.images.create({
 		name: data[2][1],
@@ -73,7 +74,7 @@ const uploadImageAction: Action = async ({ request }) => {
 const deleteImageAction: Action = async ({ request }) => {
 	const data = [...(await request.formData())];
 	const image = await dbOperations.images.getOne({ id: data[0][1] });
-	unlinkSync(`static${image.url}`);
+	unlinkSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${image.url}`);
 
 	await dbOperations.images.delete({ id: image.id });
 };
@@ -85,7 +86,7 @@ const uploadUserPhotoAction: Action = async ({ request }) => {
 	// Borramos la foto anterior del usuario (si tiene)
 	if (user.Image) {
 		try {
-			unlinkSync(`static${user.Image.url}`);
+			unlinkSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${user.Image.url}`);
 		} catch (err) {
 			console.log('La foto del usuario se elimino manualmente');
 		}
@@ -93,7 +94,7 @@ const uploadUserPhotoAction: Action = async ({ request }) => {
 	}
 	// Creamos la nueva foto
 	const path = `/img/${user.id}-${new Date().getTime()}.png`;
-	writeFileSync(`static${path}`, data[1][1], 'base64');
+	writeFileSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${path}`, data[1][1], 'base64');
 
 	const newImage = await dbOperations.images.create({
 		name: data[2][1],
