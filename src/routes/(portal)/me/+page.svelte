@@ -7,6 +7,7 @@
 
 	const user = JSON.parse(data.user);
 	let fileinput, files;
+	let error = '';
 
 	// transforma una fila en base64
 	const fileToBase64 = async (file) => {
@@ -15,22 +16,31 @@
 			fileReader.onload = (e) => resolve(fileReader.result as string);
 			fileReader.readAsDataURL(file);
 		});
+		console.log('ARchivo Base 64');
+		console.log(base64.split(',')[1].length);
 		return base64.split(',')[1];
 	};
 
 	const onFileSelected = async (e: Event) => {
 		const formData = new FormData();
-		formData.append('alt', `foto de perfil de ${user.username}`);
-		formData.append('image', await fileToBase64(files[0]));
-		formData.append('name', files[0].name);
-		formData.append('user', user.id);
+		const imageBase64 = await fileToBase64(files[0]);
+		if (imageBase64.length < 1000000) {
+			formData.append('alt', `foto de perfil de ${user.username}`);
+			formData.append('image', imageBase64);
+			formData.append('name', files[0].name);
+			formData.append('user', user.id);
 
-		await fetch('?/uploadPhoto', {
-			method: 'POST',
-			body: formData
-		});
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAa');
+			formData.forEach((value, key) => console.log(`KEY: ${key} , VALUE: ${value}`));
 
-		location.reload();
+			await fetch('?/uploadPhoto', {
+				method: 'POST',
+				body: formData
+			});
+			location.reload();
+		} else {
+			error = 'La imagen es muy pesada. Intenta que sea menor a 600KB';
+		}
 	};
 
 	console.log(user);
@@ -66,6 +76,9 @@
 						class="w-6 h-6 text-gray-100 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 					/></button
 				>
+				{#if error}
+					<div class="block text-red-600 dark:text-red-500 mb-2 text-sm font-medium">{error}</div>
+				{/if}
 			</div>
 			<div class="border-l border-sky-300 grow pl-3 ">
 				<p class="mt-3 text-lg font-bold text-gray-500 md:text-xl dark:text-gray-400">

@@ -72,7 +72,8 @@
 						id: file.id,
 						name: file.name.split('.').at(0),
 						extension: file.name.split('.').at(-1),
-						description: file.description
+						description: file.description,
+						group: file.group
 					};
 				})}
 				caption="Archivos"
