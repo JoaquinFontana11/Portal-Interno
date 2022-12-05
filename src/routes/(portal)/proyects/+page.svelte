@@ -13,10 +13,10 @@
 		backgroundColor: 'bg-transparent'
 	}}
 >
-	<div class="grid grid-cols-4 gap-10 auto-rows-[26rem] ">
+	<div class="grid grid-cols-4 gap-10 auto-rows-[16rem] ">
 		{#each JSON.parse(data.pages) as page}
 			<a
-				class="border shadow-md  flex flex-col gap-10 justify-around relative h-96 bg-proyectCard max-w-[340px] duration-75 hover:-translate-y-1"
+				class="border shadow-md  flex flex-col gap-10 justify-around relative h-64 bg-proyectCard max-w-[340px] duration-75 hover:-translate-y-1 bg-cover bg-top"
 				href={page.slug}
 			>
 				<h1 class="text-center font-semibold text-4xl h-min text-gray-700">{page.title}</h1>
