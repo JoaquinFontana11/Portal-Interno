@@ -17,13 +17,3 @@
 		</div>
 	</div>
 </a>
-
-<style>
-	.card-content {
-		background-color: red;
-		padding: 10px;
-	}
-	.card-content img {
-		display: none !important;
-	}
-</style>
