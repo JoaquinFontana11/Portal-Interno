@@ -11,7 +11,19 @@
 		<span class="font-light text-gray-500">{novelty.date.split('T')[0]}</span>
 		<h1 class=" font-semibold text-2xl h-min ">{novelty.Page.title}</h1>
 		<div class="flex  max-h-60 w-72">
-			<span class="break-words truncate">{@html novelty.Page.body}</span>
+			<span class="break-words truncate "
+				>{@html novelty.Page.body.replace(/<img/g, '<img style="display: none;"')}</span
+			>
 		</div>
 	</div>
 </a>
+
+<style>
+	.card-content {
+		background-color: red;
+		padding: 10px;
+	}
+	.card-content img {
+		display: none !important;
+	}
+</style>
