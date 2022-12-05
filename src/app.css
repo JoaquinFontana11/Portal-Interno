@@ -13,3 +13,34 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.page-content a,
+.cl-content a {
+	@apply text-sky-500;
+	text-decoration: underline;
+}
+
+.page-content a:hover,
+.cl-content a:hover {
+	@apply text-sky-700;
+	text-decoration: underline;
+}
+
+.page-content img,
+.cl-content img {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 50%;
+}
+
+.page-content h1,
+.cl-content h1 {
+	@apply text-sky-500;
+	@apply text-3xl;
+}
+
+.page-content h2,
+.cl-content h2 {
+	@apply text-sky-500;
+	@apply text-2xl;
+}
