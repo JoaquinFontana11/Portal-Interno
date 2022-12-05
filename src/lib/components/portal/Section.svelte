@@ -22,7 +22,7 @@
 			direction == 'center' ? 'text-center' : direction == 'left' ? 'text-left' : 'text-right'
 		} mb-8 text-2xl font-bold tracking-tight leading-none ${
 			config.titleColor
-		} md:text-4xl lg:text-5xl dark:text-white`}
+		} md:text-3xl lg:text-4xl dark:text-white`}
 	>
 		{title}
 	</h2>

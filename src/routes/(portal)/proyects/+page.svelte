@@ -19,7 +19,7 @@
 				class="border shadow-md  flex flex-col gap-10 justify-around relative h-64 bg-proyectCard max-w-[340px] duration-75 hover:-translate-y-1 bg-cover bg-top"
 				href={page.slug}
 			>
-				<h1 class="text-center font-semibold text-4xl h-min text-gray-700">{page.title}</h1>
+				<h1 class="text-center font-semibold text-2xl h-min text-gray-600 p-3">{page.title}</h1>
 				<!-- <div class="flex justify-center px-5 max-h-60 w-72">
 					<span class="break-words truncate text-gray-500">{@html page.body}</span>
 				</div> -->
