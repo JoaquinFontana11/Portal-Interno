@@ -8,7 +8,11 @@
 	const menus = JSON.parse(data.menus)
 		.filter((menu) => menu.active)
 		.map((menu) => {
-			menu.submenus = menu.submenus?.filter((submenu) => submenu.active);
+			menu.submenus = menu.submenus
+				?.filter((submenu) => submenu.active)
+				.sort((submenu1, submenu2) => {
+					return submenu1.order > submenu2.order ? 1 : -1;
+				});
 			menu.drop = false;
 			return menu;
 		});
@@ -56,7 +60,12 @@
 	];
 </script>
 
-<Navbar {menus} user={JSON.parse(data.user)} />
+<Navbar
+	menus={menus.sort((menu1, menu2) => {
+		return menu1.order > menu2.order ? 1 : -1;
+	})}
+	user={JSON.parse(data.user)}
+/>
 <main class="min-h-screen min-w-screen z-10 bg-section">
 	<slot />
 </main>
