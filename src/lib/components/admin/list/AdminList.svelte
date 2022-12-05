@@ -13,6 +13,7 @@
 	console.log(caption);
 
 	const deleteEvent = async (e: CustomEvent) => {
+		console.log(e);
 		const body = new FormData();
 		body.append('id', e.detail.id);
 		await fetch(`?/${deleteAction}`, {
@@ -52,7 +53,13 @@
 						actions={['edit']}
 					/>
 				{:else}
-					<AdminListRow {doc} {attributes} on:modify-doc={modifyEvent} {actions} />
+					<AdminListRow
+						{doc}
+						{attributes}
+						on:modify-doc={modifyEvent}
+						on:delete-doc={deleteEvent}
+						{actions}
+					/>
 				{/if}
 			{:else}
 				<svelte:component
