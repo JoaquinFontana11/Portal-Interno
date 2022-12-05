@@ -26,7 +26,9 @@
 				</h2>
 			</div>
 			<div class="row-start-2 row-span-3">
-				<div class="text-justify indent-5 mb-3 text-lg font-light text-gray-500 md:text-xl">
+				<div
+					class="text-justify indent-5 mb-3 text-lg font-light text-gray-500 md:text-xl page-content"
+				>
 					{@html novelty.Page.body}
 				</div>
 			</div>

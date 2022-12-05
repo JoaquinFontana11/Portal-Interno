@@ -15,7 +15,7 @@
 	}}
 >
 	<div
-		class="bg-neutral-50  rounded-lg shadow-lg p-10 gap-10 relative z-10 w-11/12 m-auto h-11/12 mt-10 mb-10"
+		class="bg-neutral-50  rounded-lg shadow-lg p-10 gap-10 relative z-10 w-11/12 m-auto h-11/12 mt-10 mb-10 page-content"
 	>
 		{@html page.body.replace(
 			/<img/g,
