@@ -43,16 +43,16 @@
 	<tbody>
 		{#each data as doc}
 			{#if !customRow}
-				{#if caption == 'Paginas' && doc.slug[0] == '/'}
+				{#if caption == 'Paginas' && !doc.slug.includes('pages')}
 					<AdminListRow
 						{doc}
 						{attributes}
 						on:modify-doc={modifyEvent}
 						on:delete-doc={deleteEvent}
-						{actions}
+						actions={['edit']}
 					/>
 				{:else}
-					<AdminListRow {doc} {attributes} on:modify-doc={modifyEvent} actions={['edit']} />
+					<AdminListRow {doc} {attributes} on:modify-doc={modifyEvent} {actions} />
 				{/if}
 			{:else}
 				<svelte:component
