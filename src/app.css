@@ -44,3 +44,9 @@
 	@apply text-sky-500;
 	@apply text-2xl;
 }
+
+th {
+	width: 10rem;
+	min-width: 10rem;
+	max-width: 10rem;
+}

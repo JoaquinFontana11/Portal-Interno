@@ -59,16 +59,20 @@ const deleteFileAction: Action = async ({ request }) => {
 };
 
 const uploadImageAction: Action = async ({ request }) => {
-	const data = [...(await request.formData())];
+	try {
+		const data = [...(await request.formData())];
+		console.log(data[1][1].length);
+		const path = `/img/${new Date().getTime()}.png`;
+		writeFileSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${path}`, data[1][1], 'base64');
 
-	const path = `/img/${new Date().getTime()}.png`;
-	writeFileSync(`${NODE_ENV == 'production' ? 'client' : 'static'}${path}`, data[1][1], 'base64');
-
-	await dbOperations.images.create({
-		name: data[2][1],
-		alt: data[0][1],
-		url: path
-	});
+		await dbOperations.images.create({
+			name: data[2][1],
+			alt: data[0][1],
+			url: path
+		});
+	} catch (err) {
+		console.log(err);
+	}
 };
 
 const deleteImageAction: Action = async ({ request }) => {

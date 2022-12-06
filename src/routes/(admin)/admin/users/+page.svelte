@@ -94,6 +94,12 @@
 				caption="Usuarios"
 				actions={['delete', 'edit']}
 				customRow={AdminListRowUser}
+				options={[
+					{ value: 'Admin', name: 'Admin' },
+					{ value: 'Visitante', name: 'Visitante' }
+				]}
+				iterators={{ search: ['name'], select: ['role'] }}
+				placeholder="Ingrese un Nombre..."
 			/>
 		{:else}
 			<AdminForm

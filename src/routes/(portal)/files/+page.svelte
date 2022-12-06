@@ -1,12 +1,19 @@
 <script lang="ts">
 	import Section from '$lib/components/portal/Section.svelte';
 	import type { PageData } from './$types';
-	import { Document, Table, VideoCamera, PresentationChartBar, Icon } from 'svelte-hero-icons';
+	import {
+		Document,
+		Table,
+		VideoCamera,
+		PresentationChartBar,
+		Icon,
+		DocumentSearch
+	} from 'svelte-hero-icons';
 	import { flip } from 'svelte/animate';
 	import { fade, fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import AdminSearch from '$lib/components/admin/AdminSearch.svelte';
-	import SelectGroups from '$lib/components/portal/files/SelectGroups.svelte';
+	import CustomSelect from '$lib/components/CustomSelect.svelte';
 
 	export let data: PageData;
 	const files = JSON.parse(data.files).map((f) => {
@@ -27,6 +34,22 @@
 		pptx: [PresentationChartBar, 'border-orange-300 hover:border-orange-500'],
 		mp4: [VideoCamera, 'border-cyan-300 hover:border-cyan-500']
 	};
+
+	// 	<option value="">TODOS</option>
+	// <option value="DPMA">DPMA</option>
+	// <option value="IOP">IOP</option>
+	// <option value="PMO">PMO</option>
+	// <option value="MC">MC</option>
+	// <option value="SP">SP</option>
+	// <option value="CYC">CYC</option>
+	const selectOptions: Array<Object> = [
+		{ name: 'DPMA', value: 'DPMA' },
+		{ name: 'IOP', value: 'IOP' },
+		{ name: 'PMO', value: 'PMO' },
+		{ name: 'MC', value: 'MC' },
+		{ name: 'SP', value: 'SP' },
+		{ name: 'CYC', value: 'CYC' }
+	];
 </script>
 
 <Section
@@ -38,7 +61,7 @@
 >
 	<div class="bg-neutral-50 rounded-lg shadow-lg p-10 flex flex-col z-10 relative">
 		<div class="w-96 relative self-end flex gap-3">
-			<SelectGroups bind:value={filterGroups} />
+			<CustomSelect icon={DocumentSearch} options={selectOptions} bind:value={filterGroups} />
 			<AdminSearch placeholder="Ingrese nombre de archivo..." bind:value={filterFiles} />
 		</div>
 		<ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">

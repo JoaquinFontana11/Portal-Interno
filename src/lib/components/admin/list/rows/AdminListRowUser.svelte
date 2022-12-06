@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { fade, fly } from 'svelte/transition';
 	export let doc: any;
 	export let attributes: string[];
 	export let actions: string[];
@@ -16,6 +18,8 @@
 
 <tr
 	class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+	in:fade={{ duration: 200 }}
+	out:fly={{ duration: 300, x: 100 }}
 >
 	<td class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
 		<img class="w-10 h-10 rounded-full" src={doc.Image?.url || '/img/test.png'} alt={``} />

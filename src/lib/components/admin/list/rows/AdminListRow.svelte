@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { fade, fly } from 'svelte/transition';
 	export let doc: any;
 	export let attributes: string[];
 	export let actions: string[];
@@ -16,22 +18,25 @@
 
 <tr
 	class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+	in:fade={{ duration: 200 }}
+	out:fly={{ duration: 300, x: 100 }}
 >
-	{#each attributes as atr}
-		{#if typeof doc[atr] == 'boolean'}
-			<td class="h-1 py-3 px-6 text-center">
+	{#each attributes as atr, index (atr)}
+		<td class="h-1 py-3 px-6 text-center">
+			{#if typeof doc[atr] == 'boolean'}
 				<div class="flex items-center justify-center">
 					<div
 						class={`h-2.5 w-2.5 rounded-full ${doc[atr] ? 'bg-green-600' : 'bg-red-600'} mr-2`}
 					/>
 					{`${doc[atr] ? 'Activo' : 'Inactivo'}`}
 				</div>
-			</td>
-		{:else}
-			<td class="text-center h-1 py-3 px-6 t"><span>{doc[atr]}</span></td>
-		{/if}
+			{:else}
+				<span>{doc[atr]}</span>
+			{/if}
+		</td>
+		<!-- </div> -->
 	{/each}
-	<td class="h-1 py-3 px-6 text-center">
+	<td class="h-1 py-3 px-6 text-center" in:fade={{ duration: 300 }}>
 		<div class="flex items-center w-full justify-center gap-2">
 			{#if actions.includes('edit')}
 				<button
