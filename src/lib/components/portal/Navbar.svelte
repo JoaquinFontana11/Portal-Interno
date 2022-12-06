@@ -21,7 +21,7 @@
 <svelte:window on:click={closeSubmenus} />
 <nav
 	class={`bg-white border-gray-200  sm:px-4 py-2.5 dark:bg-gray-900 shadow-xl z-50 hover:shadow-3x relative max-w-screen`}
-	style="z-index: 9999"
+	style="z-index: 99"
 >
 	<div class="container flex flex-wrap justify-between items-center min-w-full">
 		<a href="/" class="flex items-center">

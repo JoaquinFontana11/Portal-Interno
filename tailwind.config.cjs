@@ -24,8 +24,11 @@ module.exports = {
 					"linear-gradient(145deg, rgba(255,255,255, 0.1) 0%, rgba(255,255,255, 0.1) 100%), url('/img/layered-waves-haikei.svg')",
 				gradientWhite:
 					'linear-gradient(180deg, rgba(255,255,255, 0.6) 0%, rgba(186, 230, 253, 0.4) 100%)',
+				gradientSky2:
+					'linear-gradient(180deg, rgba(186, 230, 253, 0.4) 0%, rgba(186, 230, 253, 0.6) 100%)',
 				gradientSky:
-					'linear-gradient(180deg, rgba(186, 230, 253, 0.4) 0%, rgba(186, 230, 253, 0.8) 100%)'
+					'linear-gradient(180deg, rgba(186, 230, 253, 0.6) 0%, rgba(186, 230, 253, 0.8) 100%)'
+	
 			}
 		}
 	},

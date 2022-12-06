@@ -1,5 +1,7 @@
 import type { PageServerLoad } from './$types';
 import dbOpeartions from '$lib/server/db/db';
+import type { Actions } from './$types';
+import dbActions from '$lib/server/actions/actions';
 
 export const load: PageServerLoad = async () => {
 	const noveltys = await dbOpeartions.noveltys.getAll();
@@ -30,5 +32,27 @@ export const load: PageServerLoad = async () => {
 		})
 	);
 
-	return { noveltys: JSON.stringify(noveltys), photos: JSON.stringify(photos) };
+	let announcements = await dbOpeartions.announcements.getAll();
+	const announcementsClosed = await dbOpeartions.announcementClosed.getAll();
+
+	announcements = announcements.map((announcement) => {
+		announcement.closed = [];
+		announcementsClosed.forEach((closed) => {
+		
+		console.log(closed)
+                  if (closed.announcement_id != announcement.id) return;
+			announcement.closed.push(closed.user_id);
+		});
+                return announcement;
+	        
+        });
+	return {
+		noveltys: JSON.stringify(noveltys),
+		photos: JSON.stringify(photos),
+		announcements: JSON.stringify(announcements)
+	};
+};
+
+export const actions: Actions = {
+	close: dbActions.announcementClosed.create
 };
