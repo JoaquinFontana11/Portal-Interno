@@ -4,36 +4,49 @@
 	import PhotoCard from '$lib/components/portal/photos/PhotoCard.svelte';
 	import Card from '$lib/components/portal/Card.svelte';
 	import { DocumentDuplicate, FolderDownload, Calendar } from 'svelte-hero-icons';
-        import Announcement from '$lib/components/portal/Announcement.svelte';
+	import Announcement from '$lib/components/portal/Announcement.svelte';
 	export let data: PageData;
 
 	const noveltys = JSON.parse(data.noveltys);
 	const photos = JSON.parse(data.photos);
 	const announcements = JSON.parse(data.announcements);
-        const user = JSON.parse(data.user)
+	const user = JSON.parse(data.user);
 
-        let showAnnouncements = announcements.filter(announcement => !announcement.closed.includes(user.id))
-        let currentAnnouncement = 0;
-        console.log(showAnnouncements);
+	let showAnnouncements = announcements.filter(
+		(announcement) =>
+			!announcement.closed.includes(user.id) &&
+			new Date(announcement.init_date).getTime() < new Date().getTime() &&
+			new Date(announcement.end_date).getTime() > new Date().getTime()
+	);
+	let currentAnnouncement = 0;
+	console.log(showAnnouncements);
 
-        //console.log(JSON.parse(data.user));
-        const removeAdd = async (announcementId) => {
-          const data = new FormData();
-          data.append('user_id', user.id);
-          data.append('announcement_id', announcementId);
+	//console.log(JSON.parse(data.user));
+	const removeAdd = async (announcementId) => {
+		const data = new FormData();
+		data.append('user_id', user.id);
+		data.append('announcement_id', announcementId);
 
-          await fetch('?/close', {
-            method: 'POST',
-            body: data
-          })
-        }
+		await fetch('?/close', {
+			method: 'POST',
+			body: data
+		});
+		currentAnnouncement++;
+	};
 </script>
 
 {#each showAnnouncements as announcement, i}
-  {#if i == currentAnnouncement}
-
-  <Announcement {announcement} on:click={() => {currentAnnouncement++}} on:close-forever={() => {removeAdd(announcement.id)}} />
-  {/if}
+	{#if i == currentAnnouncement}
+		<Announcement
+			{announcement}
+			on:click={() => {
+				currentAnnouncement++;
+			}}
+			on:close-forever={() => {
+				removeAdd(announcement.id);
+			}}
+		/>
+	{/if}
 {/each}
 
 <header class="h-[600px] max-w-screen bg-home bg-cover flex items-center justify-center">
@@ -101,7 +114,7 @@
 
 <Section
 	title="Ultimas novedades"
-        direction="right"
+	direction="right"
 	overview="Enterarte de lo ultimo de la DPMA"
 	config={{
 		titleColor: 'text-gray-900',
