@@ -16,6 +16,11 @@
 	let messageSubmit = { status: false, message: '' };
 	let menuType = 0;
 
+	const menuParentsOptions = JSON.parse(data.menus).map((menu) => {
+		return { value: menu.name, name: menu.name };
+	});
+	console.log(menuParentsOptions);
+
 	const componentsMain: IComponent = {
 		label: 'Tipo de Menu',
 		name: 'menus',
@@ -168,6 +173,9 @@
 				caption="Menus"
 				actions={['delete', 'edit']}
 				deleteAction="deleteMenu"
+				options={[{ value: true, name: 'Activo' }]}
+				iterators={{ search: ['name'], select: ['active'] }}
+				placeholder="Ingrese un Nombre..."
 			/>
 			<br />
 			<AdminList
@@ -181,6 +189,9 @@
 				caption="Submenus"
 				actions={['delete', 'edit']}
 				deleteAction="deleteSubmenu"
+				options={[{ value: true, name: 'Activo' }, ...menuParentsOptions]}
+				iterators={{ search: ['name'], select: ['active', 'parent'] }}
+				placeholder="Ingrese un Nombre..."
 			/>
 		{:else}
 			<FormSelect

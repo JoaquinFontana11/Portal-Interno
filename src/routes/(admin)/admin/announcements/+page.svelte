@@ -74,6 +74,9 @@
 				data={JSON.parse(data.announcements)}
 				caption="Anuncios"
 				actions={['delete']}
+				options={[]}
+				iterators={{ search: ['title'], select: ['null'] }}
+				placeholder="Ingrese un Titulo..."
 			/>
 		{:else}
 			<AdminForm

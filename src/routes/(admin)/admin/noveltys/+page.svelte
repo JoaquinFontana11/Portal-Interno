@@ -14,6 +14,7 @@
 	let loading = false;
 	let modalConfirm = false;
 	let messageSubmit = { status: false, message: '' };
+	console.log(JSON.parse(data.noveltys));
 
 	const components: IComponent[] = [
 		{
@@ -70,6 +71,9 @@
 				caption="Novedades"
 				actions={['delete', 'edit']}
 				customRow={AdminListRowNovelty}
+				options={[]}
+				iterators={{ search: ['Page', 'title'], select: ['null'] }}
+				placeholder="Ingrese un Titulo..."
 			/>
 		{:else}
 			<AdminForm

@@ -44,15 +44,22 @@
 		const formData = new FormData();
 
 		// pasamos todos los valores del formualrio a FormData
-		await Promise.all(
-			components.map(async (component) => {
-				// si es de tipo objetc es porque es un File por eso lo pasamos a base 64
-				if (typeof component.value == 'object') {
-					formData.append(component.name, await fileToBase64(component.value[0]));
-					formData.append('name', component.value[0].name);
-				} else formData.append(component.name, component.value);
-			})
-		);
+		try {
+			await Promise.all(
+				components.map(async (component) => {
+					// si es de tipo objetc es porque es un File por eso lo pasamos a base 64
+					if (typeof component.value == 'object') {
+						formData.append(component.name, await fileToBase64(component.value[0]));
+						formData.append('name', component.value[0].name);
+					} else formData.append(component.name, component.value);
+				})
+			);
+			console.log('---------------------------');
+			console.log([...formData][0].length);
+		} catch (err) {
+			console.log('---------------------------');
+			console.log(err);
+		}
 		// agregamos o no data extra
 		addExtraData(components).forEach((component) => {
 			formData.append(component.name, component.value);

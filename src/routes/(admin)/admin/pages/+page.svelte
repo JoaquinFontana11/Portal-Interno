@@ -77,6 +77,9 @@
 				data={JSON.parse(data.pages)}
 				caption="Paginas"
 				actions={['delete', 'edit']}
+				options={[{ value: true, name: 'Proyecto' }]}
+				iterators={{ search: ['title'], select: ['project'] }}
+				placeholder="Ingrese un Titulo..."
 			/>
 		{:else}
 			<AdminForm

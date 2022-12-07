@@ -78,6 +78,16 @@
 				})}
 				caption="Archivos"
 				actions={['delete']}
+				options={[
+					{ value: 'DPMA', name: 'DPMA' },
+					{ value: 'IOP', name: 'IOP' },
+					{ value: 'PMO', name: 'PMO' },
+					{ value: 'MC', name: 'MC' },
+					{ value: 'SP', name: 'SP' },
+					{ value: 'CYC', name: 'CYC' }
+				]}
+				iterators={{ search: ['name'], select: ['group'] }}
+				placeholder="Ingrese un Nombre..."
 			/>
 		{:else}
 			<AdminForm

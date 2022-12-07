@@ -60,6 +60,9 @@
 				caption="Fotos de galeria"
 				actions={['delete']}
 				customRow={AdminListRowPhoto}
+				options={[]}
+				iterators={{ search: ['title'], select: ['null'] }}
+				placeholder="Ingrese un Titulo..."
 			/>
 		{:else}
 			<AdminForm

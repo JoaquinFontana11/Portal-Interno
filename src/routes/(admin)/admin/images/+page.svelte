@@ -55,6 +55,9 @@
 				caption="Imagenes"
 				actions={['delete']}
 				customRow={AdminListRowImage}
+				options={[]}
+				iterators={{ search: ['name'], select: ['null'] }}
+				placeholder="Ingrese un Nombre..."
 			/>
 		{:else}
 			<AdminForm
