@@ -114,7 +114,7 @@
 
 <Section
 	title="Ultimas novedades"
-	direction="right"
+	direction="center"
 	overview="Enterarte de lo ultimo de la DPMA"
 	config={{
 		titleColor: 'text-gray-900',
@@ -185,7 +185,7 @@
 <Section
 	title="Ultimas fotos publicadas!"
 	overview="Deja tu comentario"
-	direction="left"
+	direction="center"
 	config={{
 		titleColor: 'text-gray-900',
 		backgroundColor: 'bg-gradientSky'
