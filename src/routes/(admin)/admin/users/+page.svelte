@@ -85,47 +85,45 @@
 		list = !list;
 	}}
 />
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
-	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		{#if list}
-			<AdminList
-				headers={['Nombre', 'Nombre de usuario', 'Rol']}
-				data={JSON.parse(data.users)}
-				caption="Usuarios"
-				actions={['delete', 'edit']}
-				customRow={AdminListRowUser}
-				options={[
-					{ value: 'Admin', name: 'Admin' },
-					{ value: 'Visitante', name: 'Visitante' }
-				]}
-				iterators={{ search: ['name'], select: ['role'] }}
-				placeholder="Ingrese un Nombre..."
-			/>
-		{:else}
-			<AdminForm
-				title="Formulario usuarios"
-				{components}
-				submitMessage="Agregar usuario"
-				{loading}
-				{validators}
-				action="create"
-				on:validation-end={(e) => {
-					messageSubmit = e.detail;
-					modalConfirm = true;
-				}}
-			/>
-		{/if}
-	</div>
-	<div>
-		{#if modalConfirm}
-			<AdminModalConfirm
-				status={messageSubmit.status}
-				message={messageSubmit.message}
-				on:close={() => {
-					modalConfirm = false;
-					messageSubmit.status ? location.reload() : (list = false);
-				}}
-			/>
-		{/if}
-	</div>
-</main>
+<div>
+	{#if list}
+		<AdminList
+			headers={['Nombre', 'Nombre de usuario', 'Rol']}
+			data={JSON.parse(data.users)}
+			caption="Usuarios"
+			actions={['delete', 'edit']}
+			customRow={AdminListRowUser}
+			options={[
+				{ value: 'Admin', name: 'Admin' },
+				{ value: 'Visitante', name: 'Visitante' }
+			]}
+			iterators={{ search: ['name'], select: ['role'] }}
+			placeholder="Ingrese un Nombre..."
+		/>
+	{:else}
+		<AdminForm
+			title="Formulario usuarios"
+			{components}
+			submitMessage="Agregar usuario"
+			{loading}
+			{validators}
+			action="create"
+			on:validation-end={(e) => {
+				messageSubmit = e.detail;
+				modalConfirm = true;
+			}}
+		/>
+	{/if}
+</div>
+<div>
+	{#if modalConfirm}
+		<AdminModalConfirm
+			status={messageSubmit.status}
+			message={messageSubmit.message}
+			on:close={() => {
+				modalConfirm = false;
+				messageSubmit.status ? location.reload() : (list = false);
+			}}
+		/>
+	{/if}
+</div>

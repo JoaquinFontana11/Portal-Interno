@@ -3,7 +3,7 @@
 	export let icon: IconSource;
 </script>
 
-<div class="text-center absolute left-64 top-5 z-30">
+<div class="text-center absolute left-5 top-5 z-30">
 	<button
 		class="w-16 h-16 bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-200 dark:hover:bg-gray-100 focus:outline-none rounded-full"
 		type="button"

@@ -160,87 +160,85 @@
 	}}
 />
 
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll ">
-	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		{#if list}
-			<AdminList
-				headers={['Nombre', 'Pagina', 'Orden', 'Activo']}
-				attributes={['name', 'slug', 'order', 'active']}
-				data={JSON.parse(data.menus).map((menu) => {
-					menu.slug = menu.Page?.slug || 'no asociado';
-					return menu;
-				})}
-				caption="Menus"
-				actions={['delete', 'edit']}
-				deleteAction="deleteMenu"
-				options={[{ value: true, name: 'Activo' }]}
-				iterators={{ search: ['name'], select: ['active'] }}
-				placeholder="Ingrese un Nombre..."
+<div>
+	{#if list}
+		<AdminList
+			headers={['Nombre', 'Pagina', 'Orden', 'Activo']}
+			attributes={['name', 'slug', 'order', 'active']}
+			data={JSON.parse(data.menus).map((menu) => {
+				menu.slug = menu.Page?.slug || 'no asociado';
+				return menu;
+			})}
+			caption="Menus"
+			actions={['delete', 'edit']}
+			deleteAction="deleteMenu"
+			options={[{ value: true, name: 'Activo' }]}
+			iterators={{ search: ['name'], select: ['active'] }}
+			placeholder="Ingrese un Nombre..."
+		/>
+		<br />
+		<AdminList
+			headers={['Nombre', 'Pagina', 'Padre', 'Orden', 'Activo']}
+			attributes={['name', 'slug', 'parent', 'order', 'active']}
+			data={JSON.parse(data.submenus).map((submenu) => {
+				submenu.slug = submenu.Page?.slug || 'no asociado';
+				submenu.parent = submenu.Menu?.name || 'no asociado';
+				return submenu;
+			})}
+			caption="Submenus"
+			actions={['delete', 'edit']}
+			deleteAction="deleteSubmenu"
+			options={[{ value: true, name: 'Activo' }, ...menuParentsOptions]}
+			iterators={{ search: ['name'], select: ['active', 'parent'] }}
+			placeholder="Ingrese un Nombre..."
+		/>
+	{:else}
+		<FormSelect
+			label={componentsMain.label}
+			options={componentsMain.options}
+			bind:value={componentsMain.value}
+			required={componentsMain.value}
+			on:custom-change={changeForm}
+		/>
+		<br />
+		{#if menuType == 1}
+			<AdminForm
+				title="Formulario de Menu"
+				components={componentsMenu}
+				submitMessage="Subir Menu"
+				{loading}
+				action="createMenu"
+				validators={validatorMenu}
+				on:validation-end={(e) => {
+					messageSubmit = e.detail;
+					modalConfirm = true;
+				}}
 			/>
-			<br />
-			<AdminList
-				headers={['Nombre', 'Pagina', 'Padre', 'Orden', 'Activo']}
-				attributes={['name', 'slug', 'parent', 'order', 'active']}
-				data={JSON.parse(data.submenus).map((submenu) => {
-					submenu.slug = submenu.Page?.slug || 'no asociado';
-					submenu.parent = submenu.Menu?.name || 'no asociado';
-					return submenu;
-				})}
-				caption="Submenus"
-				actions={['delete', 'edit']}
-				deleteAction="deleteSubmenu"
-				options={[{ value: true, name: 'Activo' }, ...menuParentsOptions]}
-				iterators={{ search: ['name'], select: ['active', 'parent'] }}
-				placeholder="Ingrese un Nombre..."
-			/>
-		{:else}
-			<FormSelect
-				label={componentsMain.label}
-				options={componentsMain.options}
-				bind:value={componentsMain.value}
-				required={componentsMain.value}
-				on:custom-change={changeForm}
-			/>
-			<br />
-			{#if menuType == 1}
-				<AdminForm
-					title="Formulario de Menu"
-					components={componentsMenu}
-					submitMessage="Subir Menu"
-					{loading}
-					action="createMenu"
-					validators={validatorMenu}
-					on:validation-end={(e) => {
-						messageSubmit = e.detail;
-						modalConfirm = true;
-					}}
-				/>
-			{:else if menuType == 2}
-				<AdminForm
-					title="Formulario de Submenu"
-					components={componentsSubMenu}
-					submitMessage="Subir Submenu"
-					{loading}
-					action="createSubmenu"
-					validators={validatorSubmenu}
-					on:validation-end={(e) => {
-						messageSubmit = e.detail;
-						modalConfirm = true;
-					}}
-				/>
-			{/if}
-		{/if}
-	</div>
-	<div>
-		{#if modalConfirm}
-			<AdminModalConfirm
-				status={messageSubmit.status}
-				message={messageSubmit.message}
-				on:close={() => {
-					modalConfirm = false;
-					messageSubmit.status ? location.reload() : (list = false);
+		{:else if menuType == 2}
+			<AdminForm
+				title="Formulario de Submenu"
+				components={componentsSubMenu}
+				submitMessage="Subir Submenu"
+				{loading}
+				action="createSubmenu"
+				validators={validatorSubmenu}
+				on:validation-end={(e) => {
+					messageSubmit = e.detail;
+					modalConfirm = true;
 				}}
 			/>
 		{/if}
-	</div>
-</main>
+	{/if}
+</div>
+<div>
+	{#if modalConfirm}
+		<AdminModalConfirm
+			status={messageSubmit.status}
+			message={messageSubmit.message}
+			on:close={() => {
+				modalConfirm = false;
+				messageSubmit.status ? location.reload() : (list = false);
+			}}
+		/>
+	{/if}
+</div>

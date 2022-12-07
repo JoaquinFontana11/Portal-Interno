@@ -19,7 +19,6 @@
 <tr
 	class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 	in:fade={{ duration: 200 }}
-	out:fly={{ duration: 300, x: 100 }}
 >
 	{#each attributes as atr, index (atr)}
 		<td class="h-1 py-3 px-6 text-center">

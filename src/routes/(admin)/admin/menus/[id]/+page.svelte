@@ -166,58 +166,56 @@
 	};
 </script>
 
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
-	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		{#if Object.entries(submenu).length != 0 && Object.entries(menu).length != 0}
-			<FormSelect
-				label={componentsMain.label}
-				options={componentsMain.options}
-				bind:value={componentsMain.value}
-				required={componentsMain.value}
-				on:custom-change={changeForm}
-			/>
-		{/if}
-		<br />
-		{#if menuType == 1}
-			<AdminForm
-				title="Formulario de Menu"
-				components={componentsMenu}
-				submitMessage="Subir Menu"
-				{loading}
-				action="updateMenu"
-				validators={validatorMenu}
-				on:validation-end={(e) => {
-					messageSubmit = e.detail;
-					modalConfirm = true;
-				}}
-				addExtraData={extraDataId(menu?.id)}
-			/>
-		{:else if menuType == 2}
-			<AdminForm
-				title="Formulario de Submenu"
-				components={componentsSubMenu}
-				submitMessage="Subir Submenu"
-				{loading}
-				action="updateSubmenu"
-				validators={validatorSubmenu}
-				on:validation-end={(e) => {
-					messageSubmit = e.detail;
-					modalConfirm = true;
-				}}
-				addExtraData={extraDataId(submenu?.id)}
-			/>
-		{/if}
-	</div>
-	<div>
-		{#if modalConfirm}
-			<AdminModalConfirm
-				status={messageSubmit.status}
-				message={messageSubmit.message}
-				on:close={() => {
-					modalConfirm = false;
-					messageSubmit.status ? location.reload() : (list = false);
-				}}
-			/>
-		{/if}
-	</div>
-</main>
+<div>
+	{#if Object.entries(submenu).length != 0 && Object.entries(menu).length != 0}
+		<FormSelect
+			label={componentsMain.label}
+			options={componentsMain.options}
+			bind:value={componentsMain.value}
+			required={componentsMain.value}
+			on:custom-change={changeForm}
+		/>
+	{/if}
+	<br />
+	{#if menuType == 1}
+		<AdminForm
+			title="Formulario de Menu"
+			components={componentsMenu}
+			submitMessage="Subir Menu"
+			{loading}
+			action="updateMenu"
+			validators={validatorMenu}
+			on:validation-end={(e) => {
+				messageSubmit = e.detail;
+				modalConfirm = true;
+			}}
+			addExtraData={extraDataId(menu?.id)}
+		/>
+	{:else if menuType == 2}
+		<AdminForm
+			title="Formulario de Submenu"
+			components={componentsSubMenu}
+			submitMessage="Subir Submenu"
+			{loading}
+			action="updateSubmenu"
+			validators={validatorSubmenu}
+			on:validation-end={(e) => {
+				messageSubmit = e.detail;
+				modalConfirm = true;
+			}}
+			addExtraData={extraDataId(submenu?.id)}
+		/>
+	{/if}
+</div>
+<div>
+	{#if modalConfirm}
+		<AdminModalConfirm
+			status={messageSubmit.status}
+			message={messageSubmit.message}
+			on:close={() => {
+				modalConfirm = false;
+				messageSubmit.status ? location.reload() : (list = false);
+			}}
+		/>
+	{/if}
+</div>

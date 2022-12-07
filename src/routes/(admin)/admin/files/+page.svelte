@@ -61,59 +61,57 @@
 		list = !list;
 	}}
 />
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
-	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		{#if list}
-			<AdminList
-				headers={['Nombre', 'Descripcion', 'Extension', 'Grupo']}
-				attributes={['name', 'description', 'extension', 'group']}
-				data={JSON.parse(data.files).map((file) => {
-					return {
-						id: file.id,
-						name: file.name.split('.').at(0),
-						extension: file.name.split('.').at(-1),
-						description: file.description,
-						group: file.group
-					};
-				})}
-				caption="Archivos"
-				actions={['delete']}
-				options={[
-					{ value: 'DPMA', name: 'DPMA' },
-					{ value: 'IOP', name: 'IOP' },
-					{ value: 'PMO', name: 'PMO' },
-					{ value: 'MC', name: 'MC' },
-					{ value: 'SP', name: 'SP' },
-					{ value: 'CYC', name: 'CYC' }
-				]}
-				iterators={{ search: ['name'], select: ['group'] }}
-				placeholder="Ingrese un Nombre..."
-			/>
-		{:else}
-			<AdminForm
-				title="Formulario de archivos"
-				{components}
-				submitMessage="Subir archivo"
-				{loading}
-				action="create"
-				{validators}
-				on:validation-end={(e) => {
-					messageSubmit = e.detail;
-					modalConfirm = true;
-				}}
-			/>
-		{/if}
-	</div>
-	<div>
-		{#if modalConfirm}
-			<AdminModalConfirm
-				status={messageSubmit.status}
-				message={messageSubmit.message}
-				on:close={() => {
-					modalConfirm = false;
-					messageSubmit.status ? location.reload() : (list = false);
-				}}
-			/>
-		{/if}
-	</div>
-</main>
+<div>
+	{#if list}
+		<AdminList
+			headers={['Nombre', 'Descripcion', 'Extension', 'Grupo']}
+			attributes={['name', 'description', 'extension', 'group']}
+			data={JSON.parse(data.files).map((file) => {
+				return {
+					id: file.id,
+					name: file.name.split('.').at(0),
+					extension: file.name.split('.').at(-1),
+					description: file.description,
+					group: file.group
+				};
+			})}
+			caption="Archivos"
+			actions={['delete']}
+			options={[
+				{ value: 'DPMA', name: 'DPMA' },
+				{ value: 'IOP', name: 'IOP' },
+				{ value: 'PMO', name: 'PMO' },
+				{ value: 'MC', name: 'MC' },
+				{ value: 'SP', name: 'SP' },
+				{ value: 'CYC', name: 'CYC' }
+			]}
+			iterators={{ search: ['name'], select: ['group'] }}
+			placeholder="Ingrese un Nombre..."
+		/>
+	{:else}
+		<AdminForm
+			title="Formulario de archivos"
+			{components}
+			submitMessage="Subir archivo"
+			{loading}
+			action="create"
+			{validators}
+			on:validation-end={(e) => {
+				messageSubmit = e.detail;
+				modalConfirm = true;
+			}}
+		/>
+	{/if}
+</div>
+<div>
+	{#if modalConfirm}
+		<AdminModalConfirm
+			status={messageSubmit.status}
+			message={messageSubmit.message}
+			on:close={() => {
+				modalConfirm = false;
+				messageSubmit.status ? location.reload() : (list = false);
+			}}
+		/>
+	{/if}
+</div>
