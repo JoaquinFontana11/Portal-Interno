@@ -111,6 +111,7 @@
 														<li>
 															<a
 																href={submenu.Page.slug}
+																target="_self"
 																class="block p-3 rounded-lg hover:bg-gray-200 text-gray-700   dark:hover:bg-gray-700"
 															>
 																<p class="font-semibold text-sm ">{submenu.name}</p>
@@ -131,6 +132,7 @@
 														<li>
 															<a
 																href={submenu.Page.slug}
+																target="_self"
 																class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
 															>
 																<p class="font-semibold text-sm text-gray-700">{submenu.name}</p>
@@ -146,6 +148,7 @@
 														<li>
 															<a
 																href={submenu.Page.slug}
+																target="_self"
 																class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
 															>
 																<p class="font-semibold text-sm text-gray-700">{submenu.name}</p>
