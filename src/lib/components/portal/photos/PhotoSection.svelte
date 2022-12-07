@@ -44,10 +44,10 @@
 	class="flex flex-col p-10 rounded-lg shadow-lg gap-1 h-full max-h-full bg-white w-2/3 md:w-1/2 ml-auto mr-auto"
 >
 	<div class="flex items-center gap-2 mb-5">
-		<img src="/img/test.png" class="w-12 h-12 rounded-full" />
+		<img src={photo.User.Image.url} class="w-12 h-12 rounded-full" />
 		<div class="flex flex-col justify-center gap-1">
 			<span class="text-xl font-medium leading-none text-gray-800  dark:text-white"
-				>nombre de usuario</span
+				>{photo.User.username}</span
 			>
 			<h1
 				class=" text-5xl font-extrabold tracking-tight leading-none text-gray-900  dark:text-white"
