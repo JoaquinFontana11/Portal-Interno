@@ -3,10 +3,10 @@
 </script>
 
 <AdminNavbar />
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-hidden">
-	<div
-		class="p-10 pt-20 w-full h-full absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2 overflow-y-scroll "
-	>
+<main
+	class="relative ml-56 dark:bg-gray-900 bg-neutral-50 h-screen pb-10 overflow-y-hidden overflow-x-hidden"
+>
+	<div class="p-10 pt-20 pb-10  w-full h-screen overflow-y-scroll">
 		<slot />
 	</div>
 </main>

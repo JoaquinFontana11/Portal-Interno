@@ -58,32 +58,30 @@
 	};
 </script>
 
-<main class="ml-56 dark:bg-gray-900 bg-neutral-50 h-screen relative overflow-y-scroll">
-	<div class="w-3/4 h-3/4 absolute bottom-1/2 right-1/2 transform translate-x-1/2 translate-y-1/2">
-		<AdminForm
-			title="Formulario de novedades"
-			{components}
-			submitMessage="Modificar novedad"
-			{loading}
-			action="update"
-			{addExtraData}
-			{validators}
-			on:validation-end={(e) => {
-				messageSubmit = e.detail;
-				modalConfirm = true;
+<div>
+	<AdminForm
+		title="Formulario de novedades"
+		{components}
+		submitMessage="Modificar novedad"
+		{loading}
+		action="update"
+		{addExtraData}
+		{validators}
+		on:validation-end={(e) => {
+			messageSubmit = e.detail;
+			modalConfirm = true;
+		}}
+	/>
+</div>
+<div>
+	{#if modalConfirm}
+		<AdminModalConfirm
+			status={messageSubmit.status}
+			message={messageSubmit.message}
+			on:close={() => {
+				modalConfirm = false;
+				messageSubmit.status ? location.reload() : (list = false);
 			}}
 		/>
-	</div>
-	<div>
-		{#if modalConfirm}
-			<AdminModalConfirm
-				status={messageSubmit.status}
-				message={messageSubmit.message}
-				on:close={() => {
-					modalConfirm = false;
-					messageSubmit.status ? location.reload() : (list = false);
-				}}
-			/>
-		{/if}
-	</div>
-</main>
+	{/if}
+</div>

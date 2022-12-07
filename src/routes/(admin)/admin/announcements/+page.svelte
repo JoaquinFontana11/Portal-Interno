@@ -91,8 +91,6 @@
 			}}
 		/>
 	{/if}
-</div>
-<div>
 	{#if modalConfirm}
 		<AdminModalConfirm
 			status={messageSubmit.status}

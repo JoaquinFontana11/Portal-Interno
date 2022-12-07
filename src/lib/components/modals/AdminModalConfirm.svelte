@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="fixed top-0 left-0 w-screen h-screen bg-gray-500 opacity-75" />
+<div class="fixed top-0 left-0 w-screen h-full bg-gray-500 opacity-75" />
 <div
 	id="popup-modal"
 	tabindex="-1"
