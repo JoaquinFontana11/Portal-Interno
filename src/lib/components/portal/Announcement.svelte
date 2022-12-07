@@ -14,7 +14,7 @@
 	style="z-index: 101;"
 	class="w-1/2 h-1/2 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-50   p-4 overflow-x-hidden overflow-y-auto "
 >
-	<div class="relative w-full h-full max-w-2xl md:h-auto">
+	<div class="relative w-full h-full  md:h-auto">
 		<!-- Modal content -->
 		<div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
 			<!-- Modal header -->
@@ -26,8 +26,8 @@
 					type="button"
 					class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
 					data-modal-toggle="staticModal"
-                                on:click
-                                      >
+					on:click
+				>
 					<svg
 						class="w-5 h-5"
 						fill="currentColor"
@@ -47,18 +47,16 @@
 					{@html announcement.content}
 				</p>
 			</div>
-                        <div class="p-2">
-
-			<button
-				on:click={(e) => {
-					dispatch('close-forever', {});
-                                }}
-                          class="w-full rounded-lg bg-rose-500 text-gray-100 hover:bg-rose-600 p-2"
-			>
-				No mostrar mas este anuncio
-			</button>
-                      </div>
+			<div class="p-2">
+				<button
+					on:click={(e) => {
+						dispatch('close-forever', {});
+					}}
+					class="w-full rounded-lg bg-rose-500 text-gray-100 hover:bg-rose-600 p-2"
+				>
+					No mostrar mas este anuncio
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
-
