@@ -7,6 +7,10 @@ Portal Interno para la DPMA
 - Svelte-Kit
 - TypeScript
 
+### Base de Datos
+
+- PostgreSQL
+
 ## Alojamiento
 
 ### Entorno de Desarrollo
